@@ -40,23 +40,17 @@ Seq[Any](format.raw/*8.1*/("""
 
 <head>
     <title>"""),_display_(/*13.13*/title),format.raw/*13.18*/("""</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media="screen" href='"""),_display_(/*15.50*/routes/*15.56*/.Assets.versioned("stylesheets/main.css")),format.raw/*15.97*/("""'>
-    <link rel="stylesheet" media="screen" href='"""),_display_(/*16.50*/routes/*16.56*/.Assets.versioned("stylesheets/prism.css")),format.raw/*16.98*/("""'>
-    <link rel="shortcut icon" type="image/png" href='"""),_display_(/*17.55*/routes/*17.61*/.Assets.versioned("images/favicon.png")),format.raw/*17.100*/("""'>
-    <script src='"""),_display_(/*18.19*/routes/*18.25*/.Assets.versioned("javascripts/hello.js")),format.raw/*18.66*/("""' type="text/javascript"></script>
-    <script src='"""),_display_(/*19.19*/routes/*19.25*/.Assets.versioned("javascripts/prism.js")),format.raw/*19.66*/("""' type="text/javascript"></script>
+    <link rel="stylesheet" media="screen" href='"""),_display_(/*14.50*/routes/*14.56*/.Assets.versioned("stylesheets/main.css")),format.raw/*14.97*/("""'>
+    <link rel="shortcut icon" type="image/png" href='"""),_display_(/*15.55*/routes/*15.61*/.Assets.versioned("images/favicon.png")),format.raw/*15.100*/("""'>
+    <!-- 
+    <script src='"""),_display_(/*17.19*/routes/*17.25*/.Assets.versioned("javascripts/hello.js")),format.raw/*17.66*/("""' type="text/javascript"></script>
+    <script src='"""),_display_(/*18.19*/routes/*18.25*/.Assets.versioned("javascripts/prism.js")),format.raw/*18.66*/("""' type="text/javascript"></script>
+	 -->
 </head>
 
 <body>
-    <section id="top">
-        <div class="wrapper">
-            <img class="resize" src="assets/images/play_icon_reverse.svg" alt="logo" />
-            <h1>Play Hello World Web Tutorial</h1>
-        </div>
-    </section>
-    """),_display_(/*29.6*/content),format.raw/*29.13*/("""
-"""),format.raw/*30.1*/("""</body>
+    """),_display_(/*23.6*/content),format.raw/*23.13*/("""
+"""),format.raw/*24.1*/("""</body>
 
 </html>"""))
       }
@@ -75,9 +69,9 @@ Seq[Any](format.raw/*8.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 76b2b34df287cc55598663d98d3ffe4afa1a89c9
-                  MATRIX: 1165->260|1289->291|1316->292|1396->345|1422->350|1582->483|1597->489|1659->530|1738->582|1753->588|1816->630|1900->687|1915->693|1976->732|2024->753|2039->759|2101->800|2181->853|2196->859|2258->900|2562->1178|2590->1185|2618->1186
-                  LINES: 32->7|37->8|38->9|42->13|42->13|44->15|44->15|44->15|45->16|45->16|45->16|46->17|46->17|46->17|47->18|47->18|47->18|48->19|48->19|48->19|58->29|58->29|59->30
+                  HASH: f8e28a6096b5513c604ce59343226f6fc8005242
+                  MATRIX: 1165->260|1289->291|1316->292|1396->345|1422->350|1507->408|1522->414|1584->455|1668->512|1683->518|1744->557|1802->588|1817->594|1879->635|1959->688|1974->694|2036->735|2124->797|2152->804|2180->805
+                  LINES: 32->7|37->8|38->9|42->13|42->13|43->14|43->14|43->14|44->15|44->15|44->15|46->17|46->17|46->17|47->18|47->18|47->18|52->23|52->23|53->24
                   -- GENERATED --
               */
           
