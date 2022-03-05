@@ -10,7 +10,6 @@ GET		/time						controllers.HomeController.time
 GET		/hello/:message				controllers.HomeController.hello(message: String)
 GET		/helloplay/:message			controllers.HomeController.helloPlay(message: String)
 GET 	/plus/:a1/:a2				controllers.HomeController.plus(a1: String,a2: String)			
-GET     /apicall                    controllers.HomeController.apiCall
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
