@@ -5,6 +5,11 @@
 	<classpathentry kind="src" path="target/scala-2.13/twirl/main"/>
 	<classpathentry kind="src" path="target/scala-2.13/routes/main"/>
 	<classpathentry excluding="resources/" kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Mahavir/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/typesafe/play/twirl-api_2.13/1.5.1/twirl-api_2.13-1.5.1.jar" sourcepath="C:/Users/Mahavir/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/typesafe/play/twirl-api_2.13/1.5.1/twirl-api_2.13-1.5.1-sources.jar">
 		<attributes>
@@ -545,6 +550,6 @@
 			<attribute name="javadoc_location" value="jar:file:C:\Users\Mahavir\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\eclipse\jetty\websocket\websocket-api\9.4.20.v20190813\websocket-api-9.4.20.v20190813-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+	<classpathentry kind="lib" path="D:/Concordia/SOEN 6441 APP/Assignment-1 Freelancelot/lib/json-20211205.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

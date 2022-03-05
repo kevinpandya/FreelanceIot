@@ -1,9 +1,15 @@
 package controllers;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+
 import play.mvc.*;
+
+import org.json.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -52,10 +58,5 @@ public class HomeController extends Controller {
     
     public Result plus(String a1, String a2) {
     	return ok(Double.toString( Integer.parseInt(a1) + Integer.parseInt(a2)));
-    }
-
-    public Result apiCall() {
-
-        return ok("Hello Wolrd!");
     }
 }
