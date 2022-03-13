@@ -18,12 +18,41 @@ package controllers.javascript {
     }
 
   
+<<<<<<< HEAD
     // @LINE:7
     def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.skill",
       """
         function(id0,skill1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "skill/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("skill", skill1))})
+=======
+    // @LINE:8
+    def wordStat: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.wordStat",
+      """
+        function(search0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "wordstats/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("search", search0))})
+        }
+      """
+    )
+  
+    // @LINE:7
+    def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.skill",
+      """
+        function(id0,skill1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "skill/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("skill", skill1))})
+        }
+      """
+    )
+  
+    // @LINE:9
+    def indvStat: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.indvStat",
+      """
+        function(index0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "indvstats" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("index", index0)])})
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
         }
       """
     )
@@ -40,7 +69,11 @@ package controllers.javascript {
   
   }
 
+<<<<<<< HEAD
   // @LINE:10
+=======
+  // @LINE:12
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -48,7 +81,11 @@ package controllers.javascript {
     }
 
   
+<<<<<<< HEAD
     // @LINE:10
+=======
+    // @LINE:12
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

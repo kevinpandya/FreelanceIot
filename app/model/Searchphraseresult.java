@@ -21,7 +21,11 @@ public class Searchphraseresult {
 	private String date;
 	private String title;
 	private String type;
+	private String prevDesc;
+	//private List<String> desc = new List<String>();
 	private LinkedHashMap<String, String> skills = new LinkedHashMap<String, String>();
+	private LinkedHashMap<String, Integer> wordStats = new LinkedHashMap<String, Integer>();
+	//private JSONArray projects = new JSONArray();
 	
 	public Searchphraseresult() {
 		// TODO Auto-generated constructor stub
@@ -73,6 +77,38 @@ public class Searchphraseresult {
 	public void setSkills(LinkedHashMap<String, String> skills) {
 		this.skills = skills;
 	}
+
+	public LinkedHashMap<String, Integer> getWordStats() {
+		return wordStats;
+	}
+
+	public void setWordStats(LinkedHashMap<String, Integer> wordStats) {
+		this.wordStats = wordStats;
+	}
+
+	public void setPrevDesc(String prevDesc) {
+		this.prevDesc = prevDesc;
+	}
+
+	public String getPrevDesc() {
+		return prevDesc;
+	}
+
+//	public List<String> getDesc() {
+//		return desc;
+//	}
+//
+//	public void setDesc(List<String> desc) {
+//		this.desc = desc;
+//	}
+
+//	public void setProjects(JSONArray projects){
+//		this.projects = projects;
+//	}
+//
+//	public JSONArray getProjects() {
+//		return projects;
+//	}
 
 	@Override
 	public String toString() {

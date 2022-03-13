@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [0m[[0m[31merror[0m] [0m[0mD:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\app\businesslogic\SearchSkill.java:76:1: cannot find symbol[0m
 [0m[[0m[31merror[0m] [0m[0m  symbol:   variable resultmap[0m
 [0m[[0m[31merror[0m] [0m[0m  location: class businesslogic.SearchSkill[0m
@@ -6,3 +7,6 @@
 [0m[[0m[31merror[0m] [0m[0m  symbol:   variable resultmap[0m
 [0m[[0m[31merror[0m] [0m[0m  location: class businesslogic.SearchSkill[0m
 [0m[[0m[31merror[0m] [0m[0mresultmap[0m
+=======
+[0m[[0m[31merror[0m] [0m[0mC:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\app\controllers\HomeController.java:56:1: ';' expected[0m
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff

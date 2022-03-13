@@ -1,0 +1,15 @@
+@import model.Searchphraseresult
+@import model.Resultlist
+@import java.util
+@(searchResults: util.Map[String, Integer])
+
+
+@main("FreeLancelot") {
+    <center>
+        <article style="margin-top:50px;">
+            <div>
+                <p>@searchResults</p>
+            </div>
+        </article>
+    </center>
+}

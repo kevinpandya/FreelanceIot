@@ -23,9 +23,8 @@
 						<td>@result.getDate()</td>
 						<td>@result.getTitle()</td>
 						<td>@result.getType()</td>
-						<td>
-							@for((key,value) <- result.getSkills()){
-								<li><u><a href="@routes.HomeController.skill(value,key)" target="_blank">@key</a></u></li>
+						<td>@for((key,value) <- result.getSkills()){
+								<u><a href="@routes.HomeController.skill(value,key)">@key</a></u>
 							}
 						</td>
 						<td><a href=#>Stats</a></td>

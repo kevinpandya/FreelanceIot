@@ -3,15 +3,28 @@ package controllers;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import Main.Resultlist;
 import play.mvc.*;
 
 
 import businesslogic.*;
 import model.*;
+
+import model.Resultlist;
+import model.Searchphraseresult;
+import businesslogic.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -19,9 +32,12 @@ import model.*;
  * @author Group
  */
 public class HomeController extends Controller {
-    
-	SearchPhrase searchphrase = null;
+
+	LinkedHashMap<String, Resultlist> resultmap = new LinkedHashMap<String, Resultlist>();
+	LinkedHashMap<String, Integer> indStats = new LinkedHashMap<String, Integer>();
+    SearchPhrase searchphrase = new SearchPhrase();
     SearchSkill searchskill = new SearchSkill();
+	WordStats wordStats = new WordStats();
     
 	/**
      * An action that renders an HTML page with a welcome message.
@@ -45,7 +61,17 @@ public class HomeController extends Controller {
     	return res.thenApplyAsync(o -> ok(views.html.skill.render(o)));
     }
 
-    public CompletionStage<Result> helloPlay(final String message) {
+	public Result wordStat(String search) {
+		resultmap = wordStats.getWordStats(search);
+		return ok(views.html.stat.render(resultmap));
+	}
+
+	public Result indvStat(String desc) {
+		indStats = wordStats.getIndividualStats(desc);
+		return ok(views.html.indvstat.render(indStats));
+	}
+
+	public CompletionStage<Result> helloPlay(final String message) {
     	CompletionStage<String> output = method1(message);
     	return output.thenApplyAsync(o -> ok(o));
     }

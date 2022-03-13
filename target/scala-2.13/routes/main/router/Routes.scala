@@ -15,7 +15,11 @@ class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
   HomeController_1: controllers.HomeController,
+<<<<<<< HEAD
   // @LINE:10
+=======
+  // @LINE:12
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
   Assets_0: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -24,7 +28,11 @@ class Routes(
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
     HomeController_1: controllers.HomeController,
+<<<<<<< HEAD
     // @LINE:10
+=======
+    // @LINE:12
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     Assets_0: controllers.Assets
   ) = this(errorHandler, HomeController_1, Assets_0, "/")
 
@@ -41,6 +49,11 @@ class Routes(
   def documentation = List(
     ("""GET""", this.prefix, """controllers.HomeController.index(searchPhrase:String ?= "")"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """skill/""" + "$" + """id<[^/]+>/""" + "$" + """skill<[^/]+>""", """controllers.HomeController.skill(id:String, skill:String)"""),
+<<<<<<< HEAD
+=======
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """wordstats/""" + "$" + """search<[^/]+>""", """controllers.HomeController.wordStat(search:String)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """indvstats""", """controllers.HomeController.indvStat(index:String)"""),
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -73,6 +86,15 @@ class Routes(
   )
   private[this] lazy val controllers_HomeController_skill1_invoker = createInvoker(
     HomeController_1.skill(fakeValue[String], fakeValue[String]),
+<<<<<<< HEAD
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.HomeController",
+      "skill",
+      Seq(classOf[String], classOf[String]),
+      "GET",
+      this.prefix + """skill/""" + "$" + """id<[^/]+>/""" + "$" + """skill<[^/]+>""",
+=======
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -85,11 +107,56 @@ class Routes(
     )
   )
 
+  // @LINE:8
+  private[this] lazy val controllers_HomeController_wordStat2_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("wordstats/"), DynamicPart("search", """[^/]+""",true)))
+  )
+  private[this] lazy val controllers_HomeController_wordStat2_invoker = createInvoker(
+    HomeController_1.wordStat(fakeValue[String]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.HomeController",
+      "wordStat",
+      Seq(classOf[String]),
+      "GET",
+      this.prefix + """wordstats/""" + "$" + """search<[^/]+>""",
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
+      """""",
+      Seq()
+    )
+  )
+
+<<<<<<< HEAD
   // @LINE:10
   private[this] lazy val controllers_Assets_versioned2_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
   private[this] lazy val controllers_Assets_versioned2_invoker = createInvoker(
+=======
+  // @LINE:9
+  private[this] lazy val controllers_HomeController_indvStat3_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("indvstats")))
+  )
+  private[this] lazy val controllers_HomeController_indvStat3_invoker = createInvoker(
+    HomeController_1.indvStat(fakeValue[String]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.HomeController",
+      "indvStat",
+      Seq(classOf[String]),
+      "GET",
+      this.prefix + """indvstats""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:12
+  private[this] lazy val controllers_Assets_versioned4_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
+  )
+  private[this] lazy val controllers_Assets_versioned4_invoker = createInvoker(
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     Assets_0.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -118,10 +185,29 @@ class Routes(
         controllers_HomeController_skill1_invoker.call(HomeController_1.skill(id, skill))
       }
   
+<<<<<<< HEAD
     // @LINE:10
     case controllers_Assets_versioned2_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
         controllers_Assets_versioned2_invoker.call(Assets_0.versioned(path, file))
+=======
+    // @LINE:8
+    case controllers_HomeController_wordStat2_route(params@_) =>
+      call(params.fromPath[String]("search", None)) { (search) =>
+        controllers_HomeController_wordStat2_invoker.call(HomeController_1.wordStat(search))
+      }
+  
+    // @LINE:9
+    case controllers_HomeController_indvStat3_route(params@_) =>
+      call(params.fromQuery[String]("index", None)) { (index) =>
+        controllers_HomeController_indvStat3_invoker.call(HomeController_1.indvStat(index))
+      }
+  
+    // @LINE:12
+    case controllers_Assets_versioned4_route(params@_) =>
+      call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
+        controllers_Assets_versioned4_invoker.call(Assets_0.versioned(path, file))
+>>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
       }
   }
 }
