@@ -1,0 +1,26 @@
+@import model.Searchphraseresult
+@import model.Resultlist
+@import java.util
+@(searchResults: util.Map[String, Resultlist])
+
+
+@main("FreeLancelot") {
+    <center>
+        <article style="margin-top:50px;">
+            <div>
+            @if(searchResults != null) {
+                @for((searchTerms, searchResultlist) <- searchResults){
+                    <p>Search terms : @searchTerms : Flesh reading Ease Index ## FKGL #.#</p>
+                    <table>
+                        @for(result <- searchResultlist.getResult()){
+                            <tr>
+                                <td>@result.getWordStats()</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+            </div>
+        </article>
+    </center>
+}

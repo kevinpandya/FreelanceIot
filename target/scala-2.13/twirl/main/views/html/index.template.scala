@@ -31,20 +31,21 @@ object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Html
       {
 
 
-Seq[Any](format.raw/*4.1*/("""
+Seq[Any](format.raw/*3.42*/("""
+
 """),_display_(/*5.2*/main("FreeLancelot")/*5.22*/ {_display_(Seq[Any](format.raw/*5.24*/("""
 """),format.raw/*6.1*/("""<center>
 	<article style="margin-top:50px;">
 	<h1>Welcome to FreeLancelot</h1>
 	<form action="/" method="GET">
-		<input type="text" name="searchPhrase" placeholder="Enter serach terms"/>
+		<input type="text" name="searchPhrase" placeholder="Enter search terms"/>
 		<input type="submit" value="Go!" />
 	</form>
 	<div>
 		"""),_display_(/*14.4*/if(searchResults != null)/*14.29*/ {_display_(Seq[Any](format.raw/*14.31*/("""
 			"""),_display_(/*15.5*/for((searchTerms, searchResultlist) <- searchResults) yield /*15.58*/{_display_(Seq[Any](format.raw/*15.59*/("""
 				"""),format.raw/*16.5*/("""<p>Search terms : """),_display_(/*16.24*/searchTerms),format.raw/*16.35*/(""" """),format.raw/*16.36*/(""": Flesh reading Ease Index ## FKGL #.#</p>
-				<p><a href=#>Global Stats</a></p>
+				<a href=""""),_display_(/*17.15*/routes/*17.21*/.HomeController.wordStat(searchTerms)),format.raw/*17.58*/("""">Global Stats</a>
 				<table>
 				<tr>
 					<th>Owner_id</th>
@@ -59,19 +60,18 @@ Seq[Any](format.raw/*4.1*/("""
 						<td>"""),_display_(/*29.12*/result/*29.18*/.getDate()),format.raw/*29.28*/("""</td>
 						<td>"""),_display_(/*30.12*/result/*30.18*/.getTitle()),format.raw/*30.29*/("""</td>
 						<td>"""),_display_(/*31.12*/result/*31.18*/.getType()),format.raw/*31.28*/("""</td>
-						<td>
-							"""),_display_(/*33.9*/for((key,value) <- result.getSkills()) yield /*33.47*/{_display_(Seq[Any](format.raw/*33.48*/("""
-								"""),format.raw/*34.9*/("""<u><a href=""""),_display_(/*34.22*/routes/*34.28*/.HomeController.skill(value,key)),format.raw/*34.60*/("""" target="_blank">"""),_display_(/*34.79*/key),format.raw/*34.82*/("""</a></u>
-							""")))}),format.raw/*35.9*/("""
-						"""),format.raw/*36.7*/("""</td>
-						<td><a href=#>Stats</a></td>
+						<td>"""),_display_(/*32.12*/for((key,value) <- result.getSkills()) yield /*32.50*/{_display_(Seq[Any](format.raw/*32.51*/("""
+								"""),format.raw/*33.9*/("""<u><a href=""""),_display_(/*33.22*/routes/*33.28*/.HomeController.skill(value,key)),format.raw/*33.60*/("""" target="_blank">"""),_display_(/*33.79*/key),format.raw/*33.82*/("""</a></u>
+							""")))}),format.raw/*34.9*/("""
+						"""),format.raw/*35.7*/("""</td>
+						<td><a href=""""),_display_(/*36.21*/routes/*36.27*/.HomeController.indvStat(result.getPrevDesc())),format.raw/*36.73*/("""">Stats</a></td>
 						<td><a href=#>Readability</a></td>
 					</tr>
-				""")))}),format.raw/*40.6*/("""
-				"""),format.raw/*41.5*/("""</table>
-			""")))}),format.raw/*42.5*/("""
-		""")))}),format.raw/*43.4*/("""
-	"""),format.raw/*44.2*/("""</div>
+				""")))}),format.raw/*39.6*/("""
+				"""),format.raw/*40.5*/("""</table>
+			""")))}),format.raw/*41.5*/("""
+		""")))}),format.raw/*42.4*/("""
+	"""),format.raw/*43.2*/("""</div>
 	</article>
 </center>
 """)))}))
@@ -91,9 +91,9 @@ Seq[Any](format.raw/*4.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 2cebb39b2ba1ba14a1baef8d91ea959517ce814b
-                  MATRIX: 610->1|649->34|994->59|1128->100|1155->102|1183->122|1222->124|1249->125|1519->369|1553->394|1593->396|1624->401|1693->454|1732->455|1764->460|1810->479|1842->490|1871->491|2116->710|2175->753|2214->754|2247->760|2300->786|2315->792|2350->806|2398->827|2413->833|2444->843|2488->860|2503->866|2535->877|2579->894|2594->900|2625->910|2676->935|2730->973|2769->974|2805->983|2845->996|2860->1002|2913->1034|2959->1053|2983->1056|3030->1073|3064->1080|3192->1178|3224->1183|3267->1196|3301->1200|3330->1202
-                  LINES: 23->1|24->2|29->3|34->4|35->5|35->5|35->5|36->6|44->14|44->14|44->14|45->15|45->15|45->15|46->16|46->16|46->16|46->16|56->26|56->26|56->26|57->27|58->28|58->28|58->28|59->29|59->29|59->29|60->30|60->30|60->30|61->31|61->31|61->31|63->33|63->33|63->33|64->34|64->34|64->34|64->34|64->34|64->34|65->35|66->36|70->40|71->41|72->42|73->43|74->44
+                  HASH: 61eba269f10d4fcc9f6f0a391ad0a5b2178e66c4
+                  MATRIX: 610->1|649->35|994->61|1129->101|1159->106|1187->126|1226->128|1254->130|1532->382|1566->407|1606->409|1638->415|1707->468|1746->469|1779->475|1825->494|1857->505|1886->506|1971->564|1986->570|2044->607|2236->773|2295->816|2334->817|2368->824|2422->851|2437->857|2472->871|2521->893|2536->899|2567->909|2612->927|2627->933|2659->944|2704->962|2719->968|2750->978|2795->996|2849->1034|2888->1035|2925->1045|2965->1058|2980->1064|3033->1096|3079->1115|3103->1118|3151->1136|3186->1144|3240->1171|3255->1177|3322->1223|3429->1300|3462->1306|3506->1320|3541->1325|3571->1328
+                  LINES: 23->1|24->2|29->3|34->3|36->5|36->5|36->5|37->6|45->14|45->14|45->14|46->15|46->15|46->15|47->16|47->16|47->16|47->16|48->17|48->17|48->17|57->26|57->26|57->26|58->27|59->28|59->28|59->28|60->29|60->29|60->29|61->30|61->30|61->30|62->31|62->31|62->31|63->32|63->32|63->32|64->33|64->33|64->33|64->33|64->33|64->33|65->34|66->35|67->36|67->36|67->36|70->39|71->40|72->41|73->42|74->43
                   -- GENERATED --
               */
           
