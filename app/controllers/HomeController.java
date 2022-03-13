@@ -1,46 +1,47 @@
 package controllers;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 
 import play.mvc.*;
 
-import org.json.*;
+
+import businesslogic.*;
+import model.*;
 
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
+ * @author Group
  */
 public class HomeController extends Controller {
-
-    /**
+    
+	SearchPhrase searchphrase = null;
+    SearchSkill searchskill = new SearchSkill();
+    
+	/**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
-    public Result index() {
-        return ok(views.html.index.render());
+    public Result index(String searchPhraseString) {
+        if(searchPhraseString.equals("")) {
+        	searchphrase = null;
+    		return ok(views.html.index.render(null));
+    	}else {
+    		if(searchphrase == null)
+    			searchphrase = new SearchPhrase();
+    		return ok(views.html.index.render(searchphrase.getPhraseResult(searchPhraseString)));
+    	}
     }
     
-    public Result explore() {
-        return ok(views.html.explore.render());
-    }
-    
-    public Result tutorial() {
-        return ok(views.html.tutorial.render());
-    }
-    
-    public Result time() {
-    	return ok(Double.toString(System.currentTimeMillis()/1000));
-    }
-    
-    public Result hello(String message) {
-    	return ok("Hello "+ message);
+    public CompletionStage<Result> skill(String id,String skill) {
+    	return ok(views.html.skill.render(id,skill));
     }
 
     public CompletionStage<Result> helloPlay(final String message) {
@@ -54,9 +55,5 @@ public class HomeController extends Controller {
     
     private CompletionStage<String> method1(final String message){
     	return CompletableFuture.supplyAsync(()-> outputString(message));
-    }
-    
-    public Result plus(String a1, String a2) {
-    	return ok(Double.toString( Integer.parseInt(a1) + Integer.parseInt(a2)));
     }
 }

@@ -1,4 +1,6 @@
-
+@import model.Searchphraseresult
+@import model.Resultlist
+@(searchResults: Map[String, Resultlist])
 
 @main("FreeLancelot") {
 <center>
@@ -6,8 +8,40 @@
 	<h1>Welcome to FreeLancelot</h1>
 	<form action="/" method="GET">
 		<input type="text" name="searchPhrase" placeholder="Enter serach terms"/>
-		<input type="submit" name="search" value="Go!" />
+		<input type="submit" value="Go!" />
 	</form>
+	<div>
+		@if(searchResults != null) {
+			@for((searchTerms, searchResultlist) <- searchResults){
+				<p>Search terms : @searchTerms : Flesh reading Ease Index ## FKGL #.#</p>
+				<p><a href=#>Global Stats</a></p>
+				<table>
+				<tr>
+					<th>Owner_id</th>
+					<th>Date</th>
+					<th>Title</th>
+					<th>Type</th>
+					<th>Skills</th>
+				</tr>
+				@for(result <- searchResultlist.getResult()){
+					<tr>
+						<td><a href=#>@result.getOwner_id()</a></td>
+						<td>@result.getDate()</td>
+						<td>@result.getTitle()</td>
+						<td>@result.getType()</td>
+						<td>
+							@for((key,value) <- result.getSkills()){
+								<u><a href="@routes.HomeController.skill(value,key)" target="_blank">@key</a></u>
+							}
+						</td>
+						<td><a href=#>Stats</a></td>
+						<td><a href=#>Readability</a></td>
+					</tr>
+				}
+				</table>
+			}
+		}
+	</div>
 	</article>
 </center>
 }

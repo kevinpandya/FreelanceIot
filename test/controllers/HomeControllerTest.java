@@ -28,11 +28,6 @@ public class HomeControllerTest extends WithApplication {
         Result result = route(app, request);
         assertEquals(OK, result.status());
     }
-    
-    @Test
-    public void testTime() {
-    	Result result = new HomeController().time();
-    	assertEquals(OK, result.status());
-    }
+
     
 }

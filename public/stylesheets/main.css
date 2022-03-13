@@ -230,7 +230,7 @@ article ol li:before {
     position: absolute;
     top: 8px;
     left: 0;
-    content: "►";
+    content: "â–º";
     color: #ccc;
     font-size: 10px;
     margin-right: 5px;
@@ -797,7 +797,7 @@ header nav a.download:active {
 }
 
 #top nav .versions span:before {
-    content: "⬍";
+    content: "â¬�";
     color: rgba(0, 0, 0, 0.4);
     text-shadow: 1px 1px 0 #80c846;
     margin-right: 4px;

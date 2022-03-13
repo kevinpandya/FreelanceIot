@@ -1,2 +1,8 @@
-[debug] Acquiring lock on file C:\Users\Mahavir\Downloads\play-samples-play-java-hello-world-tutorial\project\target\.sbt-compilation-infos\root-compile\.sbt-idea-lock ...
-[debug] Releasing lock on file C:\Users\Mahavir\Downloads\play-samples-play-java-hello-world-tutorial\project\target\.sbt-compilation-infos\root-compile\.sbt-idea-lock.
+[0m[[0m[31merror[0m] [0m[0mD:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\app\businesslogic\SearchSkill.java:76:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   variable resultmap[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class businesslogic.SearchSkill[0m
+[0m[[0m[31merror[0m] [0m[0mresultmap[0m
+[0m[[0m[31merror[0m] [0m[0mD:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\app\businesslogic\SearchSkill.java:81:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   variable resultmap[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class businesslogic.SearchSkill[0m
+[0m[[0m[31merror[0m] [0m[0mresultmap[0m
