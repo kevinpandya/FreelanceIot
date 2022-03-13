@@ -17,64 +17,40 @@ package controllers {
     }
 
   
-    // @LINE:9
-    def time: Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "time")
-    }
-  
     // @LINE:8
-    def tutorial: Call = {
+    def wordStat(search:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "tutorial")
-    }
-  
-    // @LINE:12
-    def plus(a1:String, a2:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "plus/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("a1", a1)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("a2", a2)))
-    }
-  
-    // @LINE:10
-    def hello(message:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "hello/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("message", message)))
-    }
-  
-    // @LINE:11
-    def helloPlay(message:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "helloplay/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("message", message)))
+      Call("GET", _prefix + { _defaultPrefix } + "wordstats/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("search", search)))
     }
   
     // @LINE:7
-    def explore: Call = {
+    def skill(id:String, skill:String): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "explore")
+      Call("GET", _prefix + { _defaultPrefix } + "skill/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("skill", skill)))
+    }
+  
+    // @LINE:9
+    def indvStat(index:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "indvstats" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("index", index)))))
     }
   
     // @LINE:6
-    def index: Call = {
+    def index(searchPhrase:String = ""): Call = {
       
-      Call("GET", _prefix)
-    }
-  
-    // @LINE:13
-    def apiCall: Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "apicall")
+      Call("GET", _prefix + play.core.routing.queryString(List(if(searchPhrase == "") None else Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("searchPhrase", searchPhrase)))))
     }
   
   }
 
-  // @LINE:16
+  // @LINE:12
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:16
+    // @LINE:12
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

@@ -20,23 +20,62 @@ import play.api.data.Field
 import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
+/*1.2*/import model.Searchphraseresult
+/*2.2*/import model.Resultlist
 
-object skill extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object skill extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[Map[String, Resultlist],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply():play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*3.2*/(searchResults: Map[String, Resultlist]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any]()
+Seq[Any](format.raw/*3.42*/("""
+
+"""),_display_(/*5.2*/main("FreeLancelot")/*5.22*/ {_display_(Seq[Any](format.raw/*5.24*/("""
+"""),format.raw/*6.1*/("""<center>
+	<article style="margin-top:50px;">
+	<div>
+		"""),_display_(/*9.4*/if(searchResults != null)/*9.29*/ {_display_(Seq[Any](format.raw/*9.31*/("""
+			"""),_display_(/*10.5*/for((searchTerms, searchResultlist) <- searchResults) yield /*10.58*/{_display_(Seq[Any](format.raw/*10.59*/("""
+				"""),format.raw/*11.5*/("""<p>Search terms : """),_display_(/*11.24*/searchTerms),format.raw/*11.35*/(""" """),format.raw/*11.36*/(""": Flesh reading Ease Index ## FKGL #.#</p>
+				<table>
+				<tr>
+					<th>Owner_id</th>
+					<th>Date</th>
+					<th>Title</th>
+					<th>Type</th>
+					<th>Skills</th>
+				</tr>
+				"""),_display_(/*20.6*/for(result <- searchResultlist.getResult()) yield /*20.49*/{_display_(Seq[Any](format.raw/*20.50*/("""
+					"""),format.raw/*21.6*/("""<tr>
+						<td><a href=#>"""),_display_(/*22.22*/result/*22.28*/.getOwner_id()),format.raw/*22.42*/("""</a></td>
+						<td>"""),_display_(/*23.12*/result/*23.18*/.getDate()),format.raw/*23.28*/("""</td>
+						<td>"""),_display_(/*24.12*/result/*24.18*/.getTitle()),format.raw/*24.29*/("""</td>
+						<td>"""),_display_(/*25.12*/result/*25.18*/.getType()),format.raw/*25.28*/("""</td>
+						<td>"""),_display_(/*26.12*/for((key,value) <- result.getSkills()) yield /*26.50*/{_display_(Seq[Any](format.raw/*26.51*/("""
+								"""),format.raw/*27.9*/("""<u><a href=""""),_display_(/*27.22*/routes/*27.28*/.HomeController.skill(value,key)),format.raw/*27.60*/("""">"""),_display_(/*27.63*/key),format.raw/*27.66*/("""</a></u>
+							""")))}),format.raw/*28.9*/("""
+						"""),format.raw/*29.7*/("""</td>
+						<td><a href=#>Stats</a></td>
+						<td><a href=#>Readability</a></td>
+					</tr>
+				""")))}),format.raw/*33.6*/("""
+				"""),format.raw/*34.5*/("""</table>
+			""")))}),format.raw/*35.5*/("""
+		""")))}),format.raw/*36.4*/("""
+	"""),format.raw/*37.2*/("""</div>
+	</article>
+</center>
+""")))}))
       }
     }
   }
 
-  def render(): play.twirl.api.HtmlFormat.Appendable = apply()
+  def render(searchResults:Map[String, Resultlist]): play.twirl.api.HtmlFormat.Appendable = apply(searchResults)
 
-  def f:(() => play.twirl.api.HtmlFormat.Appendable) = () => apply()
+  def f:((Map[String, Resultlist]) => play.twirl.api.HtmlFormat.Appendable) = (searchResults) => apply(searchResults)
 
   def ref: this.type = this
 
@@ -46,9 +85,9 @@ Seq[Any]()
               /*
                   -- GENERATED --
                   SOURCE: app/views/skill.scala.html
-                  HASH: b2da9e89dd70a064e8e985a9d466e95834696428
-                  MATRIX: 
-                  LINES: 
+                  HASH: 973694bf9dd0199f03595fdff1f9c343d0169d2a
+                  MATRIX: 610->1|649->35|994->61|1129->101|1159->106|1187->126|1226->128|1254->130|1337->188|1370->213|1409->215|1441->221|1510->274|1549->275|1582->281|1628->300|1660->311|1689->312|1905->502|1964->545|2003->546|2037->553|2091->580|2106->586|2141->600|2190->622|2205->628|2236->638|2281->656|2296->662|2328->673|2373->691|2388->697|2419->707|2464->725|2518->763|2557->764|2594->774|2634->787|2649->793|2702->825|2732->828|2756->831|2804->849|2839->857|2971->959|3004->965|3048->979|3083->984|3113->987
+                  LINES: 23->1|24->2|29->3|34->3|36->5|36->5|36->5|37->6|40->9|40->9|40->9|41->10|41->10|41->10|42->11|42->11|42->11|42->11|51->20|51->20|51->20|52->21|53->22|53->22|53->22|54->23|54->23|54->23|55->24|55->24|55->24|56->25|56->25|56->25|57->26|57->26|57->26|58->27|58->27|58->27|58->27|58->27|58->27|59->28|60->29|64->33|65->34|66->35|67->36|68->37
                   -- GENERATED --
               */
           
