@@ -23,8 +23,8 @@ import businesslogic.*;
 import model.*;
 
 import model.Resultlist;
+import model.Profile;
 import model.Searchphraseresult;
-import businesslogic.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -35,9 +35,11 @@ public class HomeController extends Controller {
 
 	LinkedHashMap<String, Resultlist> resultmap = new LinkedHashMap<String, Resultlist>();
 	LinkedHashMap<String, Integer> indStats = new LinkedHashMap<String, Integer>();
-    SearchPhrase searchphrase = new SearchPhrase();
+	LinkedHashMap<String, Profile> usermap = new LinkedHashMap<String, Profile>();
+	SearchPhrase searchphrase = new SearchPhrase();
     SearchSkill searchskill = new SearchSkill();
 	WordStats wordStats = new WordStats();
+	SearchProfile searchprofile = new SearchProfile();
     
 	/**
      * An action that renders an HTML page with a welcome message.
@@ -69,6 +71,11 @@ public class HomeController extends Controller {
 	public Result indvStat(String desc) {
 		indStats = wordStats.getIndividualStats(desc);
 		return ok(views.html.indvstat.render(indStats));
+	}
+	
+	public Result profile(String id) {
+		usermap = searchprofile.getProfileResult(id);
+		return ok(views.html.profile.render(usermap));
 	}
 
 	public CompletionStage<Result> helloPlay(final String message) {

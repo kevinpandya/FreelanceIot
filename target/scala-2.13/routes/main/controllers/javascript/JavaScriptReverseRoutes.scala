@@ -18,22 +18,32 @@ package controllers.javascript {
     }
 
   
+    // @LINE:6
+    def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.index",
+      """
+        function(searchPhrase0) {
+          return _wA({method:"GET", url:"""" + _prefix + """" + _qS([(searchPhrase0 == null ? null : (""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("searchPhrase", searchPhrase0))])})
+        }
+      """
+    )
+  
+    // @LINE:10
+    def profile: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.profile",
+      """
+        function(ownerid0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "profile/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("ownerid", ownerid0))})
+        }
+      """
+    )
+  
     // @LINE:8
     def wordStat: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.wordStat",
       """
         function(search0) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "wordstats/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("search", search0))})
-        }
-      """
-    )
-  
-    // @LINE:7
-    def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.skill",
-      """
-        function(id0,skill1) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "skill/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("skill", skill1))})
         }
       """
     )
@@ -48,19 +58,19 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:6
-    def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.index",
+    // @LINE:7
+    def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.skill",
       """
-        function(searchPhrase0) {
-          return _wA({method:"GET", url:"""" + _prefix + """" + _qS([(searchPhrase0 == null ? null : (""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("searchPhrase", searchPhrase0))])})
+        function(id0,skill1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "skill/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("skill", skill1))})
         }
       """
     )
   
   }
 
-  // @LINE:12
+  // @LINE:13
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -68,7 +78,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:12
+    // @LINE:13
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
