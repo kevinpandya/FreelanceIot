@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-
+import Main.Resultlist;
 import play.mvc.*;
 
 
@@ -41,7 +41,8 @@ public class HomeController extends Controller {
     }
     
     public CompletionStage<Result> skill(String id,String skill) {
-    	return ok(views.html.skill.render(id,skill));
+    	CompletionStage<LinkedHashMap<String, Resultlist>> res = searchskill.getResult(id, skill);
+    	return res.thenApplyAsync(o -> ok(views.html.skill.render(o)));
     }
 
     public CompletionStage<Result> helloPlay(final String message) {

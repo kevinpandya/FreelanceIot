@@ -33,7 +33,9 @@ public class SearchSkill {
 		
 	}
 	
-	
+	public CompletionStage<LinkedHashMap<String, Resultlist>> getResult(String id,String skillstring){
+		return CompletableFuture.supplyAsync(()-> this.getSkillResult(id,skillstring));
+	}
 	
 	public LinkedHashMap<String, Resultlist> getSkillResult(String id,String skillstring) {
 		LinkedHashMap<String, Resultlist> resultmap = new LinkedHashMap<String, Resultlist>();
