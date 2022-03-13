@@ -1,10 +1,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-<<<<<<< HEAD
-[0m[[0m[0mdebug[0m] [0m[0m	(D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\conf\application.conf,D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\target\scala-2.13\classes\application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\conf\logback.xml,D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\target\scala-2.13\classes\logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\conf\routes,D:\Concordia\SOEN 6441 APP\Assignment-1 Freelancelot\target\scala-2.13\classes\routes)[0m
-=======
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\conf\application.conf,C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\target\scala-2.13\classes\application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\conf\logback.xml,C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\target\scala-2.13\classes\logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\conf\routes,C:\Users\Admin\Desktop\Assignment-1 Freelancelot\Assignment-1 Freelancelot\target\scala-2.13\classes\routes)[0m
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\merge\conf\application.conf,C:\Users\Admin\Desktop\merge\target\scala-2.13\classes\application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\merge\conf\logback.xml,C:\Users\Admin\Desktop\merge\target\scala-2.13\classes\logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\Admin\Desktop\merge\conf\routes,C:\Users\Admin\Desktop\merge\target\scala-2.13\classes\routes)[0m

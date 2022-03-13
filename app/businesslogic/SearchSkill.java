@@ -42,7 +42,7 @@ public class SearchSkill {
 		List<Searchphraseresult> sp = new ArrayList<Searchphraseresult>();
 		Resultlist r1 = new Resultlist();
 		try {
-			URL url = new URL("https://www.freelancer.com/api/projects/0.1/projects/active?limit=10&job_details=true&compact=true&languages[]=en&jobs[]="+id);
+			URL url = new URL("https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&limit=10&job_details=true&compact=true&languages[]=en&jobs[]="+id);
     		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
     		conn.setRequestMethod("GET");
     		conn.connect();
@@ -59,6 +59,7 @@ public class SearchSkill {
 					JSONObject obj = projects.getJSONObject(i);
 					Searchphraseresult tempsr = new Searchphraseresult();
 					tempsr.setOwner_id(obj.get("owner_id").toString());
+					tempsr.setPrevDesc(obj.get("preview_description").toString());
 					Date date = new Date(Long.parseLong(obj.get("submitdate").toString()+"000"));
 					DateFormat simple = new SimpleDateFormat("dd MMM yyyy");
 					tempsr.setDate(simple.format(date));tempsr.setTitle(obj.get("title").toString());

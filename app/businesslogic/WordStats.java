@@ -40,7 +40,7 @@ public class WordStats {
         List<Searchphraseresult> sp = new ArrayList<Searchphraseresult>();
         LinkedHashMap<String, Resultlist> resultmap = new LinkedHashMap<String, Resultlist>();
         Resultlist r1 = new Resultlist();
-        System.out.println(searchPhrase);
+        //System.out.println(searchPhrase);
         String[] s = searchPhrase.split(" ");
         String searchQuery = "\"";
         for(int i=0;i<s.length;i++) {

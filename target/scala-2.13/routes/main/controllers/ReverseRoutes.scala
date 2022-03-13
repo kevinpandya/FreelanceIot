@@ -17,26 +17,18 @@ package controllers {
     }
 
   
-<<<<<<< HEAD
-=======
     // @LINE:8
     def wordStat(search:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "wordstats/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("search", search)))
     }
   
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     // @LINE:7
     def skill(id:String, skill:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "skill/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("skill", skill)))
     }
   
-<<<<<<< HEAD
-    // @LINE:6
-    def index(searchPhrase:String = ""): Call = {
-      
-=======
     // @LINE:9
     def indvStat(index:String): Call = {
       
@@ -46,28 +38,19 @@ package controllers {
     // @LINE:6
     def index(searchPhrase:String = ""): Call = {
       
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
       Call("GET", _prefix + play.core.routing.queryString(List(if(searchPhrase == "") None else Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("searchPhrase", searchPhrase)))))
     }
   
   }
 
-<<<<<<< HEAD
-  // @LINE:10
-=======
   // @LINE:12
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-<<<<<<< HEAD
-    // @LINE:10
-=======
     // @LINE:12
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

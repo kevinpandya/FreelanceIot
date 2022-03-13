@@ -99,7 +99,6 @@ public class SearchPhrase {
 		return reversed;
 	}
 	
-<<<<<<< HEAD
 	public LinkedHashMap<String, Resultlist> checkPhraseResult(String phrase, LinkedHashMap<String, Resultlist> resultmap){
 		LinkedHashMap<String, Resultlist> temp = resultmap;
 		if(temp.containsKey(phrase)) {
@@ -113,6 +112,4 @@ public class SearchPhrase {
 		return temp;
 	}
 	
-=======
->>>>>>> f3ca293d357bddd15cd89a5bfc2631d652d4d7ff
 }
