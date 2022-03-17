@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\Mahavir\Desktop\Assignment-1 Freelancelot23333\test\ControllersTest\HomeControllerTest.java:45:1: variable request3 is already defined in method testIndex()[0m
+[0m[[0m[31merror[0m] [0m[0mHttp.RequestBuilder request3 = new Http.RequestBuilder()[0m
+[0m[[0m[31merror[0m] [0m[0m                .method(GET)[0m
+[0m[[0m[31merror[0m] [0m[0m                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\Mahavir\Desktop\Assignment-1 Freelancelot23333\test\ControllersTest\HomeControllerTest.java:49:1: variable result3 is already defined in method testIndex()[0m
+[0m[[0m[31merror[0m] [0m[0mResult result3 = route(app, request3);[0m

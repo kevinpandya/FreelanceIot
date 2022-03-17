@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>profile.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">profile.template.scala</span></div><h1>profile.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+import scala.jdk.CollectionConverters._
+/*1.2*/import model.Profile
+/*2.2*/import model.projectInfo
+
+<span class="pc" id="L26">object profile extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[Map[String, Profile],play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*3.2*/(searchProfile: Map[String, Profile]):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L30">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L34">Seq[Any](format.raw/*3.39*/(&quot;&quot;&quot;</span>
+
+<span class="fc" id="L36">&quot;&quot;&quot;),_display_(/*5.2*/main(&quot;FreeLancelot&quot;)/*5.22*/ {_display_(Seq[Any](format.raw/*5.24*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L37">&quot;&quot;&quot;),format.raw/*6.1*/(&quot;&quot;&quot;&lt;center&gt;</span>
+    &lt;article style=&quot;margin-top:50px;&quot;&gt;
+        &lt;div&gt;
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">            &quot;&quot;&quot;),_display_(/*9.14*/if(searchProfile != null)/*9.39*/ {_display_(Seq[Any](format.raw/*9.41*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L41">            &quot;&quot;&quot;),_display_(/*10.14*/for((searchTerms, user) &lt;- searchProfile) yield /*10.55*/{_display_(Seq[Any](format.raw/*10.56*/(&quot;&quot;&quot;</span>
+            &quot;&quot;&quot;),format.raw/*11.13*/(&quot;&quot;&quot;&lt;h2&gt;Owner Details&lt;/h2&gt;
+            &lt;b&gt;Publicname : &quot;&quot;&quot;),_display_(/*12.30*/searchTerms),format.raw/*12.41*/(&quot;&quot;&quot;&lt;/b&gt;
+            &lt;style&gt;
+                        table &quot;&quot;&quot;),format.raw/*14.31*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*14.32*/(&quot;&quot;&quot;
+                            &quot;&quot;&quot;),format.raw/*15.29*/(&quot;&quot;&quot;border-collapse: collapse;
+                        &quot;&quot;&quot;),format.raw/*16.25*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*16.26*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;),format.raw/*17.25*/(&quot;&quot;&quot;th &quot;&quot;&quot;),format.raw/*17.28*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*17.29*/(&quot;&quot;&quot;
+                            &quot;&quot;&quot;),format.raw/*18.29*/(&quot;&quot;&quot;background-color:lightskyblue;
+                            Color:white;
+                        &quot;&quot;&quot;),format.raw/*20.25*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*20.26*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;),format.raw/*21.25*/(&quot;&quot;&quot;th, td &quot;&quot;&quot;),format.raw/*21.32*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*21.33*/(&quot;&quot;&quot;
+                            &quot;&quot;&quot;),format.raw/*22.29*/(&quot;&quot;&quot;text-align:center;
+                            border:1px solid black;
+                            padding:5px
+
+                        &quot;&quot;&quot;),format.raw/*26.25*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*26.26*/(&quot;&quot;&quot;
+                    &quot;&quot;&quot;),format.raw/*27.21*/(&quot;&quot;&quot;&lt;/style&gt;
+            &lt;table border=&quot;1px&quot; &gt;
+                &quot;&quot;&quot;),_display_(/*29.18*/if(user.getId() != null)/*29.42*/ {_display_(Seq[Any](format.raw/*29.44*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*30.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Owner_id&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*32.26*/user/*32.30*/.getId()),format.raw/*32.38*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*34.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*35.18*/if(user.getUsername() != null)/*35.48*/{_display_(Seq[Any](format.raw/*35.49*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*36.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Username&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*38.26*/user/*38.30*/.getUsername()),format.raw/*38.44*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*40.18*/(&quot;&quot;&quot;
+
+                &quot;&quot;&quot;),_display_(/*42.18*/if(user.getCountry() != null)/*42.47*/{_display_(Seq[Any](format.raw/*42.48*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*43.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Country&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*45.26*/user/*45.30*/.getCountry()),format.raw/*45.43*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*47.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*48.18*/if(user.getCity() != null)/*48.44*/{_display_(Seq[Any](format.raw/*48.45*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*49.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;City&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*51.26*/user/*51.30*/.getCity()),format.raw/*51.40*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*53.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*54.18*/if(user.getRole() != null)/*54.44*/{_display_(Seq[Any](format.raw/*54.45*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*55.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;role&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*57.26*/user/*57.30*/.getRole()),format.raw/*57.40*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*59.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*60.18*/if(user.getChosenrole() != null)/*60.50*/{_display_(Seq[Any](format.raw/*60.51*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*61.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Chosen_role&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*63.26*/user/*63.30*/.getChosenrole()),format.raw/*63.46*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*65.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*66.18*/if(user.getProfiledescription() != null)/*66.58*/{_display_(Seq[Any](format.raw/*66.59*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*67.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Profiledescription&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*69.26*/user/*69.30*/.getProfiledescription()),format.raw/*69.54*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*71.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*72.18*/if(user.getRecommendations() != null)/*72.55*/{_display_(Seq[Any](format.raw/*72.56*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*73.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Recommendations&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*75.26*/user/*75.30*/.getRecommendations()),format.raw/*75.51*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*77.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*78.18*/if(user.getRegistrationdate() != null)/*78.56*/{_display_(Seq[Any](format.raw/*78.57*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*79.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;RegstationDate&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*81.26*/user/*81.30*/.getRegistrationdate()),format.raw/*81.52*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*83.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*84.18*/if(user.getCompany() != null)/*84.47*/{_display_(Seq[Any](format.raw/*84.48*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*85.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Company&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*87.26*/user/*87.30*/.getCompany()),format.raw/*87.43*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*89.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*90.18*/if(user.getHourylyrate() != null)/*90.51*/{_display_(Seq[Any](format.raw/*90.52*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*91.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;HourylyRate&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*93.26*/user/*93.30*/.getHourylyrate()),format.raw/*93.47*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*95.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*96.18*/if(user.getPrimarylanguage() != null)/*96.55*/{_display_(Seq[Any](format.raw/*96.56*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*97.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Primarylanguage&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*99.26*/user/*99.30*/.getPrimarylanguage()),format.raw/*99.51*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*101.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*102.18*/if(user.getLimitedaccount() != null)/*102.54*/{_display_(Seq[Any](format.raw/*102.55*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*103.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Limitedaccount&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*105.26*/user/*105.30*/.getLimitedaccount()),format.raw/*105.50*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*107.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*108.18*/if(user.getCode() != null)/*108.44*/{_display_(Seq[Any](format.raw/*108.45*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*109.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;CountryCode&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*111.26*/user/*111.30*/.getCode()),format.raw/*111.40*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*113.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*114.18*/if(user.getSign() != null)/*114.44*/{_display_(Seq[Any](format.raw/*114.45*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*115.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;CountrySign&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*117.26*/user/*117.30*/.getSign()),format.raw/*117.40*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*119.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*120.18*/if(user.getCurrencyname() != null)/*120.52*/{_display_(Seq[Any](format.raw/*120.53*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*121.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;CurrencyName&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*123.26*/user/*123.30*/.getCurrencyname()),format.raw/*123.48*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*125.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*126.18*/if(user.getPublicname() != null)/*126.50*/{_display_(Seq[Any](format.raw/*126.51*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*127.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Publicname&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*129.26*/user/*129.30*/.getPublicname()),format.raw/*129.46*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*131.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*132.18*/if(user.getEmailverified() != null)/*132.53*/{_display_(Seq[Any](format.raw/*132.54*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*133.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Email_Verified&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*135.26*/user/*135.30*/.getEmailverified()),format.raw/*135.49*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*137.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*138.18*/if(user.getTimezone() != null)/*138.48*/{_display_(Seq[Any](format.raw/*138.49*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*139.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;TimeZone&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*141.26*/user/*141.30*/.getTimezone()),format.raw/*141.44*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*143.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*144.18*/if(user.getSkills().size()&gt;0)/*144.47*/{_display_(Seq[Any](format.raw/*144.48*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*145.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Skills&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*147.26*/for((key,value) &lt;- user.getSkills()) yield /*147.62*/{_display_(Seq[Any](format.raw/*147.63*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;),_display_(/*148.26*/key),format.raw/*148.29*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;)))}),format.raw/*149.26*/(&quot;&quot;&quot;
+                    &quot;&quot;&quot;),format.raw/*150.21*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}/*152.18*/else/*152.22*/{_display_(Seq[Any](format.raw/*152.23*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*153.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Skills&lt;/th&gt;
+                    &lt;td&gt;Users does not have any skills&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*157.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),_display_(/*158.18*/if( user.getQualifications().size()&gt;0)/*158.56*/{_display_(Seq[Any](format.raw/*158.57*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*159.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Qualifications&lt;/th&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*161.26*/for((key,value) &lt;- user.getQualifications()) yield /*161.70*/{_display_(Seq[Any](format.raw/*161.71*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;),_display_(/*162.26*/key),format.raw/*162.29*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;)))}),format.raw/*163.26*/(&quot;&quot;&quot;
+                    &quot;&quot;&quot;),format.raw/*164.21*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}/*166.18*/else/*166.22*/{_display_(Seq[Any](format.raw/*166.23*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*167.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Qualifications&lt;/th&gt;
+                    &lt;td&gt;Users does not have any Qualifications&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*171.18*/(&quot;&quot;&quot;
+            &quot;&quot;&quot;),format.raw/*172.13*/(&quot;&quot;&quot;&lt;/table&gt;
+            &lt;h3&gt;Projects&lt;/h3&gt;
+            &lt;table&gt;
+                &quot;&quot;&quot;),_display_(/*175.18*/if( user.getProjects().size()&gt;0)/*175.50*/{_display_(Seq[Any](format.raw/*175.51*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*176.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;th&gt;Project Id&lt;/th&gt;
+                    &lt;th&gt;Submit Date&lt;/th&gt;
+                    &lt;th&gt;Title&lt;/th&gt;
+                    &lt;th&gt;Description&lt;/th&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;),_display_(/*182.18*/for(projects &lt;- user.getProjects()) yield /*182.53*/{_display_(Seq[Any](format.raw/*182.54*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*183.17*/(&quot;&quot;&quot;&lt;tr&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*184.26*/projects/*184.34*/.getProjectid()),format.raw/*184.49*/(&quot;&quot;&quot;&lt;/td&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*185.26*/projects/*185.34*/.getSubmitdate()),format.raw/*185.50*/(&quot;&quot;&quot;&lt;/td&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*186.26*/projects/*186.34*/.getTitle()),format.raw/*186.45*/(&quot;&quot;&quot;&lt;/td&gt;
+                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*187.26*/projects/*187.34*/.getDescription()),format.raw/*187.51*/(&quot;&quot;&quot;&lt;/td&gt;
+                &lt;/tr&gt;
+                &quot;&quot;&quot;)))}),format.raw/*189.18*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;)))}/*190.18*/else/*190.22*/{_display_(Seq[Any](format.raw/*190.23*/(&quot;&quot;&quot;
+                &quot;&quot;&quot;),format.raw/*191.17*/(&quot;&quot;&quot;&lt;p&gt;This user does not have project&lt;/p&gt;
+                &quot;&quot;&quot;)))}),format.raw/*192.18*/(&quot;&quot;&quot;
+            &quot;&quot;&quot;),format.raw/*193.13*/(&quot;&quot;&quot;&lt;/table&gt;
+<span class="fc" id="L225">            &quot;&quot;&quot;)))}),format.raw/*194.14*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L226">            &quot;&quot;&quot;)))}),format.raw/*195.14*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L227">        &quot;&quot;&quot;),format.raw/*196.9*/(&quot;&quot;&quot;&lt;/div&gt;</span>
+    &lt;/article&gt;
+&lt;/center&gt;
+&quot;&quot;&quot;)))}))
+      }
+    }
+  }
+
+<span class="fc" id="L235">  def render(searchProfile:Map[String, Profile]): play.twirl.api.HtmlFormat.Appendable = apply(searchProfile)</span>
+
+<span class="nc" id="L237">  def f:((Map[String, Profile]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (searchProfile) =&gt; apply(searchProfile)</span>
+
+<span class="nc" id="L239">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  SOURCE: app/views/profile.scala.html
+                  HASH: f2904afe3a3d925b96c446304145021b5b2aad76
+                  MATRIX: 610-&gt;1|638-&gt;24|983-&gt;51|1115-&gt;88|1145-&gt;93|1173-&gt;113|1212-&gt;115|1240-&gt;117|1344-&gt;195|1377-&gt;220|1416-&gt;222|1458-&gt;237|1515-&gt;278|1554-&gt;279|1596-&gt;293|1676-&gt;346|1708-&gt;357|1793-&gt;414|1822-&gt;415|1880-&gt;445|1960-&gt;497|1989-&gt;498|2043-&gt;524|2074-&gt;527|2103-&gt;528|2161-&gt;558|2287-&gt;656|2316-&gt;657|2370-&gt;683|2405-&gt;690|2434-&gt;691|2492-&gt;721|2660-&gt;861|2689-&gt;862|2739-&gt;884|2828-&gt;946|2861-&gt;970|2901-&gt;972|2947-&gt;990|3044-&gt;1060|3057-&gt;1064|3086-&gt;1072|3164-&gt;1119|3210-&gt;1138|3249-&gt;1168|3288-&gt;1169|3334-&gt;1187|3431-&gt;1257|3444-&gt;1261|3479-&gt;1275|3557-&gt;1322|3605-&gt;1343|3643-&gt;1372|3682-&gt;1373|3728-&gt;1391|3824-&gt;1460|3837-&gt;1464|3871-&gt;1477|3949-&gt;1524|3995-&gt;1543|4030-&gt;1569|4069-&gt;1570|4115-&gt;1588|4208-&gt;1654|4221-&gt;1658|4252-&gt;1668|4330-&gt;1715|4376-&gt;1734|4411-&gt;1760|4450-&gt;1761|4496-&gt;1779|4589-&gt;1845|4602-&gt;1849|4633-&gt;1859|4711-&gt;1906|4757-&gt;1925|4798-&gt;1957|4837-&gt;1958|4883-&gt;1976|4983-&gt;2049|4996-&gt;2053|5033-&gt;2069|5111-&gt;2116|5157-&gt;2135|5206-&gt;2175|5245-&gt;2176|5291-&gt;2194|5398-&gt;2274|5411-&gt;2278|5456-&gt;2302|5534-&gt;2349|5580-&gt;2368|5626-&gt;2405|5665-&gt;2406|5711-&gt;2424|5815-&gt;2501|5828-&gt;2505|5870-&gt;2526|5948-&gt;2573|5994-&gt;2592|6041-&gt;2630|6080-&gt;2631|6126-&gt;2649|6229-&gt;2725|6242-&gt;2729|6285-&gt;2751|6363-&gt;2798|6409-&gt;2817|6447-&gt;2846|6486-&gt;2847|6532-&gt;2865|6628-&gt;2934|6641-&gt;2938|6675-&gt;2951|6753-&gt;2998|6799-&gt;3017|6841-&gt;3050|6880-&gt;3051|6926-&gt;3069|7026-&gt;3142|7039-&gt;3146|7077-&gt;3163|7155-&gt;3210|7201-&gt;3229|7247-&gt;3266|7286-&gt;3267|7332-&gt;3285|7436-&gt;3362|7449-&gt;3366|7491-&gt;3387|7570-&gt;3434|7617-&gt;3453|7663-&gt;3489|7703-&gt;3490|7750-&gt;3508|7854-&gt;3584|7868-&gt;3588|7910-&gt;3608|7989-&gt;3655|8036-&gt;3674|8072-&gt;3700|8112-&gt;3701|8159-&gt;3719|8260-&gt;3792|8274-&gt;3796|8306-&gt;3806|8385-&gt;3853|8432-&gt;3872|8468-&gt;3898|8508-&gt;3899|8555-&gt;3917|8656-&gt;3990|8670-&gt;3994|8702-&gt;4004|8781-&gt;4051|8828-&gt;4070|8872-&gt;4104|8912-&gt;4105|8959-&gt;4123|9061-&gt;4197|9075-&gt;4201|9115-&gt;4219|9194-&gt;4266|9241-&gt;4285|9283-&gt;4317|9323-&gt;4318|9370-&gt;4336|9470-&gt;4408|9484-&gt;4412|9522-&gt;4428|9601-&gt;4475|9648-&gt;4494|9693-&gt;4529|9733-&gt;4530|9780-&gt;4548|9884-&gt;4624|9898-&gt;4628|9939-&gt;4647|10018-&gt;4694|10065-&gt;4713|10105-&gt;4743|10145-&gt;4744|10192-&gt;4762|10290-&gt;4832|10304-&gt;4836|10340-&gt;4850|10419-&gt;4897|10466-&gt;4916|10505-&gt;4945|10545-&gt;4946|10592-&gt;4964|10688-&gt;5032|10741-&gt;5068|10781-&gt;5069|10836-&gt;5096|10861-&gt;5099|10920-&gt;5126|10971-&gt;5148|11038-&gt;5195|11052-&gt;5199|11092-&gt;5200|11139-&gt;5218|11315-&gt;5362|11362-&gt;5381|11410-&gt;5419|11450-&gt;5420|11497-&gt;5438|11601-&gt;5514|11662-&gt;5558|11702-&gt;5559|11757-&gt;5586|11782-&gt;5589|11841-&gt;5616|11892-&gt;5638|11959-&gt;5685|11973-&gt;5689|12013-&gt;5690|12060-&gt;5708|12252-&gt;5868|12295-&gt;5882|12402-&gt;5961|12444-&gt;5993|12484-&gt;5994|12531-&gt;6012|12766-&gt;6219|12818-&gt;6254|12858-&gt;6255|12905-&gt;6273|12964-&gt;6304|12982-&gt;6312|13019-&gt;6327|13079-&gt;6359|13097-&gt;6367|13135-&gt;6383|13195-&gt;6415|13213-&gt;6423|13246-&gt;6434|13306-&gt;6466|13324-&gt;6474|13363-&gt;6491|13442-&gt;6538|13481-&gt;6557|13495-&gt;6561|13535-&gt;6562|13582-&gt;6580|13671-&gt;6637|13714-&gt;6651|13769-&gt;6674|13816-&gt;6689|13854-&gt;6699
+                  LINES: 23-&gt;1|24-&gt;2|29-&gt;3|34-&gt;3|36-&gt;5|36-&gt;5|36-&gt;5|37-&gt;6|40-&gt;9|40-&gt;9|40-&gt;9|41-&gt;10|41-&gt;10|41-&gt;10|42-&gt;11|43-&gt;12|43-&gt;12|45-&gt;14|45-&gt;14|46-&gt;15|47-&gt;16|47-&gt;16|48-&gt;17|48-&gt;17|48-&gt;17|49-&gt;18|51-&gt;20|51-&gt;20|52-&gt;21|52-&gt;21|52-&gt;21|53-&gt;22|57-&gt;26|57-&gt;26|58-&gt;27|60-&gt;29|60-&gt;29|60-&gt;29|61-&gt;30|63-&gt;32|63-&gt;32|63-&gt;32|65-&gt;34|66-&gt;35|66-&gt;35|66-&gt;35|67-&gt;36|69-&gt;38|69-&gt;38|69-&gt;38|71-&gt;40|73-&gt;42|73-&gt;42|73-&gt;42|74-&gt;43|76-&gt;45|76-&gt;45|76-&gt;45|78-&gt;47|79-&gt;48|79-&gt;48|79-&gt;48|80-&gt;49|82-&gt;51|82-&gt;51|82-&gt;51|84-&gt;53|85-&gt;54|85-&gt;54|85-&gt;54|86-&gt;55|88-&gt;57|88-&gt;57|88-&gt;57|90-&gt;59|91-&gt;60|91-&gt;60|91-&gt;60|92-&gt;61|94-&gt;63|94-&gt;63|94-&gt;63|96-&gt;65|97-&gt;66|97-&gt;66|97-&gt;66|98-&gt;67|100-&gt;69|100-&gt;69|100-&gt;69|102-&gt;71|103-&gt;72|103-&gt;72|103-&gt;72|104-&gt;73|106-&gt;75|106-&gt;75|106-&gt;75|108-&gt;77|109-&gt;78|109-&gt;78|109-&gt;78|110-&gt;79|112-&gt;81|112-&gt;81|112-&gt;81|114-&gt;83|115-&gt;84|115-&gt;84|115-&gt;84|116-&gt;85|118-&gt;87|118-&gt;87|118-&gt;87|120-&gt;89|121-&gt;90|121-&gt;90|121-&gt;90|122-&gt;91|124-&gt;93|124-&gt;93|124-&gt;93|126-&gt;95|127-&gt;96|127-&gt;96|127-&gt;96|128-&gt;97|130-&gt;99|130-&gt;99|130-&gt;99|132-&gt;101|133-&gt;102|133-&gt;102|133-&gt;102|134-&gt;103|136-&gt;105|136-&gt;105|136-&gt;105|138-&gt;107|139-&gt;108|139-&gt;108|139-&gt;108|140-&gt;109|142-&gt;111|142-&gt;111|142-&gt;111|144-&gt;113|145-&gt;114|145-&gt;114|145-&gt;114|146-&gt;115|148-&gt;117|148-&gt;117|148-&gt;117|150-&gt;119|151-&gt;120|151-&gt;120|151-&gt;120|152-&gt;121|154-&gt;123|154-&gt;123|154-&gt;123|156-&gt;125|157-&gt;126|157-&gt;126|157-&gt;126|158-&gt;127|160-&gt;129|160-&gt;129|160-&gt;129|162-&gt;131|163-&gt;132|163-&gt;132|163-&gt;132|164-&gt;133|166-&gt;135|166-&gt;135|166-&gt;135|168-&gt;137|169-&gt;138|169-&gt;138|169-&gt;138|170-&gt;139|172-&gt;141|172-&gt;141|172-&gt;141|174-&gt;143|175-&gt;144|175-&gt;144|175-&gt;144|176-&gt;145|178-&gt;147|178-&gt;147|178-&gt;147|179-&gt;148|179-&gt;148|180-&gt;149|181-&gt;150|183-&gt;152|183-&gt;152|183-&gt;152|184-&gt;153|188-&gt;157|189-&gt;158|189-&gt;158|189-&gt;158|190-&gt;159|192-&gt;161|192-&gt;161|192-&gt;161|193-&gt;162|193-&gt;162|194-&gt;163|195-&gt;164|197-&gt;166|197-&gt;166|197-&gt;166|198-&gt;167|202-&gt;171|203-&gt;172|206-&gt;175|206-&gt;175|206-&gt;175|207-&gt;176|213-&gt;182|213-&gt;182|213-&gt;182|214-&gt;183|215-&gt;184|215-&gt;184|215-&gt;184|216-&gt;185|216-&gt;185|216-&gt;185|217-&gt;186|217-&gt;186|217-&gt;186|218-&gt;187|218-&gt;187|218-&gt;187|220-&gt;189|221-&gt;190|221-&gt;190|221-&gt;190|222-&gt;191|223-&gt;192|224-&gt;193|225-&gt;194|226-&gt;195|227-&gt;196
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

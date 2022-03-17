@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>index.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">index.template.scala</span></div><h1>index.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+import scala.jdk.CollectionConverters._
+/*1.2*/import model.Searchphraseresult
+/*2.2*/import model.Resultlist
+
+<span class="pc" id="L26">object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[Map[String, Resultlist],play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*3.2*/(searchResults: Map[String, Resultlist]):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L30">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L34">Seq[Any](format.raw/*3.42*/(&quot;&quot;&quot;</span>
+
+<span class="fc" id="L36">&quot;&quot;&quot;),_display_(/*5.2*/main(&quot;FreeLancelot&quot;)/*5.22*/ {_display_(Seq[Any](format.raw/*5.24*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L37">	&quot;&quot;&quot;),format.raw/*6.2*/(&quot;&quot;&quot;&lt;center&gt;</span>
+		&lt;article style=&quot;margin-top:50px;&quot;&gt;
+			&lt;h1&gt;Welcome to FreeLancelot&lt;/h1&gt;
+			&lt;form action=&quot;/&quot; method=&quot;GET&quot;&gt;
+				&lt;input type=&quot;text&quot; name=&quot;searchPhrase&quot; placeholder=&quot;Enter search terms&quot;/&gt;
+				&lt;input id=&quot;submitbtn&quot; type=&quot;submit&quot; value=&quot;Go!&quot; /&gt;
+				&lt;br /&gt;
+				&lt;input type=&quot;text&quot; id=&quot;hiddenId&quot; name=&quot;sessionId&quot; value=&quot;&quot; /&gt;
+			&lt;/form&gt;
+			&lt;div&gt;
+<span class="fc bfc" id="L47" title="All 2 branches covered.">			&quot;&quot;&quot;),_display_(/*16.5*/if(searchResults != null)/*16.30*/ {_display_(Seq[Any](format.raw/*16.32*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L48">				&quot;&quot;&quot;),_display_(/*17.6*/for((searchTerms, searchResultlist) &lt;- searchResults) yield /*17.59*/{_display_(Seq[Any](format.raw/*17.60*/(&quot;&quot;&quot;</span>
+					&quot;&quot;&quot;),format.raw/*18.6*/(&quot;&quot;&quot;&lt;p&gt;Search terms : &quot;&quot;&quot;),_display_(/*18.25*/searchTerms),format.raw/*18.36*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*18.37*/(&quot;&quot;&quot;: Flesh reading Ease Index ## FKGL #.#&lt;/p&gt;
+					&quot;&quot;&quot;),_display_(/*19.7*/if(searchResultlist.getResult().size()&gt;0)/*19.48*/{_display_(Seq[Any](format.raw/*19.49*/(&quot;&quot;&quot;
+						&quot;&quot;&quot;),format.raw/*20.7*/(&quot;&quot;&quot;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*20.17*/routes/*20.23*/.HomeController.wordStat(searchTerms)),format.raw/*20.60*/(&quot;&quot;&quot;&quot;&gt;Global Stats&lt;/a&gt;
+						&lt;table&gt;
+							&lt;tr&gt;
+								&lt;th&gt;Owner_id&lt;/th&gt;
+								&lt;th&gt;Date&lt;/th&gt;
+								&lt;th&gt;Title&lt;/th&gt;
+								&lt;th&gt;Type&lt;/th&gt;
+								&lt;th&gt;Skills&lt;/th&gt;
+							&lt;/tr&gt;
+							&quot;&quot;&quot;),_display_(/*29.9*/for(result &lt;- searchResultlist.getResult()) yield /*29.52*/{_display_(Seq[Any](format.raw/*29.53*/(&quot;&quot;&quot;
+								&quot;&quot;&quot;),format.raw/*30.9*/(&quot;&quot;&quot;&lt;tr&gt;
+									&lt;td&gt;&lt;a href='&quot;&quot;&quot;),_display_(/*31.24*/routes/*31.30*/.HomeController.profile(result.getOwner_id())),format.raw/*31.75*/(&quot;&quot;&quot;'&gt;&quot;&quot;&quot;),_display_(/*31.78*/result/*31.84*/.getOwner_id()),format.raw/*31.98*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/td&gt;
+									&lt;td&gt;&quot;&quot;&quot;),_display_(/*32.15*/result/*32.21*/.getDate()),format.raw/*32.31*/(&quot;&quot;&quot;&lt;/td&gt;
+									&lt;td&gt;&quot;&quot;&quot;),_display_(/*33.15*/result/*33.21*/.getTitle()),format.raw/*33.32*/(&quot;&quot;&quot;&lt;/td&gt;
+									&lt;td&gt;&quot;&quot;&quot;),_display_(/*34.15*/result/*34.21*/.getType()),format.raw/*34.31*/(&quot;&quot;&quot;&lt;/td&gt;
+									&lt;td&gt;&quot;&quot;&quot;),_display_(/*35.15*/for((key,value) &lt;- result.getSkills()) yield /*35.53*/{_display_(Seq[Any](format.raw/*35.54*/(&quot;&quot;&quot;
+										&quot;&quot;&quot;),format.raw/*36.11*/(&quot;&quot;&quot;&lt;u&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*36.24*/routes/*36.30*/.HomeController.skill(value,key)),format.raw/*36.62*/(&quot;&quot;&quot;&quot; target=&quot;_blank&quot;&gt;&quot;&quot;&quot;),_display_(/*36.81*/key),format.raw/*36.84*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/u&gt;
+									&quot;&quot;&quot;)))}),format.raw/*37.11*/(&quot;&quot;&quot;
+									&quot;&quot;&quot;),format.raw/*38.10*/(&quot;&quot;&quot;&lt;/td&gt;
+									&lt;td&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*39.24*/routes/*39.30*/.HomeController.indvStat(searchTerms, result.getIndex())),format.raw/*39.86*/(&quot;&quot;&quot;&quot;&gt;Stats&lt;/a&gt;&lt;/td&gt;
+									&lt;td&gt;&lt;a href=#&gt;Readability&lt;/a&gt;&lt;/td&gt;
+								&lt;/tr&gt;
+							&quot;&quot;&quot;)))}),format.raw/*42.9*/(&quot;&quot;&quot;
+						&quot;&quot;&quot;),format.raw/*43.7*/(&quot;&quot;&quot;&lt;/table&gt;
+					&quot;&quot;&quot;)))}/*44.7*/else/*44.11*/{_display_(Seq[Any](format.raw/*44.12*/(&quot;&quot;&quot;
+						&quot;&quot;&quot;),format.raw/*45.7*/(&quot;&quot;&quot;&lt;p&gt;There are no project for the term : &quot;&quot;&quot;),_display_(/*45.47*/searchTerms),format.raw/*45.58*/(&quot;&quot;&quot;&lt;/p&gt;
+					&quot;&quot;&quot;)))}),format.raw/*46.7*/(&quot;&quot;&quot;
+<span class="fc" id="L78">				&quot;&quot;&quot;)))}),format.raw/*47.6*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L79">			&quot;&quot;&quot;)))}),format.raw/*48.5*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L80">			&quot;&quot;&quot;),format.raw/*49.4*/(&quot;&quot;&quot;&lt;/div&gt;</span>
+		&lt;/article&gt;
+	&lt;/center&gt;
+	&lt;script&gt;
+	const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+<span class="fc" id="L86">	function generateString() &quot;&quot;&quot;),format.raw/*55.28*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*55.29*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L87">		&quot;&quot;&quot;),format.raw/*56.3*/(&quot;&quot;&quot;console.log(&quot;In the function&quot;);</span>
+		let result = ' ';
+		const charactersLength = characters.length;
+<span class="fc" id="L90">		for ( let i = 0; i &lt; 8; i++ ) &quot;&quot;&quot;),format.raw/*59.33*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*59.34*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L91">			&quot;&quot;&quot;),format.raw/*60.4*/(&quot;&quot;&quot;result += characters.charAt(Math.floor(Math.random() * charactersLength));</span>
+<span class="fc" id="L92">		&quot;&quot;&quot;),format.raw/*61.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*61.4*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L93">		&quot;&quot;&quot;),format.raw/*62.3*/(&quot;&quot;&quot;return result;</span>
+<span class="fc" id="L94">	&quot;&quot;&quot;),format.raw/*63.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*63.3*/(&quot;&quot;&quot;;</span>
+
+<span class="fc" id="L96">	window.onload=function()&quot;&quot;&quot;),format.raw/*65.26*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*65.27*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L97">		&quot;&quot;&quot;),format.raw/*66.3*/(&quot;&quot;&quot;var mb = document.getElementById(&quot;submitbtn&quot;);</span>
+		mb.addEventListener(&quot;click&quot;, checkCookie);
+		console.log(&quot;In the window after loading&quot;);
+<span class="fc" id="L100">	&quot;&quot;&quot;),format.raw/*69.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*69.3*/(&quot;&quot;&quot;;</span>
+
+<span class="fc" id="L102">	function setCookie(id)&quot;&quot;&quot;),format.raw/*71.24*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*71.25*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L103">		&quot;&quot;&quot;),format.raw/*72.3*/(&quot;&quot;&quot;console.log(&quot;setcokkie id &quot;+id);</span>
+		const date = new Date();
+		date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+		var expires = &quot;expires=&quot;+date.toUTCString();
+		document.cookie = &quot;sessionId=&quot;+id+&quot;;&quot;+expires+&quot;;path=/&quot;;
+<span class="fc" id="L108">	&quot;&quot;&quot;),format.raw/*77.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*77.3*/(&quot;&quot;&quot;;</span>
+
+<span class="fc" id="L110">	function getCookie()&quot;&quot;&quot;),format.raw/*79.22*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*79.23*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L111">		&quot;&quot;&quot;),format.raw/*80.3*/(&quot;&quot;&quot;let name = &quot;sessionId=&quot;;</span>
+		let spli = document.cookie.split(';');
+<span class="fc" id="L113">		for(var j=0;j &lt; spli.length; j++)&quot;&quot;&quot;),format.raw/*82.36*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*82.37*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L114">			&quot;&quot;&quot;),format.raw/*83.4*/(&quot;&quot;&quot;let char = spli[j];</span>
+<span class="fc" id="L115">			while(char.charAt(0) == ' ') &quot;&quot;&quot;),format.raw/*84.33*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*84.34*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L116">				&quot;&quot;&quot;),format.raw/*85.5*/(&quot;&quot;&quot;char = char.substring(1);</span>
+<span class="fc" id="L117">			&quot;&quot;&quot;),format.raw/*86.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*86.5*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L118">			&quot;&quot;&quot;),format.raw/*87.4*/(&quot;&quot;&quot;if(char.indexOf(name) == 0) &quot;&quot;&quot;),format.raw/*87.32*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*87.33*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L119">				&quot;&quot;&quot;),format.raw/*88.5*/(&quot;&quot;&quot;return char.substring(name.length, char.length);</span>
+<span class="fc" id="L120">			&quot;&quot;&quot;),format.raw/*89.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*89.5*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L121">		&quot;&quot;&quot;),format.raw/*90.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*90.4*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L122">		&quot;&quot;&quot;),format.raw/*91.3*/(&quot;&quot;&quot;id = &quot;&quot;;</span>
+		console.log(&quot;getcookie id &quot;+id);
+		return id;
+<span class="fc" id="L125">	&quot;&quot;&quot;),format.raw/*94.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*94.3*/(&quot;&quot;&quot;;</span>
+
+<span class="fc" id="L127">	function checkCookie() &quot;&quot;&quot;),format.raw/*96.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*96.26*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L128">		&quot;&quot;&quot;),format.raw/*97.3*/(&quot;&quot;&quot;var id = getCookie();</span>
+		console.log(&quot;id &quot;+id);
+<span class="fc" id="L130">		if(id != &quot;&quot;)&quot;&quot;&quot;),format.raw/*99.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*99.16*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L131">			&quot;&quot;&quot;),format.raw/*100.4*/(&quot;&quot;&quot;console.log(&quot;checkcookie id if not null&quot;+id);</span>
+			//alert(id);
+			document.getElementById(&quot;hiddenId&quot;).value = id
+<span class="fc" id="L134">		&quot;&quot;&quot;),format.raw/*103.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*103.4*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L135">		&quot;&quot;&quot;),format.raw/*104.3*/(&quot;&quot;&quot;else&quot;&quot;&quot;),format.raw/*104.7*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*104.8*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L136">			&quot;&quot;&quot;),format.raw/*105.4*/(&quot;&quot;&quot;id = generateString();</span>
+			console.log(&quot;checkcookie id &quot;+id);
+<span class="fc" id="L138">			if(id != &quot;&quot; &amp;&amp; id != null)&quot;&quot;&quot;),format.raw/*107.30*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*107.31*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L139">				&quot;&quot;&quot;),format.raw/*108.5*/(&quot;&quot;&quot;setCookie(id);</span>
+<span class="fc" id="L140">			&quot;&quot;&quot;),format.raw/*109.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*109.5*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L141">		&quot;&quot;&quot;),format.raw/*110.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*110.4*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L142">	&quot;&quot;&quot;),format.raw/*111.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*111.3*/(&quot;&quot;&quot;;</span>
+	&lt;/script&gt;
+&quot;&quot;&quot;)))}))
+      }
+    }
+  }
+
+<span class="fc" id="L149">  def render(searchResults:Map[String, Resultlist]): play.twirl.api.HtmlFormat.Appendable = apply(searchResults)</span>
+
+<span class="nc" id="L151">  def f:((Map[String, Resultlist]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (searchResults) =&gt; apply(searchResults)</span>
+
+<span class="nc" id="L153">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  SOURCE: app/views/index.scala.html
+                  HASH: 6bdd795ce1983046179343389e144c15f88ccb63
+                  MATRIX: 610-&gt;1|649-&gt;35|994-&gt;61|1129-&gt;101|1159-&gt;106|1187-&gt;126|1226-&gt;128|1255-&gt;131|1641-&gt;491|1675-&gt;516|1715-&gt;518|1748-&gt;525|1817-&gt;578|1856-&gt;579|1890-&gt;586|1936-&gt;605|1968-&gt;616|1997-&gt;617|2073-&gt;667|2123-&gt;708|2162-&gt;709|2197-&gt;717|2234-&gt;727|2249-&gt;733|2307-&gt;770|2525-&gt;962|2584-&gt;1005|2623-&gt;1006|2660-&gt;1016|2716-&gt;1045|2731-&gt;1051|2797-&gt;1096|2827-&gt;1099|2842-&gt;1105|2877-&gt;1119|2929-&gt;1144|2944-&gt;1150|2975-&gt;1160|3023-&gt;1181|3038-&gt;1187|3070-&gt;1198|3118-&gt;1219|3133-&gt;1225|3164-&gt;1235|3212-&gt;1256|3266-&gt;1294|3305-&gt;1295|3345-&gt;1307|3385-&gt;1320|3400-&gt;1326|3453-&gt;1358|3499-&gt;1377|3523-&gt;1380|3574-&gt;1400|3613-&gt;1411|3670-&gt;1441|3685-&gt;1447|3762-&gt;1503|3878-&gt;1589|3913-&gt;1597|3947-&gt;1613|3960-&gt;1617|3999-&gt;1618|4034-&gt;1626|4101-&gt;1666|4133-&gt;1677|4175-&gt;1689|4212-&gt;1696|4248-&gt;1702|4280-&gt;1707|4468-&gt;1867|4497-&gt;1868|4528-&gt;1872|4689-&gt;2005|4718-&gt;2006|4750-&gt;2011|4855-&gt;2089|4883-&gt;2090|4914-&gt;2094|4958-&gt;2111|4986-&gt;2112|5044-&gt;2142|5073-&gt;2143|5104-&gt;2147|5273-&gt;2289|5301-&gt;2290|5357-&gt;2318|5386-&gt;2319|5417-&gt;2323|5678-&gt;2557|5706-&gt;2558|5760-&gt;2584|5789-&gt;2585|5820-&gt;2589|5951-&gt;2692|5980-&gt;2693|6012-&gt;2698|6093-&gt;2751|6122-&gt;2752|6155-&gt;2758|6212-&gt;2788|6240-&gt;2789|6272-&gt;2794|6328-&gt;2822|6357-&gt;2823|6390-&gt;2829|6470-&gt;2882|6498-&gt;2883|6529-&gt;2887|6557-&gt;2888|6588-&gt;2892|6676-&gt;2953|6704-&gt;2954|6761-&gt;2983|6790-&gt;2984|6821-&gt;2988|6912-&gt;3051|6941-&gt;3052|6974-&gt;3057|7119-&gt;3174|7148-&gt;3175|7180-&gt;3179|7212-&gt;3183|7241-&gt;3184|7274-&gt;3189|7395-&gt;3281|7425-&gt;3282|7459-&gt;3288|7506-&gt;3307|7535-&gt;3308|7567-&gt;3312|7596-&gt;3313|7627-&gt;3316|7656-&gt;3317
+                  LINES: 23-&gt;1|24-&gt;2|29-&gt;3|34-&gt;3|36-&gt;5|36-&gt;5|36-&gt;5|37-&gt;6|47-&gt;16|47-&gt;16|47-&gt;16|48-&gt;17|48-&gt;17|48-&gt;17|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|50-&gt;19|50-&gt;19|50-&gt;19|51-&gt;20|51-&gt;20|51-&gt;20|51-&gt;20|60-&gt;29|60-&gt;29|60-&gt;29|61-&gt;30|62-&gt;31|62-&gt;31|62-&gt;31|62-&gt;31|62-&gt;31|62-&gt;31|63-&gt;32|63-&gt;32|63-&gt;32|64-&gt;33|64-&gt;33|64-&gt;33|65-&gt;34|65-&gt;34|65-&gt;34|66-&gt;35|66-&gt;35|66-&gt;35|67-&gt;36|67-&gt;36|67-&gt;36|67-&gt;36|67-&gt;36|67-&gt;36|68-&gt;37|69-&gt;38|70-&gt;39|70-&gt;39|70-&gt;39|73-&gt;42|74-&gt;43|75-&gt;44|75-&gt;44|75-&gt;44|76-&gt;45|76-&gt;45|76-&gt;45|77-&gt;46|78-&gt;47|79-&gt;48|80-&gt;49|86-&gt;55|86-&gt;55|87-&gt;56|90-&gt;59|90-&gt;59|91-&gt;60|92-&gt;61|92-&gt;61|93-&gt;62|94-&gt;63|94-&gt;63|96-&gt;65|96-&gt;65|97-&gt;66|100-&gt;69|100-&gt;69|102-&gt;71|102-&gt;71|103-&gt;72|108-&gt;77|108-&gt;77|110-&gt;79|110-&gt;79|111-&gt;80|113-&gt;82|113-&gt;82|114-&gt;83|115-&gt;84|115-&gt;84|116-&gt;85|117-&gt;86|117-&gt;86|118-&gt;87|118-&gt;87|118-&gt;87|119-&gt;88|120-&gt;89|120-&gt;89|121-&gt;90|121-&gt;90|122-&gt;91|125-&gt;94|125-&gt;94|127-&gt;96|127-&gt;96|128-&gt;97|130-&gt;99|130-&gt;99|131-&gt;100|134-&gt;103|134-&gt;103|135-&gt;104|135-&gt;104|135-&gt;104|136-&gt;105|138-&gt;107|138-&gt;107|139-&gt;108|140-&gt;109|140-&gt;109|141-&gt;110|141-&gt;110|142-&gt;111|142-&gt;111
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

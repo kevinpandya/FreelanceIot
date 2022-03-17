@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>stat.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">stat.template.scala</span></div><h1>stat.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+import scala.jdk.CollectionConverters._
+/*1.2*/import model.Searchphraseresult
+/*2.2*/import model.Resultlist
+/*3.2*/import java.util
+
+<span class="pc" id="L27">object stat extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[util.Map[String, Resultlist],play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*4.2*/(searchResults: util.Map[String, Resultlist]):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L31">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L35">Seq[Any](format.raw/*4.47*/(&quot;&quot;&quot;</span>
+
+
+<span class="fc" id="L38">    &quot;&quot;&quot;),_display_(/*7.6*/main(&quot;FreeLancelot&quot;)/*7.26*/ {_display_(Seq[Any](format.raw/*7.28*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L39">        &quot;&quot;&quot;),format.raw/*8.9*/(&quot;&quot;&quot;&lt;center&gt;</span>
+            &lt;article style=&quot;margin-top:50px;&quot;&gt;
+                &lt;div&gt;
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">                &quot;&quot;&quot;),_display_(/*11.18*/if(searchResults != null)/*11.43*/ {_display_(Seq[Any](format.raw/*11.45*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L43">                    &quot;&quot;&quot;),_display_(/*12.22*/for((searchTerms, searchResultlist) &lt;- searchResults) yield /*12.75*/{_display_(Seq[Any](format.raw/*12.76*/(&quot;&quot;&quot;</span>
+                        &quot;&quot;&quot;),format.raw/*13.25*/(&quot;&quot;&quot;&lt;p&gt;Search terms : &quot;&quot;&quot;),_display_(/*13.44*/searchTerms),format.raw/*13.55*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*13.56*/(&quot;&quot;&quot;: Flesh reading Ease Index ## FKGL #.#&lt;/p&gt;
+
+                        &lt;table style=&quot;width: 30%; border: black 1px solid&quot;&gt;
+                        &quot;&quot;&quot;),_display_(/*16.26*/for(result &lt;- searchResultlist.getResult()) yield /*16.69*/ {_display_(Seq[Any](format.raw/*16.71*/(&quot;&quot;&quot;
+                            &quot;&quot;&quot;),_display_(/*17.30*/for((key, value) &lt;- result.getWordStats()) yield /*17.72*/ {_display_(Seq[Any](format.raw/*17.74*/(&quot;&quot;&quot;
+                                &quot;&quot;&quot;),format.raw/*18.33*/(&quot;&quot;&quot;&lt;tr&gt;
+                                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*19.42*/key),format.raw/*19.45*/(&quot;&quot;&quot;&lt;/td&gt;
+                                    &lt;td&gt;&quot;&quot;&quot;),_display_(/*20.42*/value),format.raw/*20.47*/(&quot;&quot;&quot;&lt;/td&gt;
+                                &lt;/tr&gt;
+                            &quot;&quot;&quot;)))}),format.raw/*22.30*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;)))}),format.raw/*23.26*/(&quot;&quot;&quot;
+                        &quot;&quot;&quot;),format.raw/*24.25*/(&quot;&quot;&quot;&lt;/table&gt;
+<span class="fc" id="L56">                    &quot;&quot;&quot;)))}),format.raw/*25.22*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L57">                &quot;&quot;&quot;)))}),format.raw/*26.18*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L58">                &quot;&quot;&quot;),format.raw/*27.17*/(&quot;&quot;&quot;&lt;/div&gt;</span>
+            &lt;/article&gt;
+        &lt;/center&gt;
+    &quot;&quot;&quot;)))}))
+      }
+    }
+  }
+
+<span class="fc" id="L66">  def render(searchResults:util.Map[String, Resultlist]): play.twirl.api.HtmlFormat.Appendable = apply(searchResults)</span>
+
+<span class="nc" id="L68">  def f:((util.Map[String, Resultlist]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (searchResults) =&gt; apply(searchResults)</span>
+
+<span class="nc" id="L70">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  SOURCE: app/views/stat.scala.html
+                  HASH: ec3b3874ceabcf711a4c7676c5d1f82a57625139
+                  MATRIX: 610-&gt;1|649-&gt;35|680-&gt;61|1022-&gt;80|1162-&gt;125|1198-&gt;136|1226-&gt;156|1265-&gt;158|1301-&gt;168|1426-&gt;266|1460-&gt;291|1500-&gt;293|1550-&gt;316|1619-&gt;369|1658-&gt;370|1712-&gt;396|1758-&gt;415|1790-&gt;426|1819-&gt;427|1994-&gt;575|2053-&gt;618|2093-&gt;620|2151-&gt;651|2209-&gt;693|2249-&gt;695|2311-&gt;729|2385-&gt;776|2409-&gt;779|2484-&gt;827|2510-&gt;832|2616-&gt;907|2674-&gt;934|2728-&gt;960|2790-&gt;991|2840-&gt;1010|2886-&gt;1028
+                  LINES: 23-&gt;1|24-&gt;2|25-&gt;3|30-&gt;4|35-&gt;4|38-&gt;7|38-&gt;7|38-&gt;7|39-&gt;8|42-&gt;11|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|44-&gt;13|44-&gt;13|44-&gt;13|44-&gt;13|47-&gt;16|47-&gt;16|47-&gt;16|48-&gt;17|48-&gt;17|48-&gt;17|49-&gt;18|50-&gt;19|50-&gt;19|51-&gt;20|51-&gt;20|53-&gt;22|54-&gt;23|55-&gt;24|56-&gt;25|57-&gt;26|58-&gt;27
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

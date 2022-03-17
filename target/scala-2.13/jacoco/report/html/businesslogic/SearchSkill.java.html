@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchSkill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">businesslogic</a> &gt; <span class="el_source">SearchSkill.java</span></div><h1>SearchSkill.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package businesslogic;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import model.Resultlist;
+import model.Searchphraseresult;
+
+/**
+ * @author Mahavir
+ *
+ */
+public class SearchSkill {
+	
+<span class="fc" id="L30">	public String API = &quot;https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&amp;limit=10&amp;job_details=true&amp;compact=true&amp;languages[]=en&amp;jobs[]=&quot;;</span>
+	/**
+	 * 
+	 */
+<span class="fc" id="L34">	public SearchSkill() {</span>
+		
+<span class="fc" id="L36">	}</span>
+	
+	public CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; getResult(String id,String skillstring){
+<span class="fc" id="L39">		return CompletableFuture.supplyAsync(()-&gt; this.getSkillResult(id,skillstring));</span>
+	}
+	
+	public LinkedHashMap&lt;String, Resultlist&gt; getSkillResult(String id,String skillstring) {
+<span class="fc" id="L43">		LinkedHashMap&lt;String, Resultlist&gt; resultmap = new LinkedHashMap&lt;String, Resultlist&gt;();</span>
+<span class="fc" id="L44">		List&lt;Searchphraseresult&gt; sp = new ArrayList&lt;Searchphraseresult&gt;();</span>
+<span class="fc" id="L45">		Resultlist r1 = new Resultlist();</span>
+		try {
+<span class="fc" id="L47">			URL url = new URL(this.API+id);</span>
+<span class="fc" id="L48">    		HttpURLConnection conn = (HttpURLConnection)url.openConnection();</span>
+<span class="fc" id="L49">    		conn.setRequestMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L50">    		conn.connect();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">    		if(conn.getResponseCode() == 200) {</span>
+<span class="fc" id="L52">				Scanner scan = new Scanner(url.openStream());</span>
+<span class="fc" id="L53">				String temp=&quot;&quot;;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">				while(scan.hasNext()) {</span>
+<span class="fc" id="L55">					temp = temp + scan.nextLine();</span>
+                }
+<span class="fc" id="L57">				JSONObject json = new JSONObject(temp);</span>
+<span class="fc" id="L58">				JSONObject result = json.getJSONObject(&quot;result&quot;);  </span>
+<span class="fc" id="L59">				JSONArray projects = (JSONArray) result.getJSONArray(&quot;projects&quot;);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">				for(int i=0;i&lt;projects.length();i++) {</span>
+<span class="fc" id="L61">					JSONObject obj = projects.getJSONObject(i);</span>
+<span class="fc" id="L62">					Searchphraseresult tempsr = new Searchphraseresult();</span>
+<span class="fc" id="L63">					tempsr.setOwner_id(obj.get(&quot;owner_id&quot;).toString());</span>
+<span class="fc" id="L64">					tempsr.setPrevDesc(obj.get(&quot;preview_description&quot;).toString());</span>
+<span class="fc" id="L65">					Date date = new Date(Long.parseLong(obj.get(&quot;submitdate&quot;).toString()+&quot;000&quot;));</span>
+<span class="fc" id="L66">					DateFormat simple = new SimpleDateFormat(&quot;dd MMM yyyy&quot;);</span>
+<span class="fc" id="L67">					tempsr.setDate(simple.format(date));tempsr.setTitle(obj.get(&quot;title&quot;).toString());</span>
+<span class="fc" id="L68">					tempsr.setType(obj.get(&quot;type&quot;).toString());</span>
+<span class="fc" id="L69">					LinkedHashMap&lt;String, String&gt; skillsmap = new LinkedHashMap&lt;String, String&gt;(); </span>
+<span class="fc" id="L70">					JSONArray skills = obj.getJSONArray(&quot;jobs&quot;);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">					for(int j=0;j&lt;skills.length();j++) {</span>
+<span class="fc" id="L72">						JSONObject skill = skills.getJSONObject(j);</span>
+<span class="fc" id="L73">						skillsmap.put( skill.get(&quot;name&quot;).toString() , skill.get(&quot;id&quot;).toString() );</span>
+					}
+<span class="fc" id="L75">					tempsr.setSkills(skillsmap);</span>
+<span class="fc" id="L76">					sp.add(tempsr);</span>
+				}
+<span class="fc" id="L78">				r1.setResult(sp);</span>
+<span class="fc" id="L79">				resultmap.put(skillstring,r1);</span>
+			}
+<span class="fc" id="L81">		}catch(Exception e) {</span>
+<span class="fc" id="L82">			System.out.println(e);</span>
+<span class="fc" id="L83">		}</span>
+<span class="fc" id="L84">		return resultmap;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

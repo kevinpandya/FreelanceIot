@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">controllers</a> &gt; <span class="el_source">HomeController.java</span></div><h1>HomeController.java</h1><pre class="source lang-java linenums">package controllers;
+
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+
+import akka.http.javadsl.model.headers.Link;
+import play.mvc.*;
+
+
+import businesslogic.*;
+import model.*;
+
+import model.Resultlist;
+import model.Profile;
+import model.Searchphraseresult;
+
+/**
+ * This controller contains an action to handle HTTP requests
+ * to the application's home page.
+ * @author Group
+ */
+<span class="fc" id="L35">public class HomeController extends Controller {</span>
+
+<span class="fc" id="L37">	LinkedHashMap&lt;String, Resultlist&gt; resultmap = new LinkedHashMap&lt;String, Resultlist&gt;();</span>
+<span class="fc" id="L38">	LinkedHashMap&lt;String, Integer&gt; indStats = new LinkedHashMap&lt;String, Integer&gt;();</span>
+<span class="fc" id="L39">	LinkedHashMap&lt;String, Profile&gt; usermap = new LinkedHashMap&lt;String, Profile&gt;();</span>
+<span class="fc" id="L40">	SearchPhrase searchphrase = new SearchPhrase();</span>
+<span class="fc" id="L41">    SearchSkill searchskill = new SearchSkill();</span>
+<span class="fc" id="L42">	WordStats wordStats = new WordStats();</span>
+<span class="fc" id="L43">	SearchProfile searchprofile = new SearchProfile();</span>
+<span class="fc" id="L44">    Session session = new Session();</span>
+
+	/**
+     * An action that renders an HTML page with a welcome message.
+     * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+     * this method will be called when the application receives a
+     * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/&lt;/code&gt;.
+     */
+    public CompletionStage&lt;Result&gt; index(String searchPhraseString,String sessionId) {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		if(searchPhraseString.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L54">        	searchphrase = null;</span>
+<span class="fc" id="L55">        	return CompletableFuture.completedFuture(ok(views.html.index.render(null)));</span>
+        }else {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">    		if(searchphrase == null) {</span>
+<span class="fc" id="L58">				searchphrase = new SearchPhrase();</span>
+<span class="fc" id="L59">				session.setSession(sessionId,searchphrase);</span>
+			}else{
+<span class="fc" id="L61">				searchphrase = session.getSession(sessionId,searchphrase);</span>
+			}
+<span class="fc" id="L63">    		CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = searchphrase.getResult(searchPhraseString);</span>
+<span class="fc" id="L64">    		return res.thenApplyAsync(o -&gt; ok(views.html.index.render(o)));</span>
+    	}
+    }
+    
+    public CompletionStage&lt;Result&gt; skill(String id,String skill) {
+<span class="fc" id="L69">    	CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = searchskill.getResult(id, skill);</span>
+<span class="fc" id="L70">    	return res.thenApplyAsync(o -&gt; ok(views.html.skill.render(o)));</span>
+    }
+
+	public CompletionStage&lt;Result&gt; wordStat(String search) {
+<span class="fc" id="L74">		CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = wordStats.getResult(search, searchphrase.resultmap.get(search).getDescriptions());</span>
+<span class="fc" id="L75">		return res.thenApplyAsync(o -&gt; ok(views.html.stat.render(o)));</span>
+	}
+
+	public CompletionStage&lt;Result&gt; indvStat(String search, int index) {
+<span class="fc" id="L79">		CompletionStage&lt;LinkedHashMap&lt;String, Integer&gt;&gt; res = wordStats.getStatResult(searchphrase.resultmap.get(search).getDescriptions().get(index));</span>
+<span class="fc" id="L80">		return res.thenApplyAsync(o -&gt; ok(views.html.indvstat.render(o)));</span>
+	}
+	
+	public CompletionStage&lt;Result&gt; profile(String id) {
+<span class="fc" id="L84">		CompletionStage&lt;LinkedHashMap&lt;String, Profile&gt;&gt; res = searchprofile.getResult(id);</span>
+<span class="fc" id="L85">		return res.thenApplyAsync(o -&gt; ok(views.html.profile.render(o)));</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
