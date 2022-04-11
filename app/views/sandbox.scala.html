@@ -1,0 +1,66 @@
+@import model.Resultlist
+@(title: String, request: play.mvc.Http.Request ,searchResults:Map[String, Resultlist])(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/main.css")'>
+    <link rel="shortcut icon" type="image/png" href='@routes.Assets.versioned("images/favicon.png")'>
+    <style>
+    </style>
+</head>
+<body data-ws-url="@routes.WebSocketController.ws.webSocketURL(request)">
+    <center>
+        <article style="margin-top:50px;">
+            @content
+            <!--
+            @if(searchResults != null) {
+            @for((searchTerms, searchResultlist) <- searchResults){
+
+            @if(searchResultlist.getResult().size()>0){
+            <p>Search terms : @searchTerms : Flesh reading Ease Index: @searchResultlist.getFleschIndex()  FKGL : @searchResultlist.getFkgl()</p>
+            <a href="@routes.HomeController.wordStat(searchTerms)">Global Stats</a>
+            <table>
+                <tr>
+                    <th>Owner_id</th>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Skills</th>
+                    <th></th>
+                    <th></th>
+                    <th>Education Level</th>
+                </tr>
+                @for(result <- searchResultlist.getResult()){
+                <tr>
+                    <td><a href='@routes.HomeController.profile(result.getOwner_id())'>@result.getOwner_id()</a></td>
+                    <td>@result.getDate()</td>
+                    <td>@result.getTitle()</td>
+                    <td>@result.getType()</td>
+                    <td>@for((key,value) <- result.getSkills()){
+                        <u><a href="@routes.HomeController.skill(value)" target="_blank">@key</a></u>
+                        }
+                    </td>
+                    <td><a href="@routes.HomeController.indvStat(searchTerms, result.getIndex())">Stats</a></td>
+                    <td><a href="@routes.HomeController.readability(searchTerms, result.getIndex())">Readability</a></td>
+                    <td>@searchResultlist.getEdLevel()</td>
+                </tr>
+                }
+            </table>
+            }else{
+            <p>Search terms : @searchTerms : Flesh reading Ease Index: ## FKGL: ##.##</p>
+            <p>There are no project for the term : @searchTerms</p>
+            }
+            }
+            }
+            -->
+        </article>
+    </center>
+    <script src='@routes.Assets.versioned("javascripts/jquery.min.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.versioned("javascripts/knockout-3.5.1.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.versioned("javascripts/main.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.versioned("javascripts/index.js")' type="text/javascript"></script>
+</body>
+</html>
