@@ -3,54 +3,21 @@
  */
 package businesslogic;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.Map;
-import java.net.*;
-import java.util.Arrays;
-
-import akka.actor.AbstractActor;
-import akka.actor.Props;
-import akka.actor.typed.javadsl.Receive;
-import akka.http.javadsl.model.headers.Link;
-import model.Profile;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import model.Resultlist;
 import model.Searchphraseresult;
+
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>This class is used to compute word stats for 250 project descriptions as well as for individual projects</p>
  * @author Kevin Pandya
  */
-public class WordStats extends AbstractActor{
+public class WordStats {
 
-    public static Props getProps(){
-        return Props.create(WordStats.class);
-    }
-
-    @Override
-    public Receive createReceive() {
-        return receiveBuilder()
-                .match(List.class, desc -> {
-                    LinkedHashMap<String, Resultlist> statsResult = getWordStats(desc);
-                    System.out.println("StatsResult : "+statsResult);
-                    sender().tell(statsResult, self());
-                })
-                .build();
-    }
 
     /**
      * <p>Calls the getWordStats method to compute Global Stats of project descriptions</p>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchResultActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">SearchResultActor.java</span></div><h1>SearchResultActor.java</h1><pre class="source lang-java linenums">package actors;
+
+import akka.actor.AbstractActorWithTimers;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.http.javadsl.model.HttpRequest;
+import businesslogic.SearchPhrase;
+import businesslogic.SearchSkill;
+import com.google.inject.name.Named;
+import static akka.pattern.Patterns.ask;
+import static play.mvc.Results.ok;
+
+import controllers.HomeController;
+import model.Resultlist;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import play.mvc.Http;
+import play.mvc.Result;
+import play.twirl.api.Content;
+import scala.concurrent.duration.Duration;
+import play.mvc.*;
+
+import javax.inject.Inject;
+
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
+
+public class SearchResultActor extends AbstractActorWithTimers {
+
+    private ActorRef userActor;
+    private ActorRef searchActor;
+
+    private String query;
+    private Http.Request request;
+
+    private String sessionId;
+
+<span class="pc" id="L42">    private HomeController homeController = null;</span>
+<span class="pc" id="L43">    private Resultlist resultlist = null;</span>
+
+<span class="pc" id="L45">    private final Logger logger = LoggerFactory.getLogger(&quot;play&quot;);</span>
+
+    private Set&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; searchPhraseResultItems;
+
+<span class="fc" id="L49">    public static final class Tick {</span>
+    }
+        @Override
+        public void preStart()
+        {
+<span class="fc" id="L54">            getTimers().startPeriodicTimer(&quot;Time&quot; ,new Tick(),</span>
+<span class="fc" id="L55">                    Duration.create(10 , TimeUnit.SECONDS));</span>
+<span class="fc" id="L56">        }</span>
+
+        @Inject
+<span class="fc" id="L59">        public SearchResultActor(){</span>
+<span class="fc" id="L60">            this.userActor = null;</span>
+<span class="fc" id="L61">            this.query = null;</span>
+<span class="fc" id="L62">            this.searchActor = null;</span>
+<span class="fc" id="L63">            this.sessionId = null;</span>
+<span class="fc" id="L64">            this.request = null;</span>
+<span class="fc" id="L65">        }</span>
+
+<span class="nc" id="L67">        public SearchResultActor(String query,String sessionId){</span>
+<span class="nc" id="L68">            this.query = query;</span>
+<span class="nc" id="L69">            this.sessionId = sessionId;</span>
+<span class="nc" id="L70">        }</span>
+
+        public static Props props(String query,String sessionId){
+            //System.out.println(id);
+<span class="nc" id="L74">            return Props.create(SearchResultActor.class,()-&gt;new SearchResultActor(query,sessionId));</span>
+        }
+
+        public static Props getProps(){
+<span class="fc" id="L78">            return Props.create(SearchResultActor.class);</span>
+        }
+
+        @Override
+        public Receive createReceive(){
+<span class="fc" id="L83">            return receiveBuilder()</span>
+<span class="fc" id="L84">                    .match(Messages.RegisterActor.class , message -&gt;{</span>
+<span class="nc" id="L85">                        logger.info(&quot;Registering actor()&quot; , message);</span>
+<span class="nc" id="L86">                        userActor  = sender();</span>
+<span class="nc" id="L87">                        getSender().tell(&quot;userActor registered&quot; , getSelf());</span>
+<span class="nc" id="L88">            })</span>
+<span class="fc" id="L89">            .match(Messages.WatchSearchResults.class , message -&gt; {</span>
+<span class="nc" id="L90">                logger.info(&quot;Received message WatchSearchResults {}&quot; , message);</span>
+<span class="nc bnc" id="L91" title="All 6 branches missed.">                if(message != null &amp;&amp; message.query != null &amp;&amp; message.query != &quot;&quot;){</span>
+<span class="nc" id="L92">                    logger.info(message.query);</span>
+<span class="nc" id="L93">                    watchSearchResult(message);</span>
+                }
+<span class="nc" id="L95">            })</span>
+<span class="fc" id="L96">            .match(Tick.class, message -&gt;{</span>
+<span class="nc" id="L97">                logger.info(&quot;Received message Tick{}&quot; , message);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                if(query != null){</span>
+<span class="nc" id="L99">                    tickSearchResults();</span>
+
+                }
+<span class="nc" id="L102">            })</span>
+<span class="fc" id="L103">            .build();</span>
+        }
+
+        public CompletionStage&lt;Void&gt; watchSearchResult(Messages.WatchSearchResults message){
+<span class="nc" id="L107">            query = message.query;</span>
+
+<span class="nc" id="L109">            System.out.println(&quot;In Watch Search Results&quot;);</span>
+            //@Named(&quot;&quot;)
+
+<span class="nc" id="L112">            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -&gt; {</span>
+<span class="nc" id="L113">                this.searchPhraseResultItems = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L114">                searchPhraseResultItems.add(searchResults);</span>
+<span class="nc" id="L115">                resultlist.setSearchPhrase(query);</span>
+<span class="nc" id="L116">                Messages.SearchResult sr = new Messages.SearchResult(searchPhraseResultItems, query);</span>
+<span class="nc" id="L117">                userActor.tell(sr, self());</span>
+<span class="nc" id="L118">            });</span>
+        }
+
+        public CompletionStage&lt;Void&gt; tickSearchResults() {
+<span class="nc" id="L122">            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -&gt; {</span>
+<span class="nc" id="L123">                this.searchPhraseResultItems = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L124">                resultlist.setSearchPhrase(query);</span>
+<span class="nc" id="L125">                searchPhraseResultItems.add(searchResults);</span>
+<span class="nc" id="L126">                Messages.SearchResult searchResult = new Messages.SearchResult(searchPhraseResultItems, query);</span>
+<span class="nc" id="L127">                userActor.tell(searchResult, self());</span>
+<span class="nc" id="L128">            });</span>
+        }
+
+
+        public String getQuery(){
+<span class="nc" id="L133">        return  query;</span>
+        }
+        public void setQuery(String query){
+<span class="nc" id="L136">            this.query = query;</span>
+<span class="nc" id="L137">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -3,56 +3,31 @@
  */
 package businesslogic;
 
+import model.Resultlist;
+import model.Searchphraseresult;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
-
-import akka.actor.AbstractActor;
-import akka.actor.Props;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import model.Resultlist;
-import model.Searchphraseresult;
 /**
  * <p>This class is used to fetch projects of the entered search string</p>
  * @author Group Task
  */
-public class SearchPhrase extends AbstractActor {
-	public String API = "https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&job_details=1&limit=250&compact=1&languages[]=en&query=";
+public class SearchPhrase{
+	public static String API = "https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&job_details=1&limit=250&compact=1&languages[]=en&query=";
 	public static LinkedHashMap<String, Resultlist> resultmap = null;
 
 	public SearchPhrase(){
 		resultmap = new LinkedHashMap<String, Resultlist>();
 	}
 
-	public static Props props(String id){
-		System.out.println(id);
-		return Props.create(SearchPhrase.class,()->new SearchPhrase());
-	}
 
-	public static Props getProps(){
-		return Props.create(SearchPhrase.class);
-	}
-
-	@Override
-	public Receive createReceive() {
-		return receiveBuilder()
-				.match(String.class, (a) -> {
-					LinkedHashMap<String, Resultlist> searchPhraseResult = getPhraseResult(a);
-					sender().tell(searchPhraseResult, self());
-				})
-				.build();
-	}
 
 	/**
 	 * <p>This is a constructor that initializes object resultmap</p>
@@ -66,15 +41,15 @@ public class SearchPhrase extends AbstractActor {
 	 * @param searchPhrase It is the search string entered by user
 	 * @return LinkedHashMap containing the results of project details for searchPhrase
 	 */
-	public CompletionStage<LinkedHashMap<String, Resultlist>> getResult(String searchPhrase){
-		return CompletableFuture.supplyAsync(()-> this.getPhraseResult(searchPhrase));
+	public static CompletionStage<LinkedHashMap<String, Resultlist>> getResult(String searchPhrase){
+		return CompletableFuture.supplyAsync(()-> getPhraseResult(searchPhrase));
 	}
 
 	/** <p>The method calls the api to get 10 latest projects for entered Search string</p>
 	 * @param searchPhrase It is the search string entered by user
 	 * @return LinkedHashMap containing the list of 10 latest projects
 	 */
-	public LinkedHashMap<String, Resultlist> getPhraseResult(String searchPhrase){
+	public static LinkedHashMap<String, Resultlist> getPhraseResult(String searchPhrase){
 		List<Searchphraseresult> sp = new ArrayList<Searchphraseresult>();
 		Resultlist r1 = new Resultlist();
 		List<String> descriptions = new ArrayList<String>();
@@ -83,7 +58,7 @@ public class SearchPhrase extends AbstractActor {
 		rl.setSearchPhrase(searchPhrase);
 		
 		if(resultmap.containsKey(searchPhrase)) {
-			resultmap = this.checkPhraseResult(searchPhrase, resultmap);
+			resultmap = checkPhraseResult(searchPhrase, resultmap);
 		}else {
 			String[] s = searchPhrase.split(" ");
 			String searchQuery = "\"";
@@ -92,7 +67,7 @@ public class SearchPhrase extends AbstractActor {
 			}
 			searchQuery+="\"";
 			try {
-				URL url = new URL(this.API+searchQuery);
+				URL url = new URL(API+searchQuery);
 	    		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 	    		conn.setRequestMethod("GET");
 	    		conn.connect();
@@ -135,13 +110,13 @@ public class SearchPhrase extends AbstractActor {
 					r1.setFleschIndex(sfi.getFleshIndex(descriptions));
 					r1.setEdLevel(sfi.getEducationLevel(r1.getFleschIndex()));
 					r1.setFkgl(sfi.getFkgl(r1.getFleschIndex()));
-					this.resultmap.put(searchPhrase,r1);
+					resultmap.put(searchPhrase,r1);
 	            }
 			}catch(Exception e) {
 				System.out.println(e);
 			}
 		}
-		return this.reverseLinkedHashMap(this.resultmap);
+		return reverseLinkedHashMap(resultmap);
 	}
 
 	/**
@@ -149,7 +124,7 @@ public class SearchPhrase extends AbstractActor {
 	 * @param resultmap It is a LinkedHashMap of search string and result having list of projects
 	 * @return It returns a reversed LinkedHashMap
 	 */
-	public LinkedHashMap<String, Resultlist> reverseLinkedHashMap(LinkedHashMap<String, Resultlist> resultmap){
+	public static LinkedHashMap<String, Resultlist> reverseLinkedHashMap(LinkedHashMap<String, Resultlist> resultmap){
 		LinkedHashMap<String, Resultlist> reversed = new LinkedHashMap<String, Resultlist>();
 		List<String> keys = new ArrayList<String>(resultmap.keySet());
 		Collections.reverse(keys);
@@ -165,7 +140,7 @@ public class SearchPhrase extends AbstractActor {
 	 * @param resultmap LinkedHashMap containing search results
 	 * @return It returns the search results of a phrase if they are already present in the HashMap
 	 */
-	public LinkedHashMap<String, Resultlist> checkPhraseResult(String phrase, LinkedHashMap<String, Resultlist> resultmap){
+	public static LinkedHashMap<String, Resultlist> checkPhraseResult(String phrase, LinkedHashMap<String, Resultlist> resultmap){
 		LinkedHashMap<String, Resultlist> temp = resultmap;
 		if(temp.containsKey(phrase)) {
 			Resultlist rs = new Resultlist();

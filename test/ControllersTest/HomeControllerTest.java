@@ -37,21 +37,21 @@ public class  HomeControllerTest extends WithApplication {
 
         Http.RequestBuilder request2 = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native+developer&sessionId=dznchJMw");
 
         Result result2 = route(app, request2);
         assertEquals(OK, result2.status());
 
         Http.RequestBuilder request3 = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native&sessionId=dznchJMw");
 
         Result result3 = route(app, request3);
         assertEquals(OK, result3.status());
 
         Http.RequestBuilder request4 = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native+developer&sessionId=dznchJMw");
 
         Result result4 = route(app, request4);
         assertEquals(OK, result4.status());
@@ -64,7 +64,7 @@ public class  HomeControllerTest extends WithApplication {
     public void testSkill() {
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/skill/3/PHP");
+                .uri("/skill/3");
 
         Result result = route(app, request);
         assertEquals(OK, result.status());
@@ -97,14 +97,14 @@ public class  HomeControllerTest extends WithApplication {
     public void testWordStat(){
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native+developer&sessionId=dznchJMw");
 
         Result result = route(app, request);
         assertEquals(OK, result.status());
 
         Http.RequestBuilder request2 = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/wordstats/react%20native%20developer");
+                .uri("/stat/react%20native%20developer");
 
         Result result2 = route(app, request2);
         assertEquals(OK, result2.status());
@@ -117,7 +117,7 @@ public class  HomeControllerTest extends WithApplication {
     public void testIndvStat(){
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native+developer&sessionId=dznchJMw");
 
         Result result = route(app, request);
         assertEquals(OK, result.status());
@@ -138,7 +138,7 @@ public class  HomeControllerTest extends WithApplication {
     public void testReadability(){
         Http.RequestBuilder request = new Http.RequestBuilder()
                 .method(GET)
-                .uri("/?searchPhrase=react+native+developer&sessionId=FIkf8mNP");
+                .uri("/?searchPhrase=react+native+developer&sessionId=dznchJMw");
 
         Result result = route(app, request);
         assertEquals(OK, result.status());

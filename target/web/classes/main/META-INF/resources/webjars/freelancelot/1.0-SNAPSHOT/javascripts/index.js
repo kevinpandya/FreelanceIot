@@ -1,13 +1,21 @@
 (function(){
     var parseData;
     var ws;
-    console.log("Entered in Index.js");
+    //console.log("Entered in Index.js");
     console.log("Waiting for WebSocket");
     //console.log(document.getElementById("ws-url").value);
     ws = new WebSocket($("body").data("ws-url"));
+    //console.log(@routes.WebSocketController.ws.webSocketURL(request));
+    //ws = new WebSocket("@routes.WebSocketController.ws.webSocketURL(request)");
     console.log("WebSocket Created");
+    ws.onopen = function() {
+          // Web Socket is connected, send data using send()
+          ws.send("?searchPhrase="+document.getElementById("query").value);
+          //alert("Message is sent...");
+    };
     ws.onmessage = function (event) {
         var message;
+        console.log(event);
         message = JSON.parse(event.data);
         console.log(message);
         if(message.items) {

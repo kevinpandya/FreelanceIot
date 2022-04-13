@@ -1,0 +1,17 @@
+#Successful Tests
+#Wed Apr 13 18:57:47 EDT 2022
+BusinessLogic.WordStatsTest=1649890666958
+ActorTest.SearchFleschIndexActorTest=1649890658851
+BusinessLogic.SearchFleschIndexTest=1649890666964
+model.ProjectinfoTest=1649890666961
+ActorTest.SearchProfileActorTest=1649890659011
+model.ResultlistTest=1649890659110
+BusinessLogic.SearchSkillTest=1649890666964
+BusinessLogic.SessionTest=1649890666964
+model.SearchphraseresultTest=1649890659105
+ActorTest.SearchSkillActorTest=1649890659072
+model.ProfileTest=1649890659097
+ControllersTest.HomeControllerTest=1649890666952
+BusinessLogic.SearchProfileTest=1649890666964
+ActorTest.WordStatsActorTest=1649890658919
+BusinessLogic.SearchPhraseTest=1649890666964

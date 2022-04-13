@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Kevin Pandya
@@ -38,7 +37,7 @@ public class WordStatsTest extends Mockito {
         WordStats ws = wordStatsMock;
         List<String> desc = new ArrayList<String>();
         desc.add("I am looking to have someone build a responsive PHP page uses MYSQL to run search. I have PSD");
-        assertNotEquals("", ws.getResult("php" ,desc));
+        assertNotEquals("", ws.getResult(desc));
     }
 
     /**

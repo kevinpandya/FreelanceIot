@@ -411,6 +411,10 @@ article table {
     width: 100%;
 }
 
+article table th {
+    padding: 8px;
+}
+
 article table td {
     padding: 8px;
 }

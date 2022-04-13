@@ -2,8 +2,10 @@ package actors;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedHashMap;
 import java.util.Set;
 
+import model.Resultlist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,10 +67,10 @@ public final class Messages {
      * SearchResults according to the query param passed
      */
     public static final class SearchResult {
-        public final Set<Result> searchPhraseResults;
+        public final Set<LinkedHashMap<String, Resultlist>> searchPhraseResults;
         public final String query;
 
-        public SearchResult(Set<Result> searchPhraseResults, String query) {
+        public SearchResult(Set<LinkedHashMap<String, Resultlist>> searchPhraseResults, String query) {
             this.searchPhraseResults = searchPhraseResults;
             this.query = query;
         }

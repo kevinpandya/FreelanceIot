@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>index.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">index.template.scala</span></div><h1>index.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+import scala.collection.JavaConverters._
+/*1.2*/import model.Resultlist
+
+<span class="pc" id="L25">object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[play.mvc.Http.Request,Map[String, Resultlist],play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*2.2*/(request: play.mvc.Http.Request, searchResults: Map[String, Resultlist]):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L29">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L33">Seq[Any](format.raw/*2.74*/(&quot;&quot;&quot;</span>
+
+<span class="fc" id="L35">&quot;&quot;&quot;),_display_(/*4.2*/sandbox(&quot;FreeLancelot&quot;,request,searchResults)/*4.47*/ {_display_(Seq[Any](format.raw/*4.49*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L36">	&quot;&quot;&quot;),format.raw/*5.2*/(&quot;&quot;&quot;&lt;h1&gt;Welcome to FreeLancelot&lt;/h1&gt;</span>
+	&lt;form id=&quot;searchForm&quot; action=&quot;/&quot; method=&quot;GET&quot;&gt;
+		&lt;input type=&quot;text&quot; id=&quot;query&quot; name=&quot;searchPhrase&quot; placeholder=&quot;Enter search terms&quot;/&gt;
+		&lt;input id=&quot;submitbtn&quot; type=&quot;submit&quot; value=&quot;Go!&quot; /&gt;
+		&lt;br /&gt;
+		&lt;input type=&quot;text&quot; id=&quot;hiddenId&quot; name=&quot;sessionId&quot; value=&quot;&quot; /&gt;
+	&lt;/form&gt;
+	&lt;div id=&quot;repos&quot;&gt;
+
+	&lt;/div&gt;
+&quot;&quot;&quot;)))}))
+      }
+    }
+  }
+
+<span class="fc" id="L51">  def render(request:play.mvc.Http.Request,searchResults:Map[String, Resultlist]): play.twirl.api.HtmlFormat.Appendable = apply(request,searchResults)</span>
+
+<span class="nc" id="L53">  def f:((play.mvc.Http.Request,Map[String, Resultlist]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (request,searchResults) =&gt; apply(request,searchResults)</span>
+
+<span class="nc" id="L55">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  SOURCE: app/views/index.scala.html
+                  HASH: c20283c4b86326cc70c6d699055e90c198619f9c
+                  MATRIX: 611-&gt;1|978-&gt;27|1145-&gt;99|1175-&gt;104|1228-&gt;149|1267-&gt;151|1296-&gt;154
+                  LINES: 23-&gt;1|28-&gt;2|33-&gt;2|35-&gt;4|35-&gt;4|35-&gt;4|36-&gt;5
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

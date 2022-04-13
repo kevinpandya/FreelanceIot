@@ -1,27 +1,24 @@
 package controllers;
 
-import actors.SearchResultActor;
+import actors.*;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
-import play.mvc.*;
+import businesslogic.SearchFleschIndex;
+import businesslogic.SearchPhrase;
+import businesslogic.Session;
+import model.Profile;
+import model.Resultlist;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import scala.compat.java8.FutureConverters;
 
 import javax.inject.Inject;
-
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+
 import static akka.pattern.Patterns.ask;
-import static jdk.nashorn.internal.runtime.Context.getContext;
-
-import scala.compat.java8.FutureConverters;
-import businesslogic.*;
-
-import model.Resultlist;
-import model.Profile;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -40,9 +37,12 @@ public class HomeController extends Controller {
 	SearchFleschIndex sfi = new SearchFleschIndex();
     Session session = new Session();
 
+	@Inject
+	ActorSystem system = ActorSystem.create("FreeLancelot");
+
 	private ActorRef searchPhraseActor;
 //	private ActorRef childSearchPhraseActor;
-	private final ActorRef searchResultActor;
+	private ActorRef searchResultActor;
 	private final ActorRef profileActor;
 	private final ActorRef skillActor;
 	private final ActorRef statsActor;
@@ -52,9 +52,9 @@ public class HomeController extends Controller {
 	public HomeController(ActorSystem system) {
 		//this.searchPhraseActor = system.actorOf(SearchPhrase.getProps());
 		this.searchResultActor = system.actorOf(SearchResultActor.getProps());
-		this.profileActor = system.actorOf(SearchProfile.getProps());
-		this.skillActor = system.actorOf(SearchSkill.getProps());
-		this.statsActor = system.actorOf(WordStats.getProps());
+		this.profileActor = system.actorOf(SearchProfileActor.getProps());
+		this.skillActor = system.actorOf(SearchSkillActor.getProps());
+		this.statsActor = system.actorOf(WordStatsActor.getProps());
 	}
 
 
@@ -66,27 +66,19 @@ public class HomeController extends Controller {
 	 * @param searchPhraseString Search string entered by user
 	 * @return Loads the html page containing the search results
 	 */
-	@Inject
-	ActorSystem system = ActorSystem.create("FreeLancelot");
-    public CompletionStage<Result> index(Http.Request request,String searchPhraseString,String sessionId) {
 
+    public CompletionStage<Result> index(Http.Request request,String searchPhraseString,String sessionId) {
 		if(searchPhraseString.equals("")) {
 			searchPhraseActor = null;
         	return CompletableFuture.completedFuture(ok(views.html.index.render(request,null)));
         }else {
 			if(searchPhraseActor == null){
-				searchPhraseActor = system.actorOf(SearchPhrase.props(sessionId));
+				searchPhraseActor = system.actorOf(SearchPhraseActor.props(sessionId));
 				System.out.println("[INFO] new Actor Created"+searchPhraseActor);
 				session.setSession(sessionId,searchPhraseActor);
 			}else {
 				searchPhraseActor = session.getSession(sessionId);
 			}
-//    		if(searchPhraseActor == null) {
-//				searchphrase = new SearchPhrase();
-//				session.setSession(sessionId,searchPhraseActor);
-//			}else{
-//				searchphrase = session.getSession(sessionId,searchphrase);
-//			}
 			System.out.println("\n\nSession Actor : "+searchPhraseActor+"\n\n");
 			return FutureConverters.toJava(ask(searchPhraseActor, searchPhraseString, Integer. MAX_VALUE))
 					.thenApply(response -> {
@@ -99,9 +91,15 @@ public class HomeController extends Controller {
 						}
 						return ok(views.html.index.render(request,resultmap));
 					});
-    		//CompletionStage<LinkedHashMap<String, Resultlist>> res = searchphrase.getResult(searchPhraseString);
-    		//return res.thenApplyAsync(o -> ok(views.html.index.render(o)));
     	}
+		//    		if(searchPhraseActor == null) {
+//				searchphrase = new SearchPhrase();
+//				session.setSession(sessionId,searchPhraseActor);
+//			}else{
+//				searchphrase = session.getSession(sessionId,searchphrase);
+//			}
+		//CompletionStage<LinkedHashMap<String, Resultlist>> res = searchphrase.getResult(searchPhraseString);
+		//return res.thenApplyAsync(o -> ok(views.html.index.render(o)));
     }
 
 	/**
@@ -165,9 +163,18 @@ public class HomeController extends Controller {
 	 * @return Redirects to the html page containing word stats of an individual project
 	 */
 	public CompletionStage<Result> indvStat(String search, int index) {
-		WordStats wordStats = new WordStats();
-		CompletionStage<LinkedHashMap<String, Integer>> res = wordStats.getStatResult(SearchPhrase.resultmap.get(search).getDescriptions().get(index));
-		return res.thenApplyAsync(o -> ok(views.html.indvstat.render(o)));
+		//WordStats wordStats = new WordStats();
+		//CompletionStage<LinkedHashMap<String, Integer>> res = wordStats.getStatResult(SearchPhrase.resultmap.get(search).getDescriptions().get(index));
+		//return res.thenApplyAsync(o -> ok(views.html.indvstat.render(o)));
+		return FutureConverters.toJava(ask(statsActor, SearchPhrase.resultmap.get(search).getDescriptions().get(index), Integer.MAX_VALUE))
+				.thenApply(response -> {
+					try{
+						indStats = (LinkedHashMap<String, Integer>) response;
+					}catch(Exception e){
+						return ok("Internal Server Error");
+					}
+					return ok(views.html.indvstat.render(indStats));
+				});
 	}
 
 	/**

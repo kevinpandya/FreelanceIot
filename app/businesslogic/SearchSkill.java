@@ -27,23 +27,23 @@ import model.Searchphraseresult;
  * <p>This class is used to fetch 10 latest projects of a specific skill</p>
  * @author Mahavir
  */
-public class SearchSkill extends AbstractActor {
+public class SearchSkill {
 	
 	public String API = "https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&limit=10&job_details=true&compact=true&languages[]=en&jobs[]=";
 
-	public static Props getProps() {
-		return Props.create(SearchSkill.class);
-	}
-
-	@Override
-	public Receive createReceive() {
-		return receiveBuilder()
-				.match(String.class, (a) -> {
-					LinkedHashMap<String, Resultlist> skillResult = getSkillResult(a);
-					sender().tell(skillResult, self());
-				})
-				.build();
-	}
+//	public static Props getProps() {
+//		return Props.create(SearchSkill.class);
+//	}
+//
+//	@Override
+//	public Receive createReceive() {
+//		return receiveBuilder()
+//				.match(String.class, (a) -> {
+//					LinkedHashMap<String, Resultlist> skillResult = getSkillResult(a);
+//					sender().tell(skillResult, self());
+//				})
+//				.build();
+//	}
 
 	/**
 	 * <p>This method calls getSkillResult method of this class</p>

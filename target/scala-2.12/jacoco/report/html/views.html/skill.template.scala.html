@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>skill.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">skill.template.scala</span></div><h1>skill.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+import scala.collection.JavaConverters._
+/*1.2*/import model.Searchphraseresult
+/*2.2*/import model.Resultlist
+
+<span class="nc" id="L26">object skill extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[Map[String, Resultlist],play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*3.2*/(searchResults: Map[String, Resultlist]):play.twirl.api.HtmlFormat.Appendable = {
+<span class="nc" id="L30">    _display_ {</span>
+      {
+
+
+<span class="nc" id="L34">Seq[Any](format.raw/*3.42*/(&quot;&quot;&quot;</span>
+
+
+<span class="nc" id="L37">&quot;&quot;&quot;),_display_(/*6.2*/main(&quot;FreeLancelot&quot;)/*6.22*/ {_display_(Seq[Any](format.raw/*6.24*/(&quot;&quot;&quot;</span>
+<span class="nc" id="L38">&quot;&quot;&quot;),format.raw/*7.1*/(&quot;&quot;&quot;&lt;center&gt;</span>
+	&lt;article style=&quot;margin-top:50px;&quot;&gt;
+		&lt;div&gt;
+<span class="nc bnc" id="L41" title="All 2 branches missed.">			&quot;&quot;&quot;),_display_(/*10.5*/if(searchResults != null)/*10.30*/ {_display_(Seq[Any](format.raw/*10.32*/(&quot;&quot;&quot;</span>
+<span class="nc" id="L42">			&quot;&quot;&quot;),_display_(/*11.5*/for((searchTerms, searchResultlist) &lt;- searchResults) yield /*11.58*/{_display_(Seq[Any](format.raw/*11.59*/(&quot;&quot;&quot;</span>
+			&quot;&quot;&quot;),format.raw/*12.4*/(&quot;&quot;&quot;&lt;h1&gt;Skill : &quot;&quot;&quot;),_display_(/*12.17*/searchTerms),format.raw/*12.28*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*12.29*/(&quot;&quot;&quot;&lt;/h1&gt;
+			&lt;table&gt;
+				&lt;tr&gt;
+					&lt;th&gt;Owner_id&lt;/th&gt;
+					&lt;th&gt;Date&lt;/th&gt;
+					&lt;th&gt;Title&lt;/th&gt;
+					&lt;th&gt;Type&lt;/th&gt;
+					&lt;th&gt;Skills&lt;/th&gt;
+				&lt;/tr&gt;
+				&quot;&quot;&quot;),_display_(/*21.6*/for(result &lt;- searchResultlist.getResult()) yield /*21.49*/{_display_(Seq[Any](format.raw/*21.50*/(&quot;&quot;&quot;
+				&quot;&quot;&quot;),format.raw/*22.5*/(&quot;&quot;&quot;&lt;tr&gt;
+					&lt;td&gt;&lt;a href='&quot;&quot;&quot;),_display_(/*23.20*/routes/*23.26*/.HomeController.profile(result.getOwner_id())),format.raw/*23.71*/(&quot;&quot;&quot;'&gt;&quot;&quot;&quot;),_display_(/*23.74*/result/*23.80*/.getOwner_id()),format.raw/*23.94*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/td&gt;
+					&lt;td&gt;&quot;&quot;&quot;),_display_(/*24.11*/result/*24.17*/.getDate()),format.raw/*24.27*/(&quot;&quot;&quot;&lt;/td&gt;
+					&lt;td&gt;&quot;&quot;&quot;),_display_(/*25.11*/result/*25.17*/.getTitle()),format.raw/*25.28*/(&quot;&quot;&quot;&lt;/td&gt;
+					&lt;td&gt;&quot;&quot;&quot;),_display_(/*26.11*/result/*26.17*/.getType()),format.raw/*26.27*/(&quot;&quot;&quot;&lt;/td&gt;
+					&lt;td&gt;&quot;&quot;&quot;),_display_(/*27.11*/for((key,value) &lt;- result.getSkills()) yield /*27.49*/{_display_(Seq[Any](format.raw/*27.50*/(&quot;&quot;&quot;
+						&quot;&quot;&quot;),format.raw/*28.7*/(&quot;&quot;&quot;&lt;u&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*28.20*/routes/*28.26*/.HomeController.skill(value)),format.raw/*28.54*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*28.57*/key),format.raw/*28.60*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/u&gt;
+						&quot;&quot;&quot;)))}),format.raw/*29.8*/(&quot;&quot;&quot;
+					&quot;&quot;&quot;),format.raw/*30.6*/(&quot;&quot;&quot;&lt;/td&gt;
+				&lt;/tr&gt;
+				&quot;&quot;&quot;)))}),format.raw/*32.6*/(&quot;&quot;&quot;
+			&quot;&quot;&quot;),format.raw/*33.4*/(&quot;&quot;&quot;&lt;/table&gt;
+<span class="nc" id="L65">			&quot;&quot;&quot;)))}),format.raw/*34.5*/(&quot;&quot;&quot;</span>
+<span class="nc" id="L66">			&quot;&quot;&quot;)))}),format.raw/*35.5*/(&quot;&quot;&quot;</span>
+<span class="nc" id="L67">		&quot;&quot;&quot;),format.raw/*36.3*/(&quot;&quot;&quot;&lt;/div&gt;</span>
+	&lt;/article&gt;
+&lt;/center&gt;
+&quot;&quot;&quot;)))}))
+      }
+    }
+  }
+
+<span class="nc" id="L75">  def render(searchResults:Map[String, Resultlist]): play.twirl.api.HtmlFormat.Appendable = apply(searchResults)</span>
+
+<span class="nc" id="L77">  def f:((Map[String, Resultlist]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (searchResults) =&gt; apply(searchResults)</span>
+
+<span class="nc" id="L79">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  SOURCE: app/views/skill.scala.html
+                  HASH: 8dc5c7ac03d647cd70ccae87407c853c0e00212b
+                  MATRIX: 611-&gt;1|650-&gt;35|995-&gt;61|1130-&gt;101|1162-&gt;108|1190-&gt;128|1229-&gt;130|1257-&gt;132|1343-&gt;192|1377-&gt;217|1417-&gt;219|1449-&gt;225|1518-&gt;278|1557-&gt;279|1589-&gt;284|1629-&gt;297|1661-&gt;308|1690-&gt;309|1868-&gt;461|1927-&gt;504|1966-&gt;505|1999-&gt;511|2051-&gt;536|2066-&gt;542|2132-&gt;587|2162-&gt;590|2177-&gt;596|2212-&gt;610|2260-&gt;631|2275-&gt;637|2306-&gt;647|2350-&gt;664|2365-&gt;670|2397-&gt;681|2441-&gt;698|2456-&gt;704|2487-&gt;714|2531-&gt;731|2585-&gt;769|2624-&gt;770|2659-&gt;778|2699-&gt;791|2714-&gt;797|2763-&gt;825|2793-&gt;828|2817-&gt;831|2864-&gt;848|2898-&gt;855|2951-&gt;878|2983-&gt;883|3027-&gt;897|3063-&gt;903|3094-&gt;907
+                  LINES: 23-&gt;1|24-&gt;2|29-&gt;3|34-&gt;3|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|41-&gt;10|41-&gt;10|41-&gt;10|42-&gt;11|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|43-&gt;12|52-&gt;21|52-&gt;21|52-&gt;21|53-&gt;22|54-&gt;23|54-&gt;23|54-&gt;23|54-&gt;23|54-&gt;23|54-&gt;23|55-&gt;24|55-&gt;24|55-&gt;24|56-&gt;25|56-&gt;25|56-&gt;25|57-&gt;26|57-&gt;26|57-&gt;26|58-&gt;27|58-&gt;27|58-&gt;27|59-&gt;28|59-&gt;28|59-&gt;28|59-&gt;28|59-&gt;28|59-&gt;28|60-&gt;29|61-&gt;30|63-&gt;32|64-&gt;33|65-&gt;34|66-&gt;35|67-&gt;36
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

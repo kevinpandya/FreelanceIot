@@ -1,0 +1,15 @@
+@import model.Resultlist
+@(request: play.mvc.Http.Request, searchResults: Map[String, Resultlist])
+
+@sandbox("FreeLancelot",request,searchResults) {
+	<h1>Welcome to FreeLancelot</h1>
+	<form id="searchForm" action="/" method="GET">
+		<input type="text" id="query" name="searchPhrase" placeholder="Enter search terms"/>
+		<input id="submitbtn" type="submit" value="Go!" />
+		<br />
+		<input type="text" id="hiddenId" name="sessionId" value="" />
+	</form>
+	<div id="repos">
+
+	</div>
+}

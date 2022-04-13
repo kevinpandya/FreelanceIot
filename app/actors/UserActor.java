@@ -15,6 +15,7 @@ import akka.stream.KillSwitches;
 import akka.stream.Materializer;
 import akka.stream.UniqueKillSwitch;
 import akka.stream.javadsl.*;
+import model.Resultlist;
 import model.Searchphraseresult;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,6 +29,7 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletionStage;
@@ -93,7 +95,7 @@ public class UserActor extends AbstractActor {
         Source<JsonNode, NotUsed> hubSource = sinkSourcePair.second();
 
         jsonSink = Sink.foreach((JsonNode json) -> {
-
+            //System.out.println(json);
             String queryRequest = json.findPath("query").asText();
             askForItems(queryRequest);
         });
@@ -161,7 +163,7 @@ public class UserActor extends AbstractActor {
 
 
     public void addRepoItems(Messages.SearchResult searchResult) {
-        Set<Result> searchResults = searchResult.searchPhraseResults;
+        Set<LinkedHashMap<String, Resultlist>> searchResults = searchResult.searchPhraseResults;
         String query = searchResult.query;
 
         logger.info("Adding statuses {} for query {}", searchResults, query);

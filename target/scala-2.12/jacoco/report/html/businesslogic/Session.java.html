@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Session.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">businesslogic</a> &gt; <span class="el_source">Session.java</span></div><h1>Session.java</h1><pre class="source lang-java linenums">package businesslogic;
+
+import akka.actor.ActorRef;
+
+import java.util.HashMap;
+
+
+/**
+ * &lt;p&gt;This class is used to manage sessions&lt;/p&gt;
+ * @author Group Task
+ */
+<span class="fc" id="L12">public class Session {</span>
+<span class="fc" id="L13">    public HashMap&lt;String, ActorRef&gt; sessionmap = new HashMap&lt;String, ActorRef&gt;();</span>
+
+    /**
+     * &lt;p&gt;This method adds the unique session id and the search phrase results into sessionmap&lt;/p&gt;
+     * @param id Session ID
+     * @param object Object of SearchPhrase results
+     */
+    public void setSession(String id, ActorRef object){
+<span class="fc" id="L21">        sessionmap.put(id,object);</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * @param id Session ID
+     * @param object Object of SearchPhrase results
+     * @return It returns the search phrase results for a given session id
+     */
+    public ActorRef getSession(String id){
+        //System.out.println(&quot;[INFO] Get Session Callled &quot;);
+        //System.out.println(&quot;[INFO] Session Map =&gt; &quot;+sessionmap);
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if(sessionmap.containsKey(id))</span>
+<span class="fc" id="L33">            return sessionmap.get(id);</span>
+        else{
+<span class="nc" id="L35">            return null;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

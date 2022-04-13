@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">controllers</a> &gt; <span class="el_source">HomeController.java</span></div><h1>HomeController.java</h1><pre class="source lang-java linenums">package controllers;
+
+import actors.*;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import businesslogic.SearchFleschIndex;
+import businesslogic.SearchPhrase;
+import businesslogic.Session;
+import model.Profile;
+import model.Resultlist;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import scala.compat.java8.FutureConverters;
+
+import javax.inject.Inject;
+import java.util.LinkedHashMap;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+
+import static akka.pattern.Patterns.ask;
+
+/**
+ * This controller contains an action to handle HTTP requests
+ * to the application's home page.
+ * @author Group Task
+ */
+public class HomeController extends Controller {
+
+<span class="fc" id="L30">	LinkedHashMap&lt;String, Resultlist&gt; resultmap = new LinkedHashMap&lt;String, Resultlist&gt;();</span>
+<span class="fc" id="L31">	LinkedHashMap&lt;String, Integer&gt; indStats = new LinkedHashMap&lt;String, Integer&gt;();</span>
+<span class="fc" id="L32">	LinkedHashMap&lt;String, Profile&gt; usermap = new LinkedHashMap&lt;String, Profile&gt;();</span>
+//	SearchPhrase searchphrase = new SearchPhrase();
+//  SearchSkill searchskill = new SearchSkill();
+//	WordStats wordStats = new WordStats();
+//	SearchProfile searchprofile = new SearchProfile();
+<span class="fc" id="L37">	SearchFleschIndex sfi = new SearchFleschIndex();</span>
+<span class="fc" id="L38">    Session session = new Session();</span>
+
+<span class="fc" id="L40">	@Inject</span>
+<span class="fc" id="L41">	ActorSystem system = ActorSystem.create(&quot;FreeLancelot&quot;);</span>
+
+	private ActorRef searchPhraseActor;
+//	private ActorRef childSearchPhraseActor;
+	private ActorRef searchResultActor;
+	private final ActorRef profileActor;
+	private final ActorRef skillActor;
+	private final ActorRef statsActor;
+//	private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
+
+	@Inject
+<span class="fc" id="L52">	public HomeController(ActorSystem system) {</span>
+		//this.searchPhraseActor = system.actorOf(SearchPhrase.getProps());
+<span class="fc" id="L54">		this.searchResultActor = system.actorOf(SearchResultActor.getProps());</span>
+<span class="fc" id="L55">		this.profileActor = system.actorOf(SearchProfileActor.getProps());</span>
+<span class="fc" id="L56">		this.skillActor = system.actorOf(SearchSkillActor.getProps());</span>
+<span class="fc" id="L57">		this.statsActor = system.actorOf(WordStatsActor.getProps());</span>
+<span class="fc" id="L58">	}</span>
+
+
+	/**
+	 * An action that renders an HTML page with a welcome message.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/&lt;/code&gt;.
+	 * @param searchPhraseString Search string entered by user
+	 * @return Loads the html page containing the search results
+	 */
+
+    public CompletionStage&lt;Result&gt; index(Http.Request request,String searchPhraseString,String sessionId) {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">		if(searchPhraseString.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L72">			searchPhraseActor = null;</span>
+<span class="fc" id="L73">        	return CompletableFuture.completedFuture(ok(views.html.index.render(request,null)));</span>
+        }else {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">			if(searchPhraseActor == null){</span>
+<span class="fc" id="L76">				searchPhraseActor = system.actorOf(SearchPhraseActor.props(sessionId));</span>
+<span class="fc" id="L77">				System.out.println(&quot;[INFO] new Actor Created&quot;+searchPhraseActor);</span>
+<span class="fc" id="L78">				session.setSession(sessionId,searchPhraseActor);</span>
+			}else {
+<span class="fc" id="L80">				searchPhraseActor = session.getSession(sessionId);</span>
+			}
+<span class="fc" id="L82">			System.out.println(&quot;\n\nSession Actor : &quot;+searchPhraseActor+&quot;\n\n&quot;);</span>
+<span class="fc" id="L83">			return FutureConverters.toJava(ask(searchPhraseActor, searchPhraseString, Integer. MAX_VALUE))</span>
+<span class="fc" id="L84">					.thenApply(response -&gt; {</span>
+<span class="fc" id="L85">						LinkedHashMap&lt;String, Resultlist&gt; resultmap = null;</span>
+						try{
+<span class="fc" id="L87">							System.out.println(response);</span>
+<span class="fc" id="L88">							resultmap = (LinkedHashMap&lt;String, Resultlist&gt;) response;</span>
+<span class="nc" id="L89">						}catch(Exception e){</span>
+<span class="nc" id="L90">							return ok(&quot;Internal Server Error&quot;);</span>
+<span class="fc" id="L91">						}</span>
+<span class="fc" id="L92">						return ok(views.html.index.render(request,resultmap));</span>
+					});
+    	}
+		//    		if(searchPhraseActor == null) {
+//				searchphrase = new SearchPhrase();
+//				session.setSession(sessionId,searchPhraseActor);
+//			}else{
+//				searchphrase = session.getSession(sessionId,searchphrase);
+//			}
+		//CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = searchphrase.getResult(searchPhraseString);
+		//return res.thenApplyAsync(o -&gt; ok(views.html.index.render(o)));
+    }
+
+	/**
+	 * An action that renders an HTML page with projects list.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;skill/id/skill&lt;/code&gt;.
+	 * @param id id of the given skill
+	 * @return Redirects to the html page containing 10 latest projects of a given skill
+	 */
+    public CompletionStage&lt;Result&gt; skill(String id) {
+<span class="fc" id="L114">		System.out.println(id);</span>
+<span class="fc" id="L115">		return FutureConverters.toJava(ask(skillActor, id, Integer. MAX_VALUE))</span>
+<span class="fc" id="L116">				.thenApply(response -&gt; {</span>
+<span class="fc" id="L117">					LinkedHashMap&lt;String, Resultlist&gt; resultmap = null;</span>
+					try{
+<span class="fc" id="L119">						System.out.println(response);</span>
+<span class="fc" id="L120">						resultmap = (LinkedHashMap&lt;String, Resultlist&gt;) response;</span>
+<span class="nc" id="L121">					}catch(Exception e){</span>
+<span class="nc" id="L122">						return ok(&quot;Internal Server Error&quot;);</span>
+<span class="fc" id="L123">					}</span>
+<span class="fc" id="L124">					return ok(views.html.OriginalSkill.render(resultmap));</span>
+				});
+
+//		CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = searchskill.getResult(id);
+//    	return res.thenApplyAsync(o -&gt; ok(views.html.skill.render(o)));
+    }
+
+	/**
+	 * An action that renders an HTML page with Word Stats of all the searched projects.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/wordstats/search&lt;/code&gt;.
+	 * @param search Search string entered by user
+	 * @return Redirects to the html page showing Word Stats for all the searched queries
+	 */
+	public CompletionStage&lt;Result&gt; wordStat(String search) {
+		//System.out.println(&quot;In HomeController WordStats : &quot;+search);
+//		CompletionStage&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; res = wordStats.getResult(search, searchphrase.resultmap.get(search).getDescriptions());
+//		return res.thenApplyAsync(o -&gt; ok(views.html.stat.render(o)));
+<span class="fc" id="L143">		return FutureConverters.toJava(ask(statsActor, SearchPhrase.resultmap.get(search).getDescriptions(), Integer.MAX_VALUE))</span>
+<span class="fc" id="L144">				.thenApply(response -&gt; {</span>
+<span class="fc" id="L145">					LinkedHashMap&lt;String, Resultlist&gt; resultmap = null;</span>
+					try{
+<span class="fc" id="L147">						resultmap = (LinkedHashMap&lt;String, Resultlist&gt;) response;</span>
+<span class="nc" id="L148">					}catch(Exception e){</span>
+<span class="nc" id="L149">						return ok(&quot;Internal Server Error&quot;);</span>
+<span class="fc" id="L150">					}</span>
+<span class="fc" id="L151">					return ok(views.html.stat.render(resultmap));</span>
+				});
+	}
+
+
+	/**
+	 * An action that renders an HTML page with Word Stats of an individual project.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/indvstats/search/index&lt;/code&gt;.
+	 * @param search Search string entered by the user
+	 * @param index Index of the individual project
+	 * @return Redirects to the html page containing word stats of an individual project
+	 */
+	public CompletionStage&lt;Result&gt; indvStat(String search, int index) {
+		//WordStats wordStats = new WordStats();
+		//CompletionStage&lt;LinkedHashMap&lt;String, Integer&gt;&gt; res = wordStats.getStatResult(SearchPhrase.resultmap.get(search).getDescriptions().get(index));
+		//return res.thenApplyAsync(o -&gt; ok(views.html.indvstat.render(o)));
+<span class="fc" id="L169">		return FutureConverters.toJava(ask(statsActor, SearchPhrase.resultmap.get(search).getDescriptions().get(index), Integer.MAX_VALUE))</span>
+<span class="fc" id="L170">				.thenApply(response -&gt; {</span>
+					try{
+<span class="fc" id="L172">						indStats = (LinkedHashMap&lt;String, Integer&gt;) response;</span>
+<span class="nc" id="L173">					}catch(Exception e){</span>
+<span class="nc" id="L174">						return ok(&quot;Internal Server Error&quot;);</span>
+<span class="fc" id="L175">					}</span>
+<span class="fc" id="L176">					return ok(views.html.indvstat.render(indStats));</span>
+				});
+	}
+
+	/**
+	 * An action that renders an HTML page with the details of an Employer.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/profile/id&lt;/code&gt;.
+	 * @param id Owner Id of the employer
+	 * @return Redirects to the html page showing details of an Employer
+	 */
+	public CompletionStage&lt;Result&gt; profile(String id) {
+<span class="fc" id="L189">		return FutureConverters.toJava(ask(profileActor, id, Integer. MAX_VALUE))</span>
+<span class="fc" id="L190">				.thenApply(response -&gt; {</span>
+<span class="fc" id="L191">					LinkedHashMap&lt;String, Profile&gt; resultmap = null;</span>
+					try{
+<span class="fc" id="L193">						resultmap = (LinkedHashMap&lt;String, Profile&gt;) response;</span>
+<span class="nc" id="L194">					}catch(Exception e){</span>
+<span class="fc" id="L195">					}</span>
+<span class="fc" id="L196">					return ok(views.html.profile.render(resultmap));</span>
+				});
+
+//		CompletionStage&lt;LinkedHashMap&lt;String, Profile&gt;&gt; res = searchprofile.getResult(id);
+//		return res.thenApplyAsync(o -&gt; ok(views.html.profile.render(o)));
+	}
+
+	/**
+	 * An action that renders an HTML page with the Flesch Readability Index of a project description.
+	 * The configuration in the &lt;code&gt;routes&lt;/code&gt; file means that
+	 * this method will be called when the application receives a
+	 * &lt;code&gt;GET&lt;/code&gt; request with a path of &lt;code&gt;/readability/search/index&lt;/code&gt;.
+	 * @param search Search string entered by user
+	 * @param index index of an individual project
+	 * @return Redirects to the html page showing Flesch Readability Index of an individual project]
+	 */
+	public CompletionStage&lt;Result&gt; readability(String search, int index) {
+<span class="fc" id="L213">		CompletionStage&lt;LinkedHashMap&lt;String, String&gt;&gt; res = sfi.getResult(SearchPhrase.resultmap.get(search).getDescriptions().get(index));</span>
+<span class="fc" id="L214">		return res.thenApplyAsync(o -&gt; ok(views.html.readability.render(o)));</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

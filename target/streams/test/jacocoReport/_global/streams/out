@@ -1,0 +1,12 @@
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m------- Jacoco Coverage Report -------[0m
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mLines: 68.46% (>= required 0.0%) covered, 381 of 1208 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mInstructions: 59.29% (>= required 0.0%) covered, 3577 of 8786 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mBranches: 48.35% (>= required 0.0%) covered, 125 of 242 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mMethods: 43.75% (>= required 0.0%) covered, 342 of 608 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mComplexity: 42.25% (>= required 0.0%) covered, 421 of 729 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mClass: 68.85% (>= required 0.0%) covered, 19 of 61 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mCheck C:\Users\Mahavir\Desktop\FreeLancelot\target\scala-2.12\jacoco\report for detailed report[0m
+[0m[[0m[0minfo[0m] [0m[0m [0m

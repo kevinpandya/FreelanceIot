@@ -4,24 +4,33 @@ import akka.actor.AbstractActorWithTimers;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.http.javadsl.model.HttpRequest;
+import businesslogic.SearchPhrase;
 import businesslogic.SearchSkill;
+import com.google.inject.name.Named;
+import static akka.pattern.Patterns.ask;
+import static play.mvc.Results.ok;
+
 import controllers.HomeController;
 import model.Resultlist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.twirl.api.Content;
 import scala.concurrent.duration.Duration;
+import play.mvc.*;
 
 import javax.inject.Inject;
 
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 public class SearchResultActor extends AbstractActorWithTimers {
-    @Inject
+
     private ActorRef userActor;
     private ActorRef searchActor;
 
@@ -35,7 +44,7 @@ public class SearchResultActor extends AbstractActorWithTimers {
 
     private final Logger logger = LoggerFactory.getLogger("play");
 
-    private Set<Result> searchPhraseResultItems;
+    private Set<LinkedHashMap<String, Resultlist>> searchPhraseResultItems;
 
     public static final class Tick {
     }
@@ -46,12 +55,23 @@ public class SearchResultActor extends AbstractActorWithTimers {
                     Duration.create(10 , TimeUnit.SECONDS));
         }
 
+        @Inject
         public SearchResultActor(){
             this.userActor = null;
             this.query = null;
             this.searchActor = null;
             this.sessionId = null;
             this.request = null;
+        }
+
+        public SearchResultActor(String query,String sessionId){
+            this.query = query;
+            this.sessionId = sessionId;
+        }
+
+        public static Props props(String query,String sessionId){
+            //System.out.println(id);
+            return Props.create(SearchResultActor.class,()->new SearchResultActor(query,sessionId));
         }
 
         public static Props getProps(){
@@ -69,6 +89,7 @@ public class SearchResultActor extends AbstractActorWithTimers {
             .match(Messages.WatchSearchResults.class , message -> {
                 logger.info("Received message WatchSearchResults {}" , message);
                 if(message != null && message.query != null && message.query != ""){
+                    logger.info(message.query);
                     watchSearchResult(message);
                 }
             })
@@ -76,6 +97,7 @@ public class SearchResultActor extends AbstractActorWithTimers {
                 logger.info("Received message Tick{}" , message);
                 if(query != null){
                     tickSearchResults();
+
                 }
             })
             .build();
@@ -85,8 +107,9 @@ public class SearchResultActor extends AbstractActorWithTimers {
             query = message.query;
 
             System.out.println("In Watch Search Results");
+            //@Named("")
 
-            return homeController.index(request, query, sessionId).thenAcceptAsync(searchResults -> {
+            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -> {
                 this.searchPhraseResultItems = new HashSet<>();
                 searchPhraseResultItems.add(searchResults);
                 resultlist.setSearchPhrase(query);
@@ -96,7 +119,7 @@ public class SearchResultActor extends AbstractActorWithTimers {
         }
 
         public CompletionStage<Void> tickSearchResults() {
-            return homeController.index(request, query, sessionId).thenAcceptAsync(searchResults -> {
+            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -> {
                 this.searchPhraseResultItems = new HashSet<>();
                 resultlist.setSearchPhrase(query);
                 searchPhraseResultItems.add(searchResults);

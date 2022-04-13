@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">UserActor.java</span></div><h1>UserActor.java</h1><pre class="source lang-java linenums">package actors;
+
+import actors.Messages.UnwatchSearchResults;
+import actors.Messages.WatchSearchResults;
+import akka.Done;
+import akka.NotUsed;
+import akka.actor.AbstractActor;
+import akka.actor.Actor;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
+import akka.japi.Pair;
+import akka.stream.KillSwitches;
+import akka.stream.Materializer;
+import akka.stream.UniqueKillSwitch;
+import akka.stream.javadsl.*;
+import model.Resultlist;
+import model.Searchphraseresult;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Injector;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import play.libs.Json;
+import play.mvc.Result;
+
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletionStage;
+
+/**
+ * The broker between the WebSocket and the SearchResultsActor(s).
+ * The UserActor holds the connection and sends serialized JSON data to the client.
+
+ */
+public class UserActor extends AbstractActor {
+
+<span class="nc" id="L44">    private final Logger logger = LoggerFactory.getLogger(&quot;play&quot;);</span>
+
+<span class="nc" id="L46">    private Map&lt;String, UniqueKillSwitch&gt; searchResultsMap = new HashMap&lt;&gt;();</span>
+
+    private Map&lt;String, ActorRef&gt; searchResultsActors;
+
+    private Materializer mat;
+
+    private Sink&lt;JsonNode, NotUsed&gt; hubSink;
+
+    private Sink&lt;JsonNode, CompletionStage&lt;Done&gt;&gt; jsonSink;
+
+    private Flow&lt;JsonNode, JsonNode, NotUsed&gt; websocketFlow;
+
+    private Injector injector;
+
+    /**
+     * Default empty constructor for the tests
+     */
+<span class="nc" id="L63">    public UserActor() {</span>
+<span class="nc" id="L64">        searchResultsActors = null;</span>
+<span class="nc" id="L65">        mat = null;</span>
+<span class="nc" id="L66">        hubSink = null;</span>
+<span class="nc" id="L67">        websocketFlow = null;</span>
+<span class="nc" id="L68">        injector = null;</span>
+<span class="nc" id="L69">    }</span>
+
+
+    /**
+     * Regular constructor
+     * @param injector Guice Injector, used later to create the SearchResultsActor with GuiceInjectedActor
+     * @param mat Materializer for the Akka streams
+     */
+    @Inject
+<span class="nc" id="L78">    public UserActor(Injector injector, Materializer mat) {</span>
+<span class="nc" id="L79">        this.searchResultsActors = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L80">        this.mat = mat;</span>
+<span class="nc" id="L81">        this.injector = injector;</span>
+<span class="nc" id="L82">        createSink();</span>
+<span class="nc" id="L83">    }</span>
+
+    /**
+     * Create the Akka Sink
+     */
+    public void createSink() {
+<span class="nc" id="L89">        Pair&lt;Sink&lt;JsonNode, NotUsed&gt;, Source&lt;JsonNode, NotUsed&gt;&gt; sinkSourcePair =</span>
+<span class="nc" id="L90">                MergeHub.of(JsonNode.class, 16)</span>
+<span class="nc" id="L91">                        .toMat(BroadcastHub.of(JsonNode.class, 256), Keep.both())</span>
+<span class="nc" id="L92">                        .run(mat);</span>
+
+<span class="nc" id="L94">        hubSink = sinkSourcePair.first();</span>
+<span class="nc" id="L95">        Source&lt;JsonNode, NotUsed&gt; hubSource = sinkSourcePair.second();</span>
+
+<span class="nc" id="L97">        jsonSink = Sink.foreach((JsonNode json) -&gt; {</span>
+            //System.out.println(json);
+<span class="nc" id="L99">            String queryRequest = json.findPath(&quot;query&quot;).asText();</span>
+<span class="nc" id="L100">            askForItems(queryRequest);</span>
+<span class="nc" id="L101">        });</span>
+
+
+<span class="nc" id="L104">        this.websocketFlow = Flow.fromSinkAndSourceCoupled(jsonSink, hubSource)</span>
+<span class="nc" id="L105">                .watchTermination((n, stage) -&gt; {</span>
+
+<span class="nc" id="L107">                    searchResultsActors.forEach((query, actor) -&gt; stage.thenAccept(f -&gt; context().stop(actor)));</span>
+
+<span class="nc" id="L109">                    stage.thenAccept(f -&gt; context().stop(self()));</span>
+
+<span class="nc" id="L111">                    return NotUsed.getInstance();</span>
+                });
+<span class="nc" id="L113">    }</span>
+
+
+
+    /**
+     * If there already exists a SearchResultsActor for the keyword we want, ask it for updates
+     * Otherwise, create a new one, register the UserActor and wait the results
+     * @param query
+     */
+    private void askForItems(String query) {
+<span class="nc" id="L123">        ActorRef actorForQuery = searchResultsActors.get(query);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (actorForQuery != null) {</span>
+<span class="nc" id="L125">            actorForQuery.tell(new WatchSearchResults(query), self());</span>
+        } else {
+<span class="nc" id="L127">            actorForQuery = getContext().actorOf(Props.create(GuiceInjectedActor.class, injector, SearchResultActor.class));</span>
+<span class="nc" id="L128">            searchResultsActors.put(query, actorForQuery);</span>
+<span class="nc" id="L129">            actorForQuery.tell(new Messages.RegisterActor(), self());</span>
+<span class="nc" id="L130">            actorForQuery.tell(new WatchSearchResults(query), self());</span>
+        }
+<span class="nc" id="L132">    }</span>
+
+    /**
+     * The receive block, useful for the manipulation of the flow by the actor
+     */
+    @Override
+    public Receive createReceive() {
+<span class="nc" id="L139">        return receiveBuilder()</span>
+<span class="nc" id="L140">                .match(WatchSearchResults.class, watchSearchResults -&gt; {</span>
+<span class="nc" id="L141">                    logger.info(&quot;Received message WatchSearchResults {}&quot;, watchSearchResults);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">                    if (watchSearchResults != null) {</span>
+<span class="nc" id="L143">                        askForItems(watchSearchResults.query);</span>
+<span class="nc" id="L144">                        sender().tell(websocketFlow, self());</span>
+                    }
+<span class="nc" id="L146">                })</span>
+<span class="nc" id="L147">                .match(UnwatchSearchResults.class, unwatchSearchResults -&gt; {</span>
+<span class="nc" id="L148">                    logger.info(&quot;Received message UnwatchSearchResults {}&quot;, unwatchSearchResults);</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">                    if (unwatchSearchResults != null) {</span>
+<span class="nc" id="L150">                        searchResultsMap.get(unwatchSearchResults.query).shutdown();</span>
+<span class="nc" id="L151">                        searchResultsMap.remove(unwatchSearchResults.query);</span>
+                    }
+<span class="nc" id="L153">                })</span>
+<span class="nc" id="L154">                .match(Messages.SearchResult.class, message -&gt; {</span>
+<span class="nc" id="L155">                    logger.info(&quot;Received message ProjectItem {}&quot;, message);</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                    if (message != null) {</span>
+<span class="nc" id="L157">                        addRepoItems(message);</span>
+<span class="nc" id="L158">                        sender().tell(websocketFlow, self());</span>
+                    }
+<span class="nc" id="L160">                })</span>
+<span class="nc" id="L161">                .build();</span>
+    }
+
+
+    public void addRepoItems(Messages.SearchResult searchResult) {
+<span class="nc" id="L166">        Set&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; searchResults = searchResult.searchPhraseResults;</span>
+<span class="nc" id="L167">        String query = searchResult.query;</span>
+
+<span class="nc" id="L169">        logger.info(&quot;Adding statuses {} for query {}&quot;, searchResults, query);</span>
+
+<span class="nc" id="L171">        Source&lt;JsonNode, NotUsed&gt; getSource = Source.from(searchResults)</span>
+<span class="nc" id="L172">                .map(Json::toJson);</span>
+
+<span class="nc" id="L174">        final Flow&lt;JsonNode, JsonNode, UniqueKillSwitch&gt; killswitchFlow = Flow.of(JsonNode.class)</span>
+<span class="nc" id="L175">                .joinMat(KillSwitches.singleBidi(), Keep.right());</span>
+<span class="nc" id="L176">        String name = &quot;searchresult-&quot; + query;</span>
+<span class="nc" id="L177">        final RunnableGraph&lt;UniqueKillSwitch&gt; graph = getSource</span>
+<span class="nc" id="L178">                .viaMat(killswitchFlow, Keep.right())</span>
+<span class="nc" id="L179">                .to(hubSink)</span>
+<span class="nc" id="L180">                .named(name);</span>
+
+<span class="nc" id="L182">        UniqueKillSwitch killSwitch = graph.run(mat);</span>
+
+<span class="nc" id="L184">        searchResultsMap.put(query, killSwitch);</span>
+<span class="nc" id="L185">    }</span>
+
+
+    /**
+     * Factory interface to create a UserActor from the UserParentActor
+     */
+    public interface Factory {
+        Actor create(String id);
+    }
+
+    /**
+     * Setter for Materializer
+     * @param mat Materializer
+     */
+    public void setMat(Materializer mat) {
+<span class="nc" id="L200">        this.mat = mat;</span>
+<span class="nc" id="L201">    }</span>
+
+    /**
+     * Getter for the SearchResultsMap
+     * @return a Map containing the kill switches for a query
+     */
+    public Map&lt;String, UniqueKillSwitch&gt; getSearchResultsMap() {
+<span class="nc" id="L208">        return searchResultsMap;</span>
+    }
+
+    /**
+     * Setter for the SearchResultsMap
+     * @param searchResultsMap SearchResultsMap
+     */
+    public void setSearchResultsMap(Map&lt;String, UniqueKillSwitch&gt; searchResultsMap) {
+<span class="nc" id="L216">        this.searchResultsMap = searchResultsMap;</span>
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * Getter for the Materializer
+     * @return Materializer
+     */
+    public Materializer getMat() {
+<span class="nc" id="L224">        return mat;</span>
+    }
+    /**
+     * Getter for the json sink
+     * @return jsonSink a Sink of JsonNodes and CompletionStage of Done
+     */
+
+    public Sink&lt;JsonNode, CompletionStage&lt;Done&gt;&gt; getJsonSink() {
+<span class="nc" id="L232">        return jsonSink;</span>
+    }
+
+    /**
+     * Setter for the json sink
+     * @param jsonSink Sink of JsonNode and CompletionStage of Done
+     */
+    public void setJsonSink(Sink&lt;JsonNode, CompletionStage&lt;Done&gt;&gt; jsonSink) {
+<span class="nc" id="L240">        this.jsonSink = jsonSink;</span>
+<span class="nc" id="L241">    }</span>
+
+    /**
+     * Getter for the SearchResultsActor map
+     * @return searchResultsActors Map of String and ActorRef a map of actor references for a given query
+     */
+    public Map&lt;String, ActorRef&gt; getSearchResultsActors() {
+<span class="nc" id="L248">        return searchResultsActors;</span>
+    }
+
+    /**
+     * Setter for the SearchResultsActor map
+     * @param searchResultsActors Maps the String and ActorRef for a given query
+     */
+    public void setSearchResultsActors(Map&lt;String, ActorRef&gt; searchResultsActors) {
+<span class="nc" id="L256">        this.searchResultsActors = searchResultsActors;</span>
+<span class="nc" id="L257">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

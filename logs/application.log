@@ -1,330 +1,187 @@
-2022-04-11 14:57:37,707 [WARN] from com.google.inject.assistedinject.AssistedInject in play-dev-mode-akka.actor.default-dispatcher-9 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
-2022-04-11 14:57:38,416 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-9 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2022-04-11 14:57:38,450 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-9 - Application started (Dev) (no global state)
-2022-04-11 14:57:38,944 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-11 - Websocket initialized
-2022-04-11 14:57:38,945 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-11 - Created actor with id7
-2022-04-11 14:57:38,948 [INFO] from play in application-akka.actor.default-dispatcher-16 - Created child user actor with id7
-2022-04-11 14:57:39,004 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 14:57:39,043 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-15 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-7/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 14:57:48,531 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:57:50,417 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-13 - Websocket initialized
-2022-04-11 14:57:50,417 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-13 - Created actor with id14
-2022-04-11 14:57:50,417 [INFO] from play in application-akka.actor.default-dispatcher-10 - Created child user actor with id14
-2022-04-11 14:57:50,422 [INFO] from play in application-akka.actor.default-dispatcher-13 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 14:57:50,425 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-12 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-14/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 14:57:54,851 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-9 - Websocket initialized
-2022-04-11 14:57:54,851 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-9 - Created actor with id21
-2022-04-11 14:57:54,851 [INFO] from play in application-akka.actor.default-dispatcher-13 - Created child user actor with id21
-2022-04-11 14:57:54,855 [INFO] from play in application-akka.actor.default-dispatcher-16 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 14:57:54,861 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-17 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-21/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 14:57:58,538 [INFO] from play in application-akka.actor.default-dispatcher-13 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:08,509 [INFO] from play in application-akka.actor.default-dispatcher-16 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:18,523 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:28,531 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:38,533 [INFO] from play in application-akka.actor.default-dispatcher-12 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:48,530 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:58:58,532 [INFO] from play in application-akka.actor.default-dispatcher-17 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:08,539 [INFO] from play in application-akka.actor.default-dispatcher-10 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:09,351 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-21 - Websocket initialized
-2022-04-11 14:59:09,351 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-21 - Created actor with id27
-2022-04-11 14:59:09,351 [INFO] from play in application-akka.actor.default-dispatcher-10 - Created child user actor with id27
-2022-04-11 14:59:09,352 [INFO] from play in application-akka.actor.default-dispatcher-12 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 14:59:09,354 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-12 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-27/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 14:59:18,511 [INFO] from play in application-akka.actor.default-dispatcher-10 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:28,530 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:38,530 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:48,532 [INFO] from play in application-akka.actor.default-dispatcher-10 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 14:59:58,535 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 15:00:08,527 [INFO] from play in application-akka.actor.default-dispatcher-10 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 15:00:18,509 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message Tickactors.SearchResultActor$Tick@37cbda67
-2022-04-11 15:00:22,479 [WARN] from com.google.inject.assistedinject.AssistedInject in play-dev-mode-akka.actor.default-dispatcher-21 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
-2022-04-11 15:00:22,655 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-21 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2022-04-11 15:00:22,664 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-21 - Application started (Dev) (no global state)
-2022-04-11 15:00:22,801 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-11 - Websocket initialized
-2022-04-11 15:00:22,802 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-11 - Created actor with id34
-2022-04-11 15:00:22,802 [INFO] from play in application-akka.actor.default-dispatcher-7 - Created child user actor with id34
-2022-04-11 15:00:22,807 [INFO] from play in application-akka.actor.default-dispatcher-10 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 15:00:22,814 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-13 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-34/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 15:00:29,878 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-13 - Websocket initialized
-2022-04-11 15:00:29,878 [INFO] from play in play-dev-mode-akka.actor.default-dispatcher-13 - Created actor with id41
-2022-04-11 15:00:29,878 [INFO] from play in application-akka.actor.default-dispatcher-9 - Created child user actor with id41
-2022-04-11 15:00:29,881 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message WatchSearchResults WatchSearchResults()
-2022-04-11 15:00:29,886 [ERROR] from akka.actor.OneForOneStrategy in application-akka.actor.default-dispatcher-8 - Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-akka.actor.ActorInitializationException: akka://application/user/userParentActor/userActor-41/$a: exception during creation
-	at akka.actor.ActorInitializationException$.apply(Actor.scala:196)
-	at akka.actor.ActorCell.create(ActorCell.scala:664)
-	at akka.actor.ActorCell.invokeAll$1(ActorCell.scala:514)
-	at akka.actor.ActorCell.systemInvoke(ActorCell.scala:536)
-	at akka.dispatch.Mailbox.processAllSystemMessages(Mailbox.scala:295)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:230)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
-	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
-Caused by: com.google.inject.ConfigurationException: Guice configuration errors:
-
-1) No implementation for akka.actor.ActorRef was bound.
-  Did you mean?
-    akka.actor.Actor annotated with @com.google.inject.internal.UniqueAnnotations$Internal(value=1) bound  at actors.UserActor$Factory.create(UserActor.java:1)
-
-  while locating akka.actor.ActorRef
-    for field at actors.SearchResultActor.userActor(SearchResultActor.java:50)
-  while locating actors.SearchResultActor
-
-1 error
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1120)
-	at com.google.inject.internal.InjectorImpl.getProvider(InjectorImpl.java:1078)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1131)
-	at actors.GuiceInjectedActor.produce(GuiceInjectedActor.java:40)
-	at akka.actor.Props.newActor(Props.scala:226)
-	at akka.actor.ActorCell.newActor(ActorCell.scala:616)
-	at akka.actor.ActorCell.create(ActorCell.scala:643)
-	... 9 common frames omitted
-2022-04-11 15:00:32,704 [INFO] from play in application-akka.actor.default-dispatcher-9 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:00:42,722 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:00:52,703 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:02,691 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:12,720 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:22,723 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:32,723 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:42,699 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:01:52,715 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:02,715 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:12,721 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:22,696 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:32,719 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:42,716 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:02:52,715 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:03:02,719 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:03:12,720 [INFO] from play in application-akka.actor.default-dispatcher-8 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:03:22,725 [INFO] from play in application-akka.actor.default-dispatcher-11 - Received message Tickactors.SearchResultActor$Tick@7b2c80cf
-2022-04-11 15:03:25,207 [INFO] from play.api.internal.libs.concurrent.CoordinatedShutdownSupport in pool-12-thread-7 - Starting synchronous coordinated shutdown with ServerStoppedReason reason and 35000 milliseconds timeout
-2022-04-11 15:03:25,207 [INFO] from play.core.server.AkkaHttpServer in pool-12-thread-7 - Stopping Akka HTTP server...
-2022-04-11 15:03:25,208 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-34 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
-2022-04-11 15:03:25,225 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-31 - Running provided shutdown stop hooks
+2022-04-13 17:42:14,071 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:18,927 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:19,659 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:20,035 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:20,191 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:20,277 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:20,387 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:20,523 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:20,623 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:20,734 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:20,853 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:20,934 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:21,046 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:21,161 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:21,222 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:21,321 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:42:21,410 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:42:21,469 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:42:56,057 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:00,374 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:01,050 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:43:01,444 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:01,601 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:01,693 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:43:01,811 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:01,920 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:02,017 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:43:02,116 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:02,226 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:02,299 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:43:02,393 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:02,492 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:02,586 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 17:43:02,668 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 17:43:02,754 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 17:43:02,809 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:42,938 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:44,910 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:45,294 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:45,495 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:45,591 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:45,642 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:45,692 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:45,753 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:45,794 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:45,857 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:45,911 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:45,935 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:46,025 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:46,066 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:46,091 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:15:46,136 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:15:46,182 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:15:46,212 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:27,685 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:29,659 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,011 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:30,161 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:30,241 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,290 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:30,333 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:30,385 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,429 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:30,505 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:30,545 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,586 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:30,639 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:30,685 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,721 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:20:30,764 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:20:30,811 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:20:30,848 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:01,812 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:03,548 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:03,901 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:04,079 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:04,143 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:04,194 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:04,241 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:04,290 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:04,321 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:04,380 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:04,422 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:04,463 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:04,514 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:04,555 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:04,586 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:21:04,639 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:21:04,679 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:21:04,718 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:27:59,225 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:01,154 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:01,524 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,610 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,615 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,618 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,706 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:01,770 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:01,828 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,874 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:01,929 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:01,962 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:01,963 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,022 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:02,068 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:02,091 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,112 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,158 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:02,216 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:02,249 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,253 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,317 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:28:02,364 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:28:02,389 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:28:02,389 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:16,531 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:18,904 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:19,252 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,322 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,322 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,336 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,419 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:19,486 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:19,546 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,619 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:19,674 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:19,706 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,707 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,768 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:19,809 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:19,841 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,851 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:19,910 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:19,968 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:20,003 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:20,006 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:20,044 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:29:20,085 [WARN] from play.filters.headers.SecurityHeadersConfig in pool-1-thread-1 - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:29:20,117 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:29:20,120 [WARN] from play.filters.hosts.AllowedHostsFilter in pool-1-thread-1 - Host not allowed: localhost
+2022-04-13 18:35:59,602 [WARN] from com.google.inject.assistedinject.AssistedInject in main - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:36:01,323 [WARN] from play.filters.headers.SecurityHeadersConfig in main - play.filters.headers.contentSecurityPolicy is deprecated in 2.7.0.  Please use play.filters.csp.CSPFilter instead.
+2022-04-13 18:36:01,610 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:36:01,683 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:36:01,685 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:36:01,688 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:40:10,347 [WARN] from com.google.inject.assistedinject.AssistedInject in main - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:40:12,291 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:40:12,350 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:40:12,358 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:40:12,358 [WARN] from play.filters.hosts.AllowedHostsFilter in main - Host not allowed: localhost
+2022-04-13 18:41:13,958 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:41:16,555 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:41:17,928 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:41:18,986 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:41:19,728 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:41:20,234 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:24,978 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:29,975 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:30,680 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:32,345 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:32,882 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:42:33,424 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:27,106 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:31,788 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:32,513 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:34,162 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:34,870 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:50:35,393 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:10,474 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:13,694 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:14,656 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:16,843 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:17,520 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:55:18,220 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:10,742 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:14,357 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:14,891 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:16,678 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:17,243 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:17,944 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:39,535 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:42,818 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:43,435 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:45,185 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:45,797 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]
+2022-04-13 18:57:46,460 [WARN] from com.google.inject.assistedinject.AssistedInject in pool-1-thread-1 - AssistedInject factory actors.UserActor$Factory will be slow because class actors.UserActor has assisted Provider dependencies or injects the Injector. Stop injecting @Assisted Provider<T> (instead use @Assisted T) or Injector to speed things up. (It will be a ~6500% speed bump!)  The exact offending deps are: [Key[type=com.google.inject.Injector, annotation=[none]]@actors.UserActor.<init>()[0]]

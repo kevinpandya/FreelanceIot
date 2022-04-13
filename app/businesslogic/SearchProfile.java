@@ -1,16 +1,14 @@
 package businesslogic;
 
-import akka.actor.AbstractActor;
-import akka.actor.Props;
 import model.Profile;
 import model.projectInfo;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.text.DateFormat;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -20,24 +18,9 @@ import java.util.concurrent.CompletionStage;
  * <p>This class fetches the information of a user's profile</p>
  * @author Harshal
  */
-public class SearchProfile extends AbstractActor {
+public class SearchProfile {
     public String API = "https://www.freelancer.com/api/users/0.1/portfolios/?limit=10&compact=true&portfolio_details=true&user_details=true&user_qualification_details=true&user_jobs=true&user_portfolio_details=true&user_recommendations=true&count=true&user_profile_description=true&users[]=";
     public String API1 ="https://www.freelancer.com/api/projects/0.1/projects/?limit=10&full_description=true&owners[]=";
-
-    public static Props getProps(){
-        return Props.create(SearchProfile.class);
-    }
-
-    @Override
-    public Receive createReceive() {
-
-        return receiveBuilder()
-                .match(String.class, a -> {
-                    LinkedHashMap<String, Profile> pup = getProfileResult(a);
-                    sender().tell(pup, self());
-                })
-                .build();
-    }
 
     /**
      * <p>This method makes an asynchronous call to getProfileResult method</p>

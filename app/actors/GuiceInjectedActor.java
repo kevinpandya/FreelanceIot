@@ -2,6 +2,7 @@ package actors;
 
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -17,6 +18,7 @@ public class GuiceInjectedActor implements IndirectActorProducer {
      * @param injector Guice injector
      * @param actorClass actor to be created
      */
+    @Inject
     public GuiceInjectedActor(Injector injector, Class<? extends Actor> actorClass) {
         this.injector = injector;
         this.actorClass = actorClass;

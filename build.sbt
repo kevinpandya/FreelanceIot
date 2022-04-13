@@ -5,11 +5,15 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-scalaVersion := "2.13.6"
+scalaVersion := "2.12.8"
 
 libraryDependencies += guice
 
 libraryDependencies += ehcache
+
+//libraryDependencies ++= Seq(
+//  "com.typesafe.akka" %% "akka-actor" % "2.6.18",
+//  "com.typesafe.akka" %% "akka-testkit" % "2.6.18")
 
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
