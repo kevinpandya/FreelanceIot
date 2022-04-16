@@ -7,9 +7,16 @@ import model.Resultlist;
 
 import java.util.LinkedHashMap;
 
+/**
+ * Search Skill Actor for SearchSkill class
+ */
 public class SearchSkillActor extends AbstractActor {
     private SearchSkill ss = new SearchSkill();
 
+    /**
+     * Creates props for the SearchSkillActor class
+     * @return this method returns a Props object
+     */
     public static Props getProps() {
         return Props.create(SearchSkillActor.class);
     }

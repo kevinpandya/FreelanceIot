@@ -68,6 +68,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:12
+    def socket: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.socket",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "ws"})
+        }
+      """
+    )
+  
     // @LINE:7
     def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.skill",
@@ -94,26 +104,6 @@ package controllers.javascript {
       """
         function(file1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + """)("file", file1)})
-        }
-      """
-    )
-  
-  }
-
-  // @LINE:12
-  class ReverseWebSocketController(_prefix: => String) {
-
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:12
-    def ws: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.WebSocketController.ws",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "h/ws/"})
         }
       """
     )

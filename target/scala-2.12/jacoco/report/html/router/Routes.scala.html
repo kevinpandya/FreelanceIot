@@ -14,246 +14,242 @@ import _root_.play.libs.F
 <span class="fc" id="L14">class Routes(</span>
 <span class="fc" id="L15">  override val errorHandler: play.api.http.HttpErrorHandler, </span>
   // @LINE:6
-<span class="fc" id="L17">  HomeController_2: controllers.HomeController,</span>
-  // @LINE:12
-<span class="fc" id="L19">  WebSocketController_0: controllers.WebSocketController,</span>
+<span class="fc" id="L17">  HomeController_1: controllers.HomeController,</span>
   // @LINE:15
-<span class="fc" id="L21">  Assets_1: controllers.Assets,</span>
-<span class="fc" id="L22">  val prefix: String</span>
-<span class="fc" id="L23">) extends GeneratedRouter {</span>
+<span class="fc" id="L19">  Assets_0: controllers.Assets,</span>
+<span class="fc" id="L20">  val prefix: String</span>
+<span class="fc" id="L21">) extends GeneratedRouter {</span>
 
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
-    HomeController_2: controllers.HomeController,
-    // @LINE:12
-    WebSocketController_0: controllers.WebSocketController,
+    HomeController_1: controllers.HomeController,
     // @LINE:15
-    Assets_1: controllers.Assets
-<span class="fc" id="L33">  ) = this(errorHandler, HomeController_2, WebSocketController_0, Assets_1, &quot;/&quot;)</span>
+    Assets_0: controllers.Assets
+<span class="fc" id="L29">  ) = this(errorHandler, HomeController_1, Assets_0, &quot;/&quot;)</span>
 
   def withPrefix(addPrefix: String): Routes = {
-<span class="fc" id="L36">    val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)</span>
-<span class="fc" id="L37">    router.RoutesPrefix.setPrefix(prefix)</span>
-<span class="fc" id="L38">    new Routes(errorHandler, HomeController_2, WebSocketController_0, Assets_1, prefix)</span>
+<span class="fc" id="L32">    val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)</span>
+<span class="fc" id="L33">    router.RoutesPrefix.setPrefix(prefix)</span>
+<span class="fc" id="L34">    new Routes(errorHandler, HomeController_1, Assets_0, prefix)</span>
   }
 
-<span class="fc" id="L41">  private[this] val defaultPrefix: String = {</span>
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+<span class="fc" id="L37">  private[this] val defaultPrefix: String = {</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">    if (this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
   }
 
-<span class="nc" id="L45">  def documentation = List(</span>
-<span class="nc" id="L46">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix, &quot;&quot;&quot;controllers.HomeController.index(request:Request, searchPhrase:String ?= &quot;&quot;, sessionId:String ?= &quot;&quot;)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;skill/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;id&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.skill(id:String)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L48" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;stat/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.wordStat(search:String)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L49" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;indvstats/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.indvStat(search:String, index:Integer)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;profile/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;ownerid&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.profile(ownerid:String)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L51" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;readability/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.readability(search:String, index:Integer)&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;h/ws/&quot;&quot;&quot;, &quot;&quot;&quot;controllers.WebSocketController.ws&quot;&quot;&quot;),</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;assets/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;file&lt;.+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.Assets.versioned(path:String = &quot;/public&quot;, file:Asset)&quot;&quot;&quot;),</span>
-<span class="nc" id="L54">    Nil</span>
-<span class="nc" id="L55">  ).foldLeft(List.empty[(String,String,String)]) { (s,e) =&gt; e.asInstanceOf[Any] match {</span>
+<span class="nc" id="L41">  def documentation = List(</span>
+<span class="nc" id="L42">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix, &quot;&quot;&quot;controllers.HomeController.index(request:Request, searchPhrase:String ?= &quot;&quot;, sessionId:String ?= &quot;&quot;)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;skill/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;id&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.skill(id:String)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;stat/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.wordStat(search:String)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;indvstats/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.indvStat(search:String, index:Integer)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;profile/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;ownerid&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.profile(ownerid:String)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;readability/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.readability(search:String, index:Integer)&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;ws&quot;&quot;&quot;, &quot;&quot;&quot;controllers.HomeController.socket()&quot;&quot;&quot;),</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    (&quot;&quot;&quot;GET&quot;&quot;&quot;, this.prefix + (if(this.prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;) + &quot;&quot;&quot;assets/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;file&lt;.+&gt;&quot;&quot;&quot;, &quot;&quot;&quot;controllers.Assets.versioned(path:String = &quot;/public&quot;, file:Asset)&quot;&quot;&quot;),</span>
+<span class="nc" id="L50">    Nil</span>
+<span class="nc" id="L51">  ).foldLeft(List.empty[(String,String,String)]) { (s,e) =&gt; e.asInstanceOf[Any] match {</span>
     case r @ (_,_,_) =&gt; s :+ r.asInstanceOf[(String,String,String)]
     case l =&gt; s ++ l.asInstanceOf[List[(String,String,String)]]
   }}
 
 
   // @LINE:6
-<span class="pc bpc" id="L62" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_index0_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L63">    PathPattern(List(StaticPart(this.prefix)))</span>
+<span class="pc bpc" id="L58" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_index0_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L59">    PathPattern(List(StaticPart(this.prefix)))</span>
   )
-<span class="pc bpc" id="L65" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(</span>
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(</span>
     
-<span class="fc" id="L67">    (req:play.mvc.Http.Request) =&gt;</span>
-      HomeController_2.index(fakeValue[play.mvc.Http.Request], fakeValue[String], fakeValue[String]),
-<span class="fc" id="L69">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L70">      &quot;router&quot;,</span>
-<span class="fc" id="L71">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L72">      &quot;index&quot;,</span>
-<span class="fc" id="L73">      Seq(classOf[play.mvc.Http.Request], classOf[String], classOf[String]),</span>
-<span class="fc" id="L74">      &quot;GET&quot;,</span>
-<span class="fc" id="L75">      this.prefix + &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L76">      &quot;&quot;&quot; An example controller showing a sample home page&quot;&quot;&quot;,</span>
-<span class="fc" id="L77">      Seq()</span>
+<span class="fc" id="L63">    (req:play.mvc.Http.Request) =&gt;</span>
+      HomeController_1.index(fakeValue[play.mvc.Http.Request], fakeValue[String], fakeValue[String]),
+<span class="fc" id="L65">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L66">      &quot;router&quot;,</span>
+<span class="fc" id="L67">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L68">      &quot;index&quot;,</span>
+<span class="fc" id="L69">      Seq(classOf[play.mvc.Http.Request], classOf[String], classOf[String]),</span>
+<span class="fc" id="L70">      &quot;GET&quot;,</span>
+<span class="fc" id="L71">      this.prefix + &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L72">      &quot;&quot;&quot; An example controller showing a sample home page&quot;&quot;&quot;,</span>
+<span class="fc" id="L73">      Seq()</span>
     )
   )
 
   // @LINE:7
-<span class="pc bpc" id="L82" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_skill1_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L83">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;skill/&quot;), DynamicPart(&quot;id&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
+<span class="pc bpc" id="L78" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_skill1_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L79">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;skill/&quot;), DynamicPart(&quot;id&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
   )
-<span class="pc bpc" id="L85" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_skill1_invoker = createInvoker(</span>
-<span class="fc" id="L86">    HomeController_2.skill(fakeValue[String]),</span>
-<span class="fc" id="L87">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L88">      &quot;router&quot;,</span>
-<span class="fc" id="L89">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L90">      &quot;skill&quot;,</span>
-<span class="fc" id="L91">      Seq(classOf[String]),</span>
-<span class="fc" id="L92">      &quot;GET&quot;,</span>
-<span class="fc" id="L93">      this.prefix + &quot;&quot;&quot;skill/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;id&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
-<span class="fc" id="L94">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L95">      Seq()</span>
+<span class="pc bpc" id="L81" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_skill1_invoker = createInvoker(</span>
+<span class="fc" id="L82">    HomeController_1.skill(fakeValue[String]),</span>
+<span class="fc" id="L83">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L84">      &quot;router&quot;,</span>
+<span class="fc" id="L85">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L86">      &quot;skill&quot;,</span>
+<span class="fc" id="L87">      Seq(classOf[String]),</span>
+<span class="fc" id="L88">      &quot;GET&quot;,</span>
+<span class="fc" id="L89">      this.prefix + &quot;&quot;&quot;skill/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;id&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
+<span class="fc" id="L90">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L91">      Seq()</span>
     )
   )
 
   // @LINE:8
-<span class="pc bpc" id="L100" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_wordStat2_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L101">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;stat/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
+<span class="pc bpc" id="L96" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_wordStat2_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L97">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;stat/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
   )
-<span class="pc bpc" id="L103" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_wordStat2_invoker = createInvoker(</span>
-<span class="fc" id="L104">    HomeController_2.wordStat(fakeValue[String]),</span>
-<span class="fc" id="L105">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L106">      &quot;router&quot;,</span>
-<span class="fc" id="L107">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L108">      &quot;wordStat&quot;,</span>
-<span class="fc" id="L109">      Seq(classOf[String]),</span>
-<span class="fc" id="L110">      &quot;GET&quot;,</span>
-<span class="fc" id="L111">      this.prefix + &quot;&quot;&quot;stat/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
-<span class="fc" id="L112">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L113">      Seq()</span>
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_wordStat2_invoker = createInvoker(</span>
+<span class="fc" id="L100">    HomeController_1.wordStat(fakeValue[String]),</span>
+<span class="fc" id="L101">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L102">      &quot;router&quot;,</span>
+<span class="fc" id="L103">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L104">      &quot;wordStat&quot;,</span>
+<span class="fc" id="L105">      Seq(classOf[String]),</span>
+<span class="fc" id="L106">      &quot;GET&quot;,</span>
+<span class="fc" id="L107">      this.prefix + &quot;&quot;&quot;stat/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
+<span class="fc" id="L108">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L109">      Seq()</span>
     )
   )
 
   // @LINE:9
-<span class="pc bpc" id="L118" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_indvStat3_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L119">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;indvstats/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true), StaticPart(&quot;/&quot;), DynamicPart(&quot;index&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
+<span class="pc bpc" id="L114" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_indvStat3_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L115">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;indvstats/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true), StaticPart(&quot;/&quot;), DynamicPart(&quot;index&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
   )
-<span class="pc bpc" id="L121" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_indvStat3_invoker = createInvoker(</span>
-<span class="fc" id="L122">    HomeController_2.indvStat(fakeValue[String], fakeValue[Integer]),</span>
-<span class="fc" id="L123">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L124">      &quot;router&quot;,</span>
-<span class="fc" id="L125">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L126">      &quot;indvStat&quot;,</span>
-<span class="fc" id="L127">      Seq(classOf[String], classOf[Integer]),</span>
-<span class="fc" id="L128">      &quot;GET&quot;,</span>
-<span class="fc" id="L129">      this.prefix + &quot;&quot;&quot;indvstats/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
-<span class="fc" id="L130">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L131">      Seq()</span>
+<span class="pc bpc" id="L117" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_indvStat3_invoker = createInvoker(</span>
+<span class="fc" id="L118">    HomeController_1.indvStat(fakeValue[String], fakeValue[Integer]),</span>
+<span class="fc" id="L119">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L120">      &quot;router&quot;,</span>
+<span class="fc" id="L121">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L122">      &quot;indvStat&quot;,</span>
+<span class="fc" id="L123">      Seq(classOf[String], classOf[Integer]),</span>
+<span class="fc" id="L124">      &quot;GET&quot;,</span>
+<span class="fc" id="L125">      this.prefix + &quot;&quot;&quot;indvstats/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
+<span class="fc" id="L126">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L127">      Seq()</span>
     )
   )
 
   // @LINE:10
-<span class="pc bpc" id="L136" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_profile4_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L137">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;profile/&quot;), DynamicPart(&quot;ownerid&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
+<span class="pc bpc" id="L132" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_profile4_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L133">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;profile/&quot;), DynamicPart(&quot;ownerid&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
   )
-<span class="pc bpc" id="L139" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_profile4_invoker = createInvoker(</span>
-<span class="fc" id="L140">    HomeController_2.profile(fakeValue[String]),</span>
-<span class="fc" id="L141">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L142">      &quot;router&quot;,</span>
-<span class="fc" id="L143">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L144">      &quot;profile&quot;,</span>
-<span class="fc" id="L145">      Seq(classOf[String]),</span>
-<span class="fc" id="L146">      &quot;GET&quot;,</span>
-<span class="fc" id="L147">      this.prefix + &quot;&quot;&quot;profile/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;ownerid&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
-<span class="fc" id="L148">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L149">      Seq()</span>
+<span class="pc bpc" id="L135" title="1 of 4 branches missed.">  private[this] lazy val controllers_HomeController_profile4_invoker = createInvoker(</span>
+<span class="fc" id="L136">    HomeController_1.profile(fakeValue[String]),</span>
+<span class="fc" id="L137">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L138">      &quot;router&quot;,</span>
+<span class="fc" id="L139">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L140">      &quot;profile&quot;,</span>
+<span class="fc" id="L141">      Seq(classOf[String]),</span>
+<span class="fc" id="L142">      &quot;GET&quot;,</span>
+<span class="fc" id="L143">      this.prefix + &quot;&quot;&quot;profile/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;ownerid&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
+<span class="fc" id="L144">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L145">      Seq()</span>
     )
   )
 
   // @LINE:11
-<span class="pc bpc" id="L154" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_readability5_route = Route(&quot;GET&quot;,</span>
-<span class="fc" id="L155">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;readability/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true), StaticPart(&quot;/&quot;), DynamicPart(&quot;index&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
+<span class="pc bpc" id="L150" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_readability5_route = Route(&quot;GET&quot;,</span>
+<span class="fc" id="L151">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;readability/&quot;), DynamicPart(&quot;search&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true), StaticPart(&quot;/&quot;), DynamicPart(&quot;index&quot;, &quot;&quot;&quot;[^/]+&quot;&quot;&quot;,true)))</span>
   )
-<span class="pc bpc" id="L157" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_readability5_invoker = createInvoker(</span>
-<span class="fc" id="L158">    HomeController_2.readability(fakeValue[String], fakeValue[Integer]),</span>
-<span class="fc" id="L159">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="fc" id="L160">      &quot;router&quot;,</span>
-<span class="fc" id="L161">      &quot;controllers.HomeController&quot;,</span>
-<span class="fc" id="L162">      &quot;readability&quot;,</span>
-<span class="fc" id="L163">      Seq(classOf[String], classOf[Integer]),</span>
-<span class="fc" id="L164">      &quot;GET&quot;,</span>
-<span class="fc" id="L165">      this.prefix + &quot;&quot;&quot;readability/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
-<span class="fc" id="L166">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="fc" id="L167">      Seq()</span>
+<span class="pc bpc" id="L153" title="2 of 4 branches missed.">  private[this] lazy val controllers_HomeController_readability5_invoker = createInvoker(</span>
+<span class="fc" id="L154">    HomeController_1.readability(fakeValue[String], fakeValue[Integer]),</span>
+<span class="fc" id="L155">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="fc" id="L156">      &quot;router&quot;,</span>
+<span class="fc" id="L157">      &quot;controllers.HomeController&quot;,</span>
+<span class="fc" id="L158">      &quot;readability&quot;,</span>
+<span class="fc" id="L159">      Seq(classOf[String], classOf[Integer]),</span>
+<span class="fc" id="L160">      &quot;GET&quot;,</span>
+<span class="fc" id="L161">      this.prefix + &quot;&quot;&quot;readability/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;search&lt;[^/]+&gt;/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;index&lt;[^/]+&gt;&quot;&quot;&quot;,</span>
+<span class="fc" id="L162">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="fc" id="L163">      Seq()</span>
     )
   )
 
   // @LINE:12
-<span class="nc bnc" id="L172" title="All 4 branches missed.">  private[this] lazy val controllers_WebSocketController_ws6_route = Route(&quot;GET&quot;,</span>
-<span class="nc" id="L173">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;h/ws/&quot;)))</span>
+<span class="nc bnc" id="L168" title="All 4 branches missed.">  private[this] lazy val controllers_HomeController_socket6_route = Route(&quot;GET&quot;,</span>
+<span class="nc" id="L169">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;ws&quot;)))</span>
   )
-<span class="nc bnc" id="L175" title="All 4 branches missed.">  private[this] lazy val controllers_WebSocketController_ws6_invoker = createInvoker(</span>
-<span class="nc" id="L176">    WebSocketController_0.ws,</span>
-<span class="nc" id="L177">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="nc" id="L178">      &quot;router&quot;,</span>
-<span class="nc" id="L179">      &quot;controllers.WebSocketController&quot;,</span>
-<span class="nc" id="L180">      &quot;ws&quot;,</span>
-<span class="nc" id="L181">      Nil,</span>
-<span class="nc" id="L182">      &quot;GET&quot;,</span>
-<span class="nc" id="L183">      this.prefix + &quot;&quot;&quot;h/ws/&quot;&quot;&quot;,</span>
-<span class="nc" id="L184">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
-<span class="nc" id="L185">      Seq()</span>
+<span class="nc bnc" id="L171" title="All 4 branches missed.">  private[this] lazy val controllers_HomeController_socket6_invoker = createInvoker(</span>
+<span class="nc" id="L172">    HomeController_1.socket(),</span>
+<span class="nc" id="L173">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="nc" id="L174">      &quot;router&quot;,</span>
+<span class="nc" id="L175">      &quot;controllers.HomeController&quot;,</span>
+<span class="nc" id="L176">      &quot;socket&quot;,</span>
+<span class="nc" id="L177">      Nil,</span>
+<span class="nc" id="L178">      &quot;GET&quot;,</span>
+<span class="nc" id="L179">      this.prefix + &quot;&quot;&quot;ws&quot;&quot;&quot;,</span>
+<span class="nc" id="L180">      &quot;&quot;&quot;&quot;&quot;&quot;,</span>
+<span class="nc" id="L181">      Seq()</span>
     )
   )
 
   // @LINE:15
-<span class="nc bnc" id="L190" title="All 4 branches missed.">  private[this] lazy val controllers_Assets_versioned7_route = Route(&quot;GET&quot;,</span>
-<span class="nc" id="L191">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;assets/&quot;), DynamicPart(&quot;file&quot;, &quot;&quot;&quot;.+&quot;&quot;&quot;,false)))</span>
+<span class="nc bnc" id="L186" title="All 4 branches missed.">  private[this] lazy val controllers_Assets_versioned7_route = Route(&quot;GET&quot;,</span>
+<span class="nc" id="L187">    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart(&quot;assets/&quot;), DynamicPart(&quot;file&quot;, &quot;&quot;&quot;.+&quot;&quot;&quot;,false)))</span>
   )
-<span class="nc bnc" id="L193" title="All 4 branches missed.">  private[this] lazy val controllers_Assets_versioned7_invoker = createInvoker(</span>
-<span class="nc" id="L194">    Assets_1.versioned(fakeValue[String], fakeValue[Asset]),</span>
-<span class="nc" id="L195">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
-<span class="nc" id="L196">      &quot;router&quot;,</span>
-<span class="nc" id="L197">      &quot;controllers.Assets&quot;,</span>
-<span class="nc" id="L198">      &quot;versioned&quot;,</span>
-<span class="nc" id="L199">      Seq(classOf[String], classOf[Asset]),</span>
-<span class="nc" id="L200">      &quot;GET&quot;,</span>
-<span class="nc" id="L201">      this.prefix + &quot;&quot;&quot;assets/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;file&lt;.+&gt;&quot;&quot;&quot;,</span>
-<span class="nc" id="L202">      &quot;&quot;&quot; Map static resources from the /public folder to the /assets URL path&quot;&quot;&quot;,</span>
-<span class="nc" id="L203">      Seq()</span>
+<span class="nc bnc" id="L189" title="All 4 branches missed.">  private[this] lazy val controllers_Assets_versioned7_invoker = createInvoker(</span>
+<span class="nc" id="L190">    Assets_0.versioned(fakeValue[String], fakeValue[Asset]),</span>
+<span class="nc" id="L191">    play.api.routing.HandlerDef(this.getClass.getClassLoader,</span>
+<span class="nc" id="L192">      &quot;router&quot;,</span>
+<span class="nc" id="L193">      &quot;controllers.Assets&quot;,</span>
+<span class="nc" id="L194">      &quot;versioned&quot;,</span>
+<span class="nc" id="L195">      Seq(classOf[String], classOf[Asset]),</span>
+<span class="nc" id="L196">      &quot;GET&quot;,</span>
+<span class="nc" id="L197">      this.prefix + &quot;&quot;&quot;assets/&quot;&quot;&quot; + &quot;$&quot; + &quot;&quot;&quot;file&lt;.+&gt;&quot;&quot;&quot;,</span>
+<span class="nc" id="L198">      &quot;&quot;&quot; Map static resources from the /public folder to the /assets URL path&quot;&quot;&quot;,</span>
+<span class="nc" id="L199">      Seq()</span>
     )
   )
 
 
-<span class="pc bpc" id="L208" title="1 of 2 branches missed.">  def routes: PartialFunction[RequestHeader, Handler] = {</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">  def routes: PartialFunction[RequestHeader, Handler] = {</span>
   
     // @LINE:6
-<span class="pc bpc" id="L211" title="2 of 4 branches missed.">    case controllers_HomeController_index0_route(params@_) =&gt;</span>
-<span class="pc" id="L212">      call(params.fromQuery[String](&quot;searchPhrase&quot;, Some(&quot;&quot;)), params.fromQuery[String](&quot;sessionId&quot;, Some(&quot;&quot;))) { (searchPhrase, sessionId) =&gt;</span>
+<span class="pc bpc" id="L207" title="2 of 4 branches missed.">    case controllers_HomeController_index0_route(params@_) =&gt;</span>
+<span class="pc" id="L208">      call(params.fromQuery[String](&quot;searchPhrase&quot;, Some(&quot;&quot;)), params.fromQuery[String](&quot;sessionId&quot;, Some(&quot;&quot;))) { (searchPhrase, sessionId) =&gt;</span>
         controllers_HomeController_index0_invoker.call(
-          req =&gt; HomeController_2.index(req, searchPhrase, sessionId))
+          req =&gt; HomeController_1.index(req, searchPhrase, sessionId))
       }
   
     // @LINE:7
-<span class="pc bpc" id="L218" title="2 of 4 branches missed.">    case controllers_HomeController_skill1_route(params@_) =&gt;</span>
-<span class="pc" id="L219">      call(params.fromPath[String](&quot;id&quot;, None)) { (id) =&gt;</span>
-        controllers_HomeController_skill1_invoker.call(HomeController_2.skill(id))
+<span class="pc bpc" id="L214" title="2 of 4 branches missed.">    case controllers_HomeController_skill1_route(params@_) =&gt;</span>
+<span class="pc" id="L215">      call(params.fromPath[String](&quot;id&quot;, None)) { (id) =&gt;</span>
+        controllers_HomeController_skill1_invoker.call(HomeController_1.skill(id))
       }
   
     // @LINE:8
-<span class="pc bpc" id="L224" title="2 of 4 branches missed.">    case controllers_HomeController_wordStat2_route(params@_) =&gt;</span>
-<span class="pc" id="L225">      call(params.fromPath[String](&quot;search&quot;, None)) { (search) =&gt;</span>
-        controllers_HomeController_wordStat2_invoker.call(HomeController_2.wordStat(search))
+<span class="pc bpc" id="L220" title="2 of 4 branches missed.">    case controllers_HomeController_wordStat2_route(params@_) =&gt;</span>
+<span class="pc" id="L221">      call(params.fromPath[String](&quot;search&quot;, None)) { (search) =&gt;</span>
+        controllers_HomeController_wordStat2_invoker.call(HomeController_1.wordStat(search))
       }
   
     // @LINE:9
-<span class="pc bpc" id="L230" title="2 of 4 branches missed.">    case controllers_HomeController_indvStat3_route(params@_) =&gt;</span>
-<span class="pc" id="L231">      call(params.fromPath[String](&quot;search&quot;, None), params.fromPath[Integer](&quot;index&quot;, None)) { (search, index) =&gt;</span>
-        controllers_HomeController_indvStat3_invoker.call(HomeController_2.indvStat(search, index))
+<span class="pc bpc" id="L226" title="2 of 4 branches missed.">    case controllers_HomeController_indvStat3_route(params@_) =&gt;</span>
+<span class="pc" id="L227">      call(params.fromPath[String](&quot;search&quot;, None), params.fromPath[Integer](&quot;index&quot;, None)) { (search, index) =&gt;</span>
+        controllers_HomeController_indvStat3_invoker.call(HomeController_1.indvStat(search, index))
       }
   
     // @LINE:10
-<span class="pc bpc" id="L236" title="2 of 4 branches missed.">    case controllers_HomeController_profile4_route(params@_) =&gt;</span>
-<span class="pc" id="L237">      call(params.fromPath[String](&quot;ownerid&quot;, None)) { (ownerid) =&gt;</span>
-        controllers_HomeController_profile4_invoker.call(HomeController_2.profile(ownerid))
+<span class="pc bpc" id="L232" title="2 of 4 branches missed.">    case controllers_HomeController_profile4_route(params@_) =&gt;</span>
+<span class="pc" id="L233">      call(params.fromPath[String](&quot;ownerid&quot;, None)) { (ownerid) =&gt;</span>
+        controllers_HomeController_profile4_invoker.call(HomeController_1.profile(ownerid))
       }
   
     // @LINE:11
-<span class="pc bpc" id="L242" title="3 of 4 branches missed.">    case controllers_HomeController_readability5_route(params@_) =&gt;</span>
-<span class="pc" id="L243">      call(params.fromPath[String](&quot;search&quot;, None), params.fromPath[Integer](&quot;index&quot;, None)) { (search, index) =&gt;</span>
-        controllers_HomeController_readability5_invoker.call(HomeController_2.readability(search, index))
+<span class="pc bpc" id="L238" title="3 of 4 branches missed.">    case controllers_HomeController_readability5_route(params@_) =&gt;</span>
+<span class="pc" id="L239">      call(params.fromPath[String](&quot;search&quot;, None), params.fromPath[Integer](&quot;index&quot;, None)) { (search, index) =&gt;</span>
+        controllers_HomeController_readability5_invoker.call(HomeController_1.readability(search, index))
       }
   
     // @LINE:12
-<span class="nc bnc" id="L248" title="All 4 branches missed.">    case controllers_WebSocketController_ws6_route(params@_) =&gt;</span>
-<span class="nc" id="L249">      call { </span>
-<span class="nc" id="L250">        controllers_WebSocketController_ws6_invoker.call(WebSocketController_0.ws)</span>
+<span class="nc bnc" id="L244" title="All 4 branches missed.">    case controllers_HomeController_socket6_route(params@_) =&gt;</span>
+<span class="nc" id="L245">      call { </span>
+<span class="nc" id="L246">        controllers_HomeController_socket6_invoker.call(HomeController_1.socket())</span>
       }
   
     // @LINE:15
-<span class="nc bnc" id="L254" title="All 4 branches missed.">    case controllers_Assets_versioned7_route(params@_) =&gt;</span>
-<span class="nc" id="L255">      call(Param[String](&quot;path&quot;, Right(&quot;/public&quot;)), params.fromPath[Asset](&quot;file&quot;, None)) { (path, file) =&gt;</span>
-        controllers_Assets_versioned7_invoker.call(Assets_1.versioned(path, file))
+<span class="nc bnc" id="L250" title="All 4 branches missed.">    case controllers_Assets_versioned7_route(params@_) =&gt;</span>
+<span class="nc" id="L251">      call(Param[String](&quot;path&quot;, Right(&quot;/public&quot;)), params.fromPath[Asset](&quot;file&quot;, None)) { (path, file) =&gt;</span>
+        controllers_Assets_versioned7_invoker.call(Assets_0.versioned(path, file))
       }
   }
 }

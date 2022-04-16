@@ -7,27 +7,37 @@ import model.Resultlist;
 
 import java.util.LinkedHashMap;
 
-<span class="fc" id="L10">public class SearchPhraseActor extends AbstractActor {</span>
+/**
+ * Search Phrase Actor for SearchPhrase class
+ */
+<span class="fc" id="L13">public class SearchPhraseActor extends AbstractActor {</span>
 
-<span class="fc" id="L12">    private SearchPhrase sp = new SearchPhrase();</span>
+<span class="fc" id="L15">    private SearchPhrase sp = new SearchPhrase();</span>
 
+    /**
+     * @param id id of the owner
+     * @return Props creating the object of the class
+     */
     public static Props props(String id){
-<span class="fc" id="L15">        System.out.println(id);</span>
-<span class="fc" id="L16">        return Props.create(SearchPhraseActor.class,()-&gt;new SearchPhraseActor());</span>
+<span class="fc" id="L22">        System.out.println(id);</span>
+<span class="fc" id="L23">        return Props.create(SearchPhraseActor.class,()-&gt;new SearchPhraseActor());</span>
     }
 
+    /**
+     * @return this method returns a Props object
+     */
     public static Props getProps(){
-<span class="nc" id="L20">        return Props.create(SearchPhraseActor.class);</span>
+<span class="nc" id="L30">        return Props.create(SearchPhraseActor.class);</span>
     }
 
     @Override
     public Receive createReceive() {
-<span class="fc" id="L25">        return receiveBuilder()</span>
-<span class="fc" id="L26">                .match(String.class, (a) -&gt; {</span>
-<span class="fc" id="L27">                    LinkedHashMap&lt;String, Resultlist&gt; searchPhraseResult = sp.getPhraseResult(a);</span>
-<span class="fc" id="L28">                    sender().tell(searchPhraseResult, self());</span>
-<span class="fc" id="L29">                })</span>
-<span class="fc" id="L30">                .build();</span>
+<span class="fc" id="L35">        return receiveBuilder()</span>
+<span class="fc" id="L36">                .match(String.class, (a) -&gt; {</span>
+<span class="fc" id="L37">                    LinkedHashMap&lt;String, Resultlist&gt; searchPhraseResult = sp.getPhraseResult(a);</span>
+<span class="fc" id="L38">                    sender().tell(searchPhraseResult, self());</span>
+<span class="fc" id="L39">                })</span>
+<span class="fc" id="L40">                .build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

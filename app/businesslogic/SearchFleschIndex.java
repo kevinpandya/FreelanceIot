@@ -14,19 +14,24 @@ public class SearchFleschIndex {
     long sentenceCount;
     long syllableCount;
 
+
+    public CompletionStage<LinkedHashMap<String, String>> getResult(String desc){
+        return CompletableFuture.supplyAsync(() -> this.getIndex(desc));
+    }
+
     /**
      * <p>The method calls the getFleschindex and getFkgl methods</p>
      * @param desc Description of a project
      * @return LinkedHashMap containing Flesch Readability Index and FKGL of a project description
      */
-    public CompletionStage<LinkedHashMap<String, String>> getResult(String desc){
+    public LinkedHashMap<String, String> getIndex(String desc) {
         List<String> description = new ArrayList<String>();
         LinkedHashMap<String, String> resultmap = new LinkedHashMap<String, String>();
         description.add(desc);
         Integer FlIndex = this.getFleshIndex(description);
         resultmap.put("FleshIndex",FlIndex.toString());
         resultmap.put("FKGL",Float.toString(this.getFkgl(FlIndex)));
-        return CompletableFuture.completedFuture(resultmap);
+        return resultmap;
     }
 
     /**

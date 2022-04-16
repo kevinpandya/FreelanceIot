@@ -40,7 +40,7 @@ Seq[Any](format.raw/*2.74*/("""
 		<br />
 		<input type="text" id="hiddenId" name="sessionId" value="" />
 	</form>
-	<div id="repos">
+	<div id="Result">
 
 	</div>
 """)))}))
@@ -60,7 +60,7 @@ Seq[Any](format.raw/*2.74*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: c20283c4b86326cc70c6d699055e90c198619f9c
+                  HASH: 1242d7a6433ce76e5f8c46ae171db5be44436f71
                   MATRIX: 611->1|978->27|1145->99|1175->104|1228->149|1267->151|1296->154
                   LINES: 23->1|28->2|33->2|35->4|35->4|35->4|36->5
                   -- GENERATED --

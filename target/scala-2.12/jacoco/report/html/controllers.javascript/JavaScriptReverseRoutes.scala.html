@@ -68,12 +68,22 @@ package controllers.javascript {
       &quot;&quot;&quot;
     )
   
-    // @LINE:7
-<span class="nc" id="L72">    def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L73">      &quot;controllers.HomeController.skill&quot;,</span>
+    // @LINE:12
+<span class="nc" id="L72">    def socket: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L73">      &quot;controllers.HomeController.socket&quot;,</span>
 <span class="nc" id="L74">      &quot;&quot;&quot;</span>
+        function() {
+<span class="nc" id="L76">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;ws&quot;})</span>
+        }
+      &quot;&quot;&quot;
+    )
+  
+    // @LINE:7
+<span class="nc" id="L82">    def skill: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L83">      &quot;controllers.HomeController.skill&quot;,</span>
+<span class="nc" id="L84">      &quot;&quot;&quot;</span>
         function(id0) {
-<span class="nc" id="L76">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;skill/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id0))})</span>
+<span class="nc" id="L86">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;skill/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id0))})</span>
         }
       &quot;&quot;&quot;
     )
@@ -81,39 +91,19 @@ package controllers.javascript {
   }
 
   // @LINE:15
-<span class="nc" id="L84">  class ReverseAssets(_prefix: =&gt; String) {</span>
+<span class="nc" id="L94">  class ReverseAssets(_prefix: =&gt; String) {</span>
 
     def _defaultPrefix: String = {
-<span class="nc bnc" id="L87" title="All 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
     }
 
   
     // @LINE:15
-<span class="nc" id="L92">    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L93">      &quot;controllers.Assets.versioned&quot;,</span>
-<span class="nc" id="L94">      &quot;&quot;&quot;</span>
+<span class="nc" id="L102">    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L103">      &quot;controllers.Assets.versioned&quot;,</span>
+<span class="nc" id="L104">      &quot;&quot;&quot;</span>
         function(file1) {
-<span class="nc" id="L96">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
-        }
-      &quot;&quot;&quot;
-    )
-  
-  }
-
-  // @LINE:12
-<span class="nc" id="L104">  class ReverseWebSocketController(_prefix: =&gt; String) {</span>
-
-    def _defaultPrefix: String = {
-<span class="nc bnc" id="L107" title="All 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
-    }
-
-  
-    // @LINE:12
-<span class="nc" id="L112">    def ws: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L113">      &quot;controllers.WebSocketController.ws&quot;,</span>
-<span class="nc" id="L114">      &quot;&quot;&quot;</span>
-        function() {
-<span class="nc" id="L116">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;h/ws/&quot;})</span>
+<span class="nc" id="L106">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
         }
       &quot;&quot;&quot;
     )
@@ -121,5 +111,5 @@ package controllers.javascript {
   }
 
 
-<span class="nc" id="L124">}</span>
+<span class="nc" id="L114">}</span>
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

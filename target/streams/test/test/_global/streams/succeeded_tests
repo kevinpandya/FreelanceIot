@@ -1,17 +1,20 @@
 #Successful Tests
-#Wed Apr 13 18:57:47 EDT 2022
-BusinessLogic.WordStatsTest=1649890666958
-ActorTest.SearchFleschIndexActorTest=1649890658851
-BusinessLogic.SearchFleschIndexTest=1649890666964
-model.ProjectinfoTest=1649890666961
-ActorTest.SearchProfileActorTest=1649890659011
-model.ResultlistTest=1649890659110
-BusinessLogic.SearchSkillTest=1649890666964
-BusinessLogic.SessionTest=1649890666964
-model.SearchphraseresultTest=1649890659105
-ActorTest.SearchSkillActorTest=1649890659072
-model.ProfileTest=1649890659097
-ControllersTest.HomeControllerTest=1649890666952
-BusinessLogic.SearchProfileTest=1649890666964
-ActorTest.WordStatsActorTest=1649890658919
-BusinessLogic.SearchPhraseTest=1649890666964
+#Fri Apr 15 15:01:45 EDT 2022
+model.ProfileTest=1650049298399
+BusinessLogic.SearchPhraseTest=1650049304977
+ActorTest.WordStatsActorTest=1650049295947
+ActorTest.SearchFleschIndexActorTest=1650049295912
+model.ResultlistTest=1650049298415
+ControllersTest.HomeControllerTest=1650049304967
+BusinessLogic.SearchFleschIndexTest=1650049304987
+BusinessLogic.SearchProfileTest=1650049304981
+ActorTest.SearchPhraseActorTest=1650049298227
+ActorTest.SearchResultActorTest=1650049298167
+BusinessLogic.SearchSkillTest=1650049304987
+BusinessLogic.SessionTest=1650049304987
+ActorTest.SearchSkillActorTest=1650049298386
+BusinessLogic.WordStatsTest=1650049304967
+ActorTest.WebSocketActorTest=1650049298332
+model.SearchphraseresultTest=1650049298407
+model.ProjectinfoTest=1650049304977
+ActorTest.SearchProfileActorTest=1650049298272

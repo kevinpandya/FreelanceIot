@@ -23,7 +23,6 @@ public class Session {
 
     /**
      * @param id Session ID
-     * @param object Object of SearchPhrase results
      * @return It returns the search phrase results for a given session id
      */
     public ActorRef getSession(String id){

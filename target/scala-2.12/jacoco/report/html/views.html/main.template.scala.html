@@ -43,23 +43,25 @@ import scala.collection.JavaConverters._
 <span class="fc" id="L43">    &lt;title&gt;&quot;&quot;&quot;),_display_(/*13.13*/title),format.raw/*13.18*/(&quot;&quot;&quot;&lt;/title&gt;</span>
 <span class="fc" id="L44">    &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href='&quot;&quot;&quot;),_display_(/*14.50*/routes/*14.56*/.Assets.versioned(&quot;stylesheets/main.css&quot;)),format.raw/*14.97*/(&quot;&quot;&quot;'&gt;</span>
 <span class="fc" id="L45">    &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href='&quot;&quot;&quot;),_display_(/*15.55*/routes/*15.61*/.Assets.versioned(&quot;images/favicon.png&quot;)),format.raw/*15.100*/(&quot;&quot;&quot;'&gt;</span>
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;&gt;&lt;/script&gt;
     &lt;style&gt;
-<span class="fc" id="L47">        #hiddenId&quot;&quot;&quot;),format.raw/*17.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*17.19*/(&quot;&quot;&quot;</span>
-<span class="fc" id="L48">            &quot;&quot;&quot;),format.raw/*18.13*/(&quot;&quot;&quot;visibility: hidden;</span>
-<span class="fc" id="L49">        &quot;&quot;&quot;),format.raw/*19.9*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*19.10*/(&quot;&quot;&quot;</span>
-<span class="fc" id="L50">    &quot;&quot;&quot;),format.raw/*20.5*/(&quot;&quot;&quot;&lt;/style&gt;</span>
+<span class="fc" id="L48">        #hiddenId&quot;&quot;&quot;),format.raw/*18.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*18.19*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L49">            &quot;&quot;&quot;),format.raw/*19.13*/(&quot;&quot;&quot;visibility: hidden;</span>
+<span class="fc" id="L50">        &quot;&quot;&quot;),format.raw/*20.9*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*20.10*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L51">    &quot;&quot;&quot;),format.raw/*21.5*/(&quot;&quot;&quot;&lt;/style&gt;</span>
 
     &lt;!--
-<span class="fc" id="L53">    &lt;script src='&quot;&quot;&quot;),_display_(/*23.19*/routes/*23.25*/.Assets.versioned(&quot;javascripts/prism.js&quot;)),format.raw/*23.66*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
+<span class="fc" id="L54">    &lt;script src='&quot;&quot;&quot;),_display_(/*24.19*/routes/*24.25*/.Assets.versioned(&quot;javascripts/prism.js&quot;)),format.raw/*24.66*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
 	 --&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
-<span class="fc" id="L58">    &quot;&quot;&quot;),_display_(/*28.6*/content),format.raw/*28.13*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L59">    &quot;&quot;&quot;),_display_(/*29.6*/content),format.raw/*29.13*/(&quot;&quot;&quot;</span>
 
-<span class="fc" id="L60">    &quot;&quot;&quot;),format.raw/*30.5*/(&quot;&quot;&quot;&lt;script src='&quot;&quot;&quot;),_display_(/*30.19*/routes/*30.25*/.Assets.versioned(&quot;javascripts/index.js&quot;)),format.raw/*30.66*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
-<span class="fc" id="L61">    &lt;script src='&quot;&quot;&quot;),_display_(/*31.19*/routes/*31.25*/.Assets.versioned(&quot;javascripts/main.js&quot;)),format.raw/*31.65*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
-<span class="fc" id="L62">    &lt;script src='&quot;&quot;&quot;),_display_(/*32.19*/routes/*32.25*/.Assets.versioned(&quot;javascripts/jquery.min.js&quot;)),format.raw/*32.71*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
+
+<span class="fc" id="L62">    &quot;&quot;&quot;),format.raw/*32.5*/(&quot;&quot;&quot;&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span>
+<span class="fc" id="L63">    &lt;script src='&quot;&quot;&quot;),_display_(/*33.19*/routes/*33.25*/.Assets.versioned(&quot;javascripts/index.js&quot;)),format.raw/*33.66*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
+<span class="fc" id="L64">    &lt;script src='&quot;&quot;&quot;),_display_(/*34.19*/routes/*34.25*/.Assets.versioned(&quot;javascripts/main.js&quot;)),format.raw/*34.65*/(&quot;&quot;&quot;' type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span>
 
 &lt;/body&gt;
 
@@ -68,11 +70,11 @@ import scala.collection.JavaConverters._
     }
   }
 
-<span class="nc" id="L71">  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)</span>
+<span class="nc" id="L73">  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)</span>
 
-<span class="nc" id="L73">  def f:((String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title) =&gt; (content) =&gt; apply(title)(content)</span>
+<span class="nc" id="L75">  def f:((String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title) =&gt; (content) =&gt; apply(title)(content)</span>
 
-<span class="nc" id="L75">  def ref: this.type = this</span>
+<span class="nc" id="L77">  def ref: this.type = this</span>
 
 }
 
@@ -80,9 +82,9 @@ import scala.collection.JavaConverters._
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 0f828c155a7a2866635d0f2325a9358360181f19
-                  MATRIX: 1171-&gt;266|1296-&gt;296|1326-&gt;300|1410-&gt;357|1436-&gt;362|1522-&gt;421|1537-&gt;427|1599-&gt;468|1684-&gt;526|1699-&gt;532|1760-&gt;571|1822-&gt;605|1851-&gt;606|1893-&gt;620|1949-&gt;649|1978-&gt;650|2011-&gt;656|2078-&gt;696|2093-&gt;702|2155-&gt;743|2248-&gt;810|2276-&gt;817|2311-&gt;825|2352-&gt;839|2367-&gt;845|2429-&gt;886|2510-&gt;940|2525-&gt;946|2586-&gt;986|2667-&gt;1040|2682-&gt;1046|2749-&gt;1092
-                  LINES: 32-&gt;7|37-&gt;7|39-&gt;9|43-&gt;13|43-&gt;13|44-&gt;14|44-&gt;14|44-&gt;14|45-&gt;15|45-&gt;15|45-&gt;15|47-&gt;17|47-&gt;17|48-&gt;18|49-&gt;19|49-&gt;19|50-&gt;20|53-&gt;23|53-&gt;23|53-&gt;23|58-&gt;28|58-&gt;28|60-&gt;30|60-&gt;30|60-&gt;30|60-&gt;30|61-&gt;31|61-&gt;31|61-&gt;31|62-&gt;32|62-&gt;32|62-&gt;32
+                  HASH: 681ef2bae5b72bbddd4918d5d685b333ad0a96bc
+                  MATRIX: 1171-&gt;266|1296-&gt;296|1326-&gt;300|1410-&gt;357|1436-&gt;362|1522-&gt;421|1537-&gt;427|1599-&gt;468|1684-&gt;526|1699-&gt;532|1760-&gt;571|1916-&gt;699|1945-&gt;700|1987-&gt;714|2043-&gt;743|2072-&gt;744|2105-&gt;750|2172-&gt;790|2187-&gt;796|2249-&gt;837|2342-&gt;904|2370-&gt;911|2407-&gt;921|2542-&gt;1029|2557-&gt;1035|2619-&gt;1076|2700-&gt;1130|2715-&gt;1136|2776-&gt;1176
+                  LINES: 32-&gt;7|37-&gt;7|39-&gt;9|43-&gt;13|43-&gt;13|44-&gt;14|44-&gt;14|44-&gt;14|45-&gt;15|45-&gt;15|45-&gt;15|48-&gt;18|48-&gt;18|49-&gt;19|50-&gt;20|50-&gt;20|51-&gt;21|54-&gt;24|54-&gt;24|54-&gt;24|59-&gt;29|59-&gt;29|62-&gt;32|63-&gt;33|63-&gt;33|63-&gt;33|64-&gt;34|64-&gt;34|64-&gt;34
                   -- GENERATED --
               */
           

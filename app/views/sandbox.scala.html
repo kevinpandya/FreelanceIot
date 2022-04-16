@@ -11,16 +11,17 @@
     <style>
     </style>
 </head>
-<body data-ws-url="@routes.WebSocketController.ws.webSocketURL(request)">
+<body>
     <center>
         <article style="margin-top:50px;">
             @content
             @if(searchResults != null) {
             @for((searchTerms, searchResultlist) <- searchResults){
             @if(searchResultlist.getResult().size()>0){
-            <p>Search terms : @searchTerms : Flesh reading Ease Index: @searchResultlist.getFleschIndex()  FKGL : @searchResultlist.getFkgl()</p>
+            <script src='@routes.Assets.versioned("javascripts/index.js")' type="text/javascript"></script>
+            <p>Search terms : <span id="resultterm">@searchTerms</span> : Flesh reading Ease Index: <span id="FLINDEX">@searchResultlist.getFleschIndex()</span>  FKGL : <span id="FKGL">@searchResultlist.getFkgl()</span></p>
             <a href="@routes.HomeController.wordStat(searchTerms)">Global Stats</a>
-            <table>
+            <table class="@searchTerms">
                 <tr>
                     <th>Owner_id</th>
                     <th>Date</th>
@@ -32,18 +33,18 @@
                     <th>Education Level</th>
                 </tr>
                 @for(result <- searchResultlist.getResult()){
-                <tr>
-                    <td><a href='@routes.HomeController.profile(result.getOwner_id())'>@result.getOwner_id()</a></td>
-                    <td>@result.getDate()</td>
-                    <td>@result.getTitle()</td>
-                    <td>@result.getType()</td>
-                    <td>@for((key,value) <- result.getSkills()){
+                <tr class="@searchTerms@result.getIndex()">
+                    <td id="o_id@searchTerms@result.getIndex()"><a href='@routes.HomeController.profile(result.getOwner_id())' target="_blank">@result.getOwner_id()</a></td>
+                    <td id="date@searchTerms@result.getIndex()">@result.getDate()</td>
+                    <td id="title@searchTerms@result.getIndex()">@result.getTitle()</td>
+                    <td id="type@searchTerms@result.getIndex()">@result.getType()</td>
+                    <td id="skill@searchTerms@result.getIndex()">@for((key,value) <- result.getSkills()){
                         <u><a href="@routes.HomeController.skill(value)" target="_blank">@key</a></u>
                         }
                     </td>
-                    <td><a href="@routes.HomeController.indvStat(searchTerms, result.getIndex())">Stats</a></td>
-                    <td><a href="@routes.HomeController.readability(searchTerms, result.getIndex())">Readability</a></td>
-                    <td>@searchResultlist.getEdLevel()</td>
+                    <td id="indvs@searchTerms@result.getIndex()"><a href="@routes.HomeController.indvStat(searchTerms, result.getIndex())" target="_blank">Stats</a></td>
+                    <td id="read@searchTerms@result.getIndex()"><a href="@routes.HomeController.readability(searchTerms, result.getIndex())" target="_blank">Readability</a></td>
+                    <td id="edlevel@searchTerms@result.getIndex()">@searchResultlist.getEdLevel()</td>
                 </tr>
                 }
             </table>
@@ -55,9 +56,9 @@
             }
         </article>
     </center>
-    <script src='@routes.Assets.versioned("javascripts/jquery.min.js")' type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='@routes.Assets.versioned("javascripts/knockout-3.5.1.js")' type="text/javascript"></script>
     <script src='@routes.Assets.versioned("javascripts/main.js")' type="text/javascript"></script>
-    <script src='@routes.Assets.versioned("javascripts/index.js")' type="text/javascript"></script>
+
 </body>
 </html>

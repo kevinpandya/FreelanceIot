@@ -6,21 +6,27 @@ import businesslogic.SearchFleschIndex;
 
 import java.util.LinkedHashMap;
 
-<span class="nc" id="L9">public class SearchFleschIndexActor extends AbstractActor {</span>
-<span class="nc" id="L10">    private SearchFleschIndex sfi = new SearchFleschIndex();</span>
+/**
+ * This is the Actor for SearchFleschIndex class
+ */
+<span class="fc" id="L12">public class SearchFleschIndexActor extends AbstractActor {</span>
+<span class="fc" id="L13">    private SearchFleschIndex sfi = new SearchFleschIndex();</span>
 
+    /**
+     * @return this method returns a Props object
+     */
     public static Props getProps() {
-<span class="nc" id="L13">        return Props.create(SearchSkillActor.class);</span>
+<span class="fc" id="L19">        return Props.create(SearchFleschIndexActor.class);</span>
     }
 
     @Override
     public Receive createReceive() {
-<span class="nc" id="L18">        return receiveBuilder()</span>
-<span class="nc" id="L19">                .match(String.class, (a) -&gt; {</span>
-<span class="nc" id="L20">                    LinkedHashMap&lt;String, String&gt; fleschResult = (LinkedHashMap&lt;String, String&gt;) sfi.getResult(a);</span>
-<span class="nc" id="L21">                    sender().tell(fleschResult, self());</span>
-<span class="nc" id="L22">                })</span>
-<span class="nc" id="L23">                .build();</span>
+<span class="fc" id="L24">        return receiveBuilder()</span>
+<span class="fc" id="L25">                .match(String.class, (a) -&gt; {</span>
+<span class="fc" id="L26">                    LinkedHashMap&lt;String, String&gt; fleschResult = sfi.getIndex(a);</span>
+<span class="fc" id="L27">                    sender().tell(fleschResult, self());</span>
+<span class="fc" id="L28">                })</span>
+<span class="fc" id="L29">                .build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -7,10 +7,17 @@ import model.Profile;
 
 import java.util.LinkedHashMap;
 
+/**
+ * Search Profile Actor for SearchProfile class
+ */
 public class SearchProfileActor extends AbstractActor {
 
     private SearchProfile sp = new SearchProfile();
 
+    /**
+     * Creates props for the SearchProfileActor class
+     * @return this method returns a Props object
+     */
     public static Props getProps(){
         return Props.create(SearchProfileActor.class);
     }

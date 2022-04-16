@@ -14,28 +14,24 @@ import _root_.play.libs.F
 class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
-  HomeController_2: controllers.HomeController,
-  // @LINE:12
-  WebSocketController_0: controllers.WebSocketController,
+  HomeController_1: controllers.HomeController,
   // @LINE:15
-  Assets_1: controllers.Assets,
+  Assets_0: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
 
    @javax.inject.Inject()
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
-    HomeController_2: controllers.HomeController,
-    // @LINE:12
-    WebSocketController_0: controllers.WebSocketController,
+    HomeController_1: controllers.HomeController,
     // @LINE:15
-    Assets_1: controllers.Assets
-  ) = this(errorHandler, HomeController_2, WebSocketController_0, Assets_1, "/")
+    Assets_0: controllers.Assets
+  ) = this(errorHandler, HomeController_1, Assets_0, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_2, WebSocketController_0, Assets_1, prefix)
+    new Routes(errorHandler, HomeController_1, Assets_0, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -49,7 +45,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """indvstats/""" + "$" + """search<[^/]+>/""" + "$" + """index<[^/]+>""", """controllers.HomeController.indvStat(search:String, index:Integer)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """profile/""" + "$" + """ownerid<[^/]+>""", """controllers.HomeController.profile(ownerid:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """readability/""" + "$" + """search<[^/]+>/""" + "$" + """index<[^/]+>""", """controllers.HomeController.readability(search:String, index:Integer)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """h/ws/""", """controllers.WebSocketController.ws"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """ws""", """controllers.HomeController.socket()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -65,7 +61,7 @@ class Routes(
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
     
     (req:play.mvc.Http.Request) =>
-      HomeController_2.index(fakeValue[play.mvc.Http.Request], fakeValue[String], fakeValue[String]),
+      HomeController_1.index(fakeValue[play.mvc.Http.Request], fakeValue[String], fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -83,7 +79,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("skill/"), DynamicPart("id", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_skill1_invoker = createInvoker(
-    HomeController_2.skill(fakeValue[String]),
+    HomeController_1.skill(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -101,7 +97,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("stat/"), DynamicPart("search", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_wordStat2_invoker = createInvoker(
-    HomeController_2.wordStat(fakeValue[String]),
+    HomeController_1.wordStat(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -119,7 +115,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("indvstats/"), DynamicPart("search", """[^/]+""",true), StaticPart("/"), DynamicPart("index", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_indvStat3_invoker = createInvoker(
-    HomeController_2.indvStat(fakeValue[String], fakeValue[Integer]),
+    HomeController_1.indvStat(fakeValue[String], fakeValue[Integer]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -137,7 +133,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("profile/"), DynamicPart("ownerid", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_profile4_invoker = createInvoker(
-    HomeController_2.profile(fakeValue[String]),
+    HomeController_1.profile(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -155,7 +151,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("readability/"), DynamicPart("search", """[^/]+""",true), StaticPart("/"), DynamicPart("index", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_readability5_invoker = createInvoker(
-    HomeController_2.readability(fakeValue[String], fakeValue[Integer]),
+    HomeController_1.readability(fakeValue[String], fakeValue[Integer]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
@@ -169,18 +165,18 @@ class Routes(
   )
 
   // @LINE:12
-  private[this] lazy val controllers_WebSocketController_ws6_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("h/ws/")))
+  private[this] lazy val controllers_HomeController_socket6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("ws")))
   )
-  private[this] lazy val controllers_WebSocketController_ws6_invoker = createInvoker(
-    WebSocketController_0.ws,
+  private[this] lazy val controllers_HomeController_socket6_invoker = createInvoker(
+    HomeController_1.socket(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.WebSocketController",
-      "ws",
+      "controllers.HomeController",
+      "socket",
       Nil,
       "GET",
-      this.prefix + """h/ws/""",
+      this.prefix + """ws""",
       """""",
       Seq()
     )
@@ -191,7 +187,7 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
   private[this] lazy val controllers_Assets_versioned7_invoker = createInvoker(
-    Assets_1.versioned(fakeValue[String], fakeValue[Asset]),
+    Assets_0.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.Assets",
@@ -211,49 +207,49 @@ class Routes(
     case controllers_HomeController_index0_route(params@_) =>
       call(params.fromQuery[String]("searchPhrase", Some("")), params.fromQuery[String]("sessionId", Some(""))) { (searchPhrase, sessionId) =>
         controllers_HomeController_index0_invoker.call(
-          req => HomeController_2.index(req, searchPhrase, sessionId))
+          req => HomeController_1.index(req, searchPhrase, sessionId))
       }
   
     // @LINE:7
     case controllers_HomeController_skill1_route(params@_) =>
       call(params.fromPath[String]("id", None)) { (id) =>
-        controllers_HomeController_skill1_invoker.call(HomeController_2.skill(id))
+        controllers_HomeController_skill1_invoker.call(HomeController_1.skill(id))
       }
   
     // @LINE:8
     case controllers_HomeController_wordStat2_route(params@_) =>
       call(params.fromPath[String]("search", None)) { (search) =>
-        controllers_HomeController_wordStat2_invoker.call(HomeController_2.wordStat(search))
+        controllers_HomeController_wordStat2_invoker.call(HomeController_1.wordStat(search))
       }
   
     // @LINE:9
     case controllers_HomeController_indvStat3_route(params@_) =>
       call(params.fromPath[String]("search", None), params.fromPath[Integer]("index", None)) { (search, index) =>
-        controllers_HomeController_indvStat3_invoker.call(HomeController_2.indvStat(search, index))
+        controllers_HomeController_indvStat3_invoker.call(HomeController_1.indvStat(search, index))
       }
   
     // @LINE:10
     case controllers_HomeController_profile4_route(params@_) =>
       call(params.fromPath[String]("ownerid", None)) { (ownerid) =>
-        controllers_HomeController_profile4_invoker.call(HomeController_2.profile(ownerid))
+        controllers_HomeController_profile4_invoker.call(HomeController_1.profile(ownerid))
       }
   
     // @LINE:11
     case controllers_HomeController_readability5_route(params@_) =>
       call(params.fromPath[String]("search", None), params.fromPath[Integer]("index", None)) { (search, index) =>
-        controllers_HomeController_readability5_invoker.call(HomeController_2.readability(search, index))
+        controllers_HomeController_readability5_invoker.call(HomeController_1.readability(search, index))
       }
   
     // @LINE:12
-    case controllers_WebSocketController_ws6_route(params@_) =>
+    case controllers_HomeController_socket6_route(params@_) =>
       call { 
-        controllers_WebSocketController_ws6_invoker.call(WebSocketController_0.ws)
+        controllers_HomeController_socket6_invoker.call(HomeController_1.socket())
       }
   
     // @LINE:15
     case controllers_Assets_versioned7_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned7_invoker.call(Assets_1.versioned(path, file))
+        controllers_Assets_versioned7_invoker.call(Assets_0.versioned(path, file))
       }
   }
 }

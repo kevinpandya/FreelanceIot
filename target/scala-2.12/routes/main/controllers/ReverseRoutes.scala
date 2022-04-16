@@ -47,6 +47,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "readability/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("search", search)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Integer]].unbind("index", index)))
     }
   
+    // @LINE:12
+    def socket(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "ws")
+    }
+  
     // @LINE:7
     def skill(id:String): Call = {
       
@@ -66,21 +72,6 @@ package controllers {
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
-    }
-  
-  }
-
-  // @LINE:12
-  class ReverseWebSocketController(_prefix: => String) {
-    def _defaultPrefix: String = {
-      if (_prefix.endsWith("/")) "" else "/"
-    }
-
-  
-    // @LINE:12
-    def ws: Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "h/ws/")
     }
   
   }

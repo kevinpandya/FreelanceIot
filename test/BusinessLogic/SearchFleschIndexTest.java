@@ -1,22 +1,17 @@
 package BusinessLogic;
 
 import businesslogic.SearchFleschIndex;
-import businesslogic.WordStats;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author Kevin Pandya
- * <p>This class tests all the methods of the class WordStats</p>
+ * @author Hiren Parmar
+ * <p>This class tests all the methods of the class SearchFleschIndex</p>
  */
 public class SearchFleschIndexTest extends Mockito {
 

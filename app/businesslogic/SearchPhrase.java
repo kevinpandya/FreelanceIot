@@ -23,15 +23,13 @@ public class SearchPhrase{
 	public static String API = "https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&job_details=1&limit=250&compact=1&languages[]=en&query=";
 	public static LinkedHashMap<String, Resultlist> resultmap = null;
 
+	/**
+	 * <p>This is a constructor that initializes LinkedHashMap resultmap</p>
+	 */
 	public SearchPhrase(){
 		resultmap = new LinkedHashMap<String, Resultlist>();
 	}
 
-
-
-	/**
-	 * <p>This is a constructor that initializes object resultmap</p>
-	 */
 //	public SearchPhrase() {
 //		resultmap = new LinkedHashMap<String, Resultlist>();
 //	}

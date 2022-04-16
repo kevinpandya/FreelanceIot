@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * This class tests all the methods of the class SearchSkillActor
+ */
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class SearchSkillActorTest {
     static ActorSystem actorSystem;
@@ -18,12 +21,18 @@ public class SearchSkillActorTest {
 
     static Object mockObject = new Object();
 
+    /**
+     * Initializes the actorSystem and testProbe
+     */
     @Before
     public void setup() {
     	actorSystem = ActorSystem.create();
     	testProbe = new TestKit(actorSystem);
     }
 
+    /**
+     * Test method to test SearchSkill Actor
+     */
     @Test
     public void actorTest(){
         new TestKit(actorSystem) {

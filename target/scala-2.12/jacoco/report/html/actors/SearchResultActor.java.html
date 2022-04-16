@@ -1,140 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchResultActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">SearchResultActor.java</span></div><h1>SearchResultActor.java</h1><pre class="source lang-java linenums">package actors;
 
-import akka.actor.AbstractActorWithTimers;
-import akka.actor.ActorRef;
+import akka.actor.AbstractActor;
 import akka.actor.Props;
-import akka.http.javadsl.model.HttpRequest;
-import businesslogic.SearchPhrase;
-import businesslogic.SearchSkill;
-import com.google.inject.name.Named;
-import static akka.pattern.Patterns.ask;
-import static play.mvc.Results.ok;
-
-import controllers.HomeController;
+import businesslogic.SearchFleschIndex;
 import model.Resultlist;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import play.mvc.Http;
-import play.mvc.Result;
-import play.twirl.api.Content;
-import scala.concurrent.duration.Duration;
-import play.mvc.*;
+import model.Searchphraseresult;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import javax.inject.Inject;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
+<span class="fc" id="L17">public class SearchResultActor extends AbstractActor {</span>
+<span class="fc" id="L18">    public static String API = &quot;https://www.freelancer.com/api/projects/0.1/projects/active?previw_description=true&amp;job_details=1&amp;limit=250&amp;compact=1&amp;languages[]=en&amp;query=&quot;;</span>
+<span class="fc" id="L19">    public static LinkedHashMap&lt;String, Resultlist&gt; resultmap = null;</span>
 
-public class SearchResultActor extends AbstractActorWithTimers {
-
-    private ActorRef userActor;
-    private ActorRef searchActor;
-
-    private String query;
-    private Http.Request request;
-
-    private String sessionId;
-
-<span class="pc" id="L42">    private HomeController homeController = null;</span>
-<span class="pc" id="L43">    private Resultlist resultlist = null;</span>
-
-<span class="pc" id="L45">    private final Logger logger = LoggerFactory.getLogger(&quot;play&quot;);</span>
-
-    private Set&lt;LinkedHashMap&lt;String, Resultlist&gt;&gt; searchPhraseResultItems;
-
-<span class="fc" id="L49">    public static final class Tick {</span>
+    /**
+     * @return this method returns a Props object
+     */
+    public static Props getProps(){
+<span class="nc" id="L25">        return Props.create(SearchResultActor.class);</span>
     }
-        @Override
-        public void preStart()
-        {
-<span class="fc" id="L54">            getTimers().startPeriodicTimer(&quot;Time&quot; ,new Tick(),</span>
-<span class="fc" id="L55">                    Duration.create(10 , TimeUnit.SECONDS));</span>
-<span class="fc" id="L56">        }</span>
 
-        @Inject
-<span class="fc" id="L59">        public SearchResultActor(){</span>
-<span class="fc" id="L60">            this.userActor = null;</span>
-<span class="fc" id="L61">            this.query = null;</span>
-<span class="fc" id="L62">            this.searchActor = null;</span>
-<span class="fc" id="L63">            this.sessionId = null;</span>
-<span class="fc" id="L64">            this.request = null;</span>
-<span class="fc" id="L65">        }</span>
+    @Override
+    public Receive createReceive() {
+<span class="fc" id="L30">        return receiveBuilder()</span>
+<span class="fc" id="L31">                .match(String.class, (a) -&gt; {</span>
+<span class="fc" id="L32">                    Object results = getPhraseResultJSON(a);</span>
+<span class="fc" id="L33">                    sender().tell(results, self());</span>
+<span class="fc" id="L34">                })</span>
+<span class="fc" id="L35">                .build();</span>
+    }
 
-<span class="nc" id="L67">        public SearchResultActor(String query,String sessionId){</span>
-<span class="nc" id="L68">            this.query = query;</span>
-<span class="nc" id="L69">            this.sessionId = sessionId;</span>
-<span class="nc" id="L70">        }</span>
-
-        public static Props props(String query,String sessionId){
-            //System.out.println(id);
-<span class="nc" id="L74">            return Props.create(SearchResultActor.class,()-&gt;new SearchResultActor(query,sessionId));</span>
+    public Object getPhraseResultJSON(String searchPhrase){
+<span class="fc" id="L39">        JSONObject finalObject=null;</span>
+<span class="fc" id="L40">        List&lt;Searchphraseresult&gt; sp = new ArrayList&lt;Searchphraseresult&gt;();</span>
+<span class="fc" id="L41">        Resultlist r1 = new Resultlist();</span>
+<span class="fc" id="L42">        List&lt;String&gt; descriptions = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L43">        SearchFleschIndex sfi = new SearchFleschIndex();</span>
+<span class="fc" id="L44">        Resultlist rl = new Resultlist();</span>
+<span class="fc" id="L45">        rl.setSearchPhrase(searchPhrase);</span>
+<span class="fc" id="L46">        JSONObject json=null;</span>
+<span class="fc" id="L47">        String[] s = searchPhrase.split(&quot; &quot;);</span>
+<span class="fc" id="L48">        String searchQuery = &quot;\&quot;&quot;;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for(int i=0;i&lt;s.length;i++) {</span>
+<span class="fc" id="L50">            searchQuery+=s[i]+&quot;%20&quot;;</span>
         }
-
-        public static Props getProps(){
-<span class="fc" id="L78">            return Props.create(SearchResultActor.class);</span>
-        }
-
-        @Override
-        public Receive createReceive(){
-<span class="fc" id="L83">            return receiveBuilder()</span>
-<span class="fc" id="L84">                    .match(Messages.RegisterActor.class , message -&gt;{</span>
-<span class="nc" id="L85">                        logger.info(&quot;Registering actor()&quot; , message);</span>
-<span class="nc" id="L86">                        userActor  = sender();</span>
-<span class="nc" id="L87">                        getSender().tell(&quot;userActor registered&quot; , getSelf());</span>
-<span class="nc" id="L88">            })</span>
-<span class="fc" id="L89">            .match(Messages.WatchSearchResults.class , message -&gt; {</span>
-<span class="nc" id="L90">                logger.info(&quot;Received message WatchSearchResults {}&quot; , message);</span>
-<span class="nc bnc" id="L91" title="All 6 branches missed.">                if(message != null &amp;&amp; message.query != null &amp;&amp; message.query != &quot;&quot;){</span>
-<span class="nc" id="L92">                    logger.info(message.query);</span>
-<span class="nc" id="L93">                    watchSearchResult(message);</span>
+<span class="fc" id="L52">        searchQuery+=&quot;\&quot;&quot;;</span>
+        try{
+<span class="fc" id="L54">            URL url = new URL(API+searchQuery);</span>
+<span class="fc" id="L55">            HttpURLConnection conn = (HttpURLConnection)url.openConnection();</span>
+<span class="fc" id="L56">            conn.setRequestMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L57">            conn.connect();</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">            if(conn.getResponseCode() == 200) {</span>
+<span class="fc" id="L59">                System.out.println(&quot;Inside the url result&quot;);</span>
+<span class="fc" id="L60">                Scanner scan = new Scanner(url.openStream());</span>
+<span class="fc" id="L61">                String temp = &quot;&quot;;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                while (scan.hasNext()) {</span>
+<span class="fc" id="L63">                    temp = temp + scan.nextLine();</span>
                 }
-<span class="nc" id="L95">            })</span>
-<span class="fc" id="L96">            .match(Tick.class, message -&gt;{</span>
-<span class="nc" id="L97">                logger.info(&quot;Received message Tick{}&quot; , message);</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">                if(query != null){</span>
-<span class="nc" id="L99">                    tickSearchResults();</span>
+<span class="fc" id="L65">                JSONObject json1 = new JSONObject(temp);</span>
+                //System.out.println(json1);
+<span class="fc" id="L67">                JSONObject result = json1.getJSONObject(&quot;result&quot;);</span>
+<span class="fc" id="L68">                JSONArray projects = (JSONArray) result.getJSONArray(&quot;projects&quot;);</span>
 
+<span class="fc" id="L70">                JSONArray projectdesclist = new JSONArray();</span>
+<span class="fc" id="L71">                JSONArray projectarray = new JSONArray();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">                for(int i=0;i&lt;projects.length();i++) {</span>
+
+
+
+<span class="fc" id="L76">                    JSONObject obj = projects.getJSONObject(i);</span>
+<span class="fc" id="L77">                    Searchphraseresult tempsr = new Searchphraseresult();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">                    if(i&lt;10){</span>
+<span class="fc" id="L79">                        JSONObject projectobject = new JSONObject(); //====================</span>
+<span class="fc" id="L80">                        projectobject.put(&quot;owner_id&quot;,obj.get(&quot;owner_id&quot;).toString()); //===================</span>
+<span class="fc" id="L81">                        tempsr.setOwner_id(obj.get(&quot;owner_id&quot;).toString());</span>
+<span class="fc" id="L82">                        tempsr.setIndex(i);</span>
+<span class="fc" id="L83">                        projectobject.put(&quot;index&quot;,i);</span>
+<span class="fc" id="L84">                        tempsr.setPrevDesc(obj.get(&quot;preview_description&quot;).toString());</span>
+<span class="fc" id="L85">                        projectobject.put(&quot;preview_description&quot;,obj.get(&quot;preview_description&quot;).toString()); //====================</span>
+<span class="fc" id="L86">                        descriptions.add(obj.get(&quot;preview_description&quot;).toString());</span>
+<span class="fc" id="L87">                        JSONObject prew_desc = new JSONObject(); //============================</span>
+<span class="fc" id="L88">                        prew_desc.put(String.valueOf(i),obj.get(&quot;preview_description&quot;).toString()); //===================</span>
+<span class="fc" id="L89">                        projectdesclist.put(prew_desc); //=======================</span>
+<span class="fc" id="L90">                        Date date = new Date(Long.parseLong(obj.get(&quot;submitdate&quot;).toString()+&quot;000&quot;));</span>
+<span class="fc" id="L91">                        DateFormat simple = new SimpleDateFormat(&quot;dd MMM yyyy&quot;);</span>
+<span class="fc" id="L92">                        tempsr.setDate(simple.format(date));</span>
+<span class="fc" id="L93">                        projectobject.put(&quot;date&quot;,simple.format(date)); //===================</span>
+<span class="fc" id="L94">                        tempsr.setTitle(obj.get(&quot;title&quot;).toString());</span>
+<span class="fc" id="L95">                        projectobject.put(&quot;title&quot;,obj.get(&quot;title&quot;).toString()); //===================</span>
+<span class="fc" id="L96">                        tempsr.setType(obj.get(&quot;type&quot;).toString());</span>
+<span class="fc" id="L97">                        projectobject.put(&quot;type&quot;,obj.get(&quot;type&quot;).toString());  //================</span>
+<span class="fc" id="L98">                        LinkedHashMap&lt;String, String&gt; skillsmap = new LinkedHashMap&lt;String, String&gt;();</span>
+<span class="fc" id="L99">                        JSONArray projectobjectskill = new JSONArray();</span>
+<span class="fc" id="L100">                        JSONArray skills = obj.getJSONArray(&quot;jobs&quot;);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">                        for(int j=0;j&lt;skills.length();j++) {</span>
+<span class="fc" id="L102">                            JSONObject skill = skills.getJSONObject(j);</span>
+<span class="fc" id="L103">                            JSONObject skillobject = new JSONObject();</span>
+<span class="fc" id="L104">                            skillobject.put(skill.get(&quot;name&quot;).toString() , skill.get(&quot;id&quot;).toString());</span>
+<span class="fc" id="L105">                            projectobjectskill.put(skillobject);</span>
+<span class="fc" id="L106">                            skillsmap.put( skill.get(&quot;name&quot;).toString() , skill.get(&quot;id&quot;).toString() );</span>
+                        }
+<span class="fc" id="L108">                        tempsr.setSkills(skillsmap);</span>
+<span class="fc" id="L109">                        sp.add(tempsr);</span>
+<span class="fc" id="L110">                        projectobject.put(&quot;skills&quot;,projectobjectskill);</span>
+<span class="fc" id="L111">                        System.out.println(projectobject);</span>
+<span class="fc" id="L112">                        projectarray.put(projectobject);</span>
+<span class="fc" id="L113">                    }else{</span>
+<span class="fc" id="L114">                        descriptions.add(obj.get(&quot;preview_description&quot;).toString());</span>
+<span class="fc" id="L115">                        JSONObject prew_desc = new JSONObject(); //============================</span>
+<span class="fc" id="L116">                        prew_desc.put(String.valueOf(i),obj.get(&quot;preview_description&quot;).toString()); //===================</span>
+<span class="fc" id="L117">                        projectdesclist.put(prew_desc);</span>
+                    }
                 }
-<span class="nc" id="L102">            })</span>
-<span class="fc" id="L103">            .build();</span>
-        }
+<span class="fc" id="L120">                System.out.println(&quot;\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="fc" id="L121">                System.out.println(projectarray);</span>
+<span class="fc" id="L122">                r1.setResult(sp);</span>
+<span class="fc" id="L123">                r1.setDescriptions(descriptions);</span>
+<span class="fc" id="L124">                r1.setFleschIndex(sfi.getFleshIndex(descriptions));</span>
+<span class="fc" id="L125">                r1.setEdLevel(sfi.getEducationLevel(r1.getFleschIndex()));</span>
+<span class="fc" id="L126">                r1.setFkgl(sfi.getFkgl(r1.getFleschIndex()));</span>
+<span class="fc" id="L127">                JSONArray phraseResult = new JSONArray();</span>
+<span class="fc" id="L128">                System.out.println(&quot;here&quot;);</span>
+<span class="fc" id="L129">                phraseResult.put(projectarray);</span>
+<span class="fc" id="L130">                phraseResult.put(projectdesclist);</span>
+<span class="fc" id="L131">                JSONObject flindex = new JSONObject();</span>
+<span class="fc" id="L132">                JSONObject edlevel = new JSONObject();</span>
+<span class="fc" id="L133">                JSONObject fkgl = new JSONObject();</span>
+<span class="fc" id="L134">                flindex.put(&quot;FL_Index&quot;,r1.getFleschIndex());</span>
+<span class="fc" id="L135">                edlevel.put(&quot;Ed_Level&quot;,r1.getEdLevel());</span>
+<span class="fc" id="L136">                fkgl.put(&quot;FKGL&quot;,r1.getFkgl());</span>
+<span class="fc" id="L137">                phraseResult.put(flindex);</span>
+<span class="fc" id="L138">                phraseResult.put(edlevel);</span>
+<span class="fc" id="L139">                phraseResult.put(fkgl);</span>
+<span class="fc" id="L140">                System.out.println(&quot;\n\n\nPHRASE RESULT ===========\n\n&quot;);</span>
+<span class="fc" id="L141">                System.out.println(phraseResult);</span>
+<span class="fc" id="L142">                finalObject = new JSONObject();</span>
+<span class="fc" id="L143">                finalObject.put(&quot;result&quot;,phraseResult);</span>
 
-        public CompletionStage&lt;Void&gt; watchSearchResult(Messages.WatchSearchResults message){
-<span class="nc" id="L107">            query = message.query;</span>
-
-<span class="nc" id="L109">            System.out.println(&quot;In Watch Search Results&quot;);</span>
-            //@Named(&quot;&quot;)
-
-<span class="nc" id="L112">            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -&gt; {</span>
-<span class="nc" id="L113">                this.searchPhraseResultItems = new HashSet&lt;&gt;();</span>
-<span class="nc" id="L114">                searchPhraseResultItems.add(searchResults);</span>
-<span class="nc" id="L115">                resultlist.setSearchPhrase(query);</span>
-<span class="nc" id="L116">                Messages.SearchResult sr = new Messages.SearchResult(searchPhraseResultItems, query);</span>
-<span class="nc" id="L117">                userActor.tell(sr, self());</span>
-<span class="nc" id="L118">            });</span>
-        }
-
-        public CompletionStage&lt;Void&gt; tickSearchResults() {
-<span class="nc" id="L122">            return SearchPhrase.getResult(query).thenAcceptAsync(searchResults -&gt; {</span>
-<span class="nc" id="L123">                this.searchPhraseResultItems = new HashSet&lt;&gt;();</span>
-<span class="nc" id="L124">                resultlist.setSearchPhrase(query);</span>
-<span class="nc" id="L125">                searchPhraseResultItems.add(searchResults);</span>
-<span class="nc" id="L126">                Messages.SearchResult searchResult = new Messages.SearchResult(searchPhraseResultItems, query);</span>
-<span class="nc" id="L127">                userActor.tell(searchResult, self());</span>
-<span class="nc" id="L128">            });</span>
-        }
-
-
-        public String getQuery(){
-<span class="nc" id="L133">        return  query;</span>
-        }
-        public void setQuery(String query){
-<span class="nc" id="L136">            this.query = query;</span>
-<span class="nc" id="L137">        }</span>
+                //System.out.println(finalObject);
+<span class="nc" id="L146">                resultmap.put(searchPhrase,r1);</span>
+                //return finalObject;
+//                ObjectMapper objectMapper = new ObjectMapper();
+//
+//                try {
+//                    json = new JSONObject(objectMapper.writeValueAsString(resultmap));
+//                    System.out.println(json);
+//                    return json;
+//                } catch (JsonProcessingException e) {
+//                    e.printStackTrace();
+//                }
+            }
+<span class="fc" id="L158">        }catch (Exception e){</span>
+<span class="fc" id="L159">            System.out.println(e);</span>
+<span class="nc" id="L160">        }</span>
+<span class="fc" id="L161">        System.out.println(finalObject);</span>
+<span class="fc" id="L162">        return finalObject;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -43,23 +43,25 @@ Seq[Any](format.raw/*7.32*/("""
     <title>"""),_display_(/*13.13*/title),format.raw/*13.18*/("""</title>
     <link rel="stylesheet" media="screen" href='"""),_display_(/*14.50*/routes/*14.56*/.Assets.versioned("stylesheets/main.css")),format.raw/*14.97*/("""'>
     <link rel="shortcut icon" type="image/png" href='"""),_display_(/*15.55*/routes/*15.61*/.Assets.versioned("images/favicon.png")),format.raw/*15.100*/("""'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
-        #hiddenId"""),format.raw/*17.18*/("""{"""),format.raw/*17.19*/("""
-            """),format.raw/*18.13*/("""visibility: hidden;
-        """),format.raw/*19.9*/("""}"""),format.raw/*19.10*/("""
-    """),format.raw/*20.5*/("""</style>
+        #hiddenId"""),format.raw/*18.18*/("""{"""),format.raw/*18.19*/("""
+            """),format.raw/*19.13*/("""visibility: hidden;
+        """),format.raw/*20.9*/("""}"""),format.raw/*20.10*/("""
+    """),format.raw/*21.5*/("""</style>
 
     <!--
-    <script src='"""),_display_(/*23.19*/routes/*23.25*/.Assets.versioned("javascripts/prism.js")),format.raw/*23.66*/("""' type="text/javascript"></script>
+    <script src='"""),_display_(/*24.19*/routes/*24.25*/.Assets.versioned("javascripts/prism.js")),format.raw/*24.66*/("""' type="text/javascript"></script>
 	 -->
 </head>
 
 <body>
-    """),_display_(/*28.6*/content),format.raw/*28.13*/("""
+    """),_display_(/*29.6*/content),format.raw/*29.13*/("""
 
-    """),format.raw/*30.5*/("""<script src='"""),_display_(/*30.19*/routes/*30.25*/.Assets.versioned("javascripts/index.js")),format.raw/*30.66*/("""' type="text/javascript"></script>
-    <script src='"""),_display_(/*31.19*/routes/*31.25*/.Assets.versioned("javascripts/main.js")),format.raw/*31.65*/("""' type="text/javascript"></script>
-    <script src='"""),_display_(/*32.19*/routes/*32.25*/.Assets.versioned("javascripts/jquery.min.js")),format.raw/*32.71*/("""' type="text/javascript"></script>
+
+    """),format.raw/*32.5*/("""<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='"""),_display_(/*33.19*/routes/*33.25*/.Assets.versioned("javascripts/index.js")),format.raw/*33.66*/("""' type="text/javascript"></script>
+    <script src='"""),_display_(/*34.19*/routes/*34.25*/.Assets.versioned("javascripts/main.js")),format.raw/*34.65*/("""' type="text/javascript"></script>
 
 </body>
 
@@ -80,9 +82,9 @@ Seq[Any](format.raw/*7.32*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/main.scala.html
-                  HASH: 0f828c155a7a2866635d0f2325a9358360181f19
-                  MATRIX: 1171->266|1296->296|1326->300|1410->357|1436->362|1522->421|1537->427|1599->468|1684->526|1699->532|1760->571|1822->605|1851->606|1893->620|1949->649|1978->650|2011->656|2078->696|2093->702|2155->743|2248->810|2276->817|2311->825|2352->839|2367->845|2429->886|2510->940|2525->946|2586->986|2667->1040|2682->1046|2749->1092
-                  LINES: 32->7|37->7|39->9|43->13|43->13|44->14|44->14|44->14|45->15|45->15|45->15|47->17|47->17|48->18|49->19|49->19|50->20|53->23|53->23|53->23|58->28|58->28|60->30|60->30|60->30|60->30|61->31|61->31|61->31|62->32|62->32|62->32
+                  HASH: 681ef2bae5b72bbddd4918d5d685b333ad0a96bc
+                  MATRIX: 1171->266|1296->296|1326->300|1410->357|1436->362|1522->421|1537->427|1599->468|1684->526|1699->532|1760->571|1916->699|1945->700|1987->714|2043->743|2072->744|2105->750|2172->790|2187->796|2249->837|2342->904|2370->911|2407->921|2542->1029|2557->1035|2619->1076|2700->1130|2715->1136|2776->1176
+                  LINES: 32->7|37->7|39->9|43->13|43->13|44->14|44->14|44->14|45->15|45->15|45->15|48->18|48->18|49->19|50->20|50->20|51->21|54->24|54->24|54->24|59->29|59->29|62->32|63->33|63->33|63->33|64->34|64->34|64->34
                   -- GENERATED --
               */
           

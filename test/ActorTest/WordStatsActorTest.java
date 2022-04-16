@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * This class tests all the methods of the class WordStatsActor
+ */
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class WordStatsActorTest {
     static ActorSystem actorSystem;
@@ -18,12 +21,18 @@ public class WordStatsActorTest {
 
     static Object mockObject = new Object();
 
+    /**
+     * Initializes the actorSystem and testProbe
+     */
     @Before
     public void setup() {
         actorSystem = ActorSystem.create();
         testProbe = new TestKit(actorSystem);
     }
 
+    /**
+     * Test method to test WordStats Actor
+     */
     @Test
     public void actorTest(){
         new TestKit(actorSystem) {

@@ -1,12 +1,12 @@
 [0m[[0m[0minfo[0m] [0m[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m------- Jacoco Coverage Report -------[0m
 [0m[[0m[0minfo[0m] [0m[0m[0m
-[0m[[0m[0minfo[0m] [0m[0mLines: 68.46% (>= required 0.0%) covered, 381 of 1208 missed, OK[0m
-[0m[[0m[0minfo[0m] [0m[0mInstructions: 59.29% (>= required 0.0%) covered, 3577 of 8786 missed, OK[0m
-[0m[[0m[0minfo[0m] [0m[0mBranches: 48.35% (>= required 0.0%) covered, 125 of 242 missed, OK[0m
-[0m[[0m[0minfo[0m] [0m[0mMethods: 43.75% (>= required 0.0%) covered, 342 of 608 missed, OK[0m
-[0m[[0m[0minfo[0m] [0m[0mComplexity: 42.25% (>= required 0.0%) covered, 421 of 729 missed, OK[0m
-[0m[[0m[0minfo[0m] [0m[0mClass: 68.85% (>= required 0.0%) covered, 19 of 61 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mLines: 81.34% (>= required 0.0%) covered, 211 of 1131 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mInstructions: 66.33% (>= required 0.0%) covered, 2832 of 8412 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mBranches: 53.81% (>= required 0.0%) covered, 109 of 236 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mMethods: 48.82% (>= required 0.0%) covered, 282 of 551 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mComplexity: 47.23% (>= required 0.0%) covered, 353 of 669 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mClass: 81.63% (>= required 0.0%) covered, 9 of 49 missed, OK[0m
 [0m[[0m[0minfo[0m] [0m[0m[0m
 [0m[[0m[0minfo[0m] [0m[0mCheck C:\Users\Mahavir\Desktop\FreeLancelot\target\scala-2.12\jacoco\report for detailed report[0m
 [0m[[0m[0minfo[0m] [0m[0m [0m

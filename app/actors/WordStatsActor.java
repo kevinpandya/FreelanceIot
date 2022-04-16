@@ -8,10 +8,17 @@ import model.Resultlist;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Word Stats Actor for the WordStats class
+ */
 public class WordStatsActor extends AbstractActor {
 
     private WordStats ws = new WordStats();
 
+    /**
+     * Creates props for the WordStatsActor class
+     * @return this method returns a Props object
+     */
     public static Props getProps(){
         return Props.create(WordStatsActor.class);
     }

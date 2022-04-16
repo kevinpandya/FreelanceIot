@@ -7,21 +7,27 @@ import model.Resultlist;
 
 import java.util.LinkedHashMap;
 
-<span class="fc" id="L10">public class SearchSkillActor extends AbstractActor {</span>
-<span class="fc" id="L11">    private SearchSkill ss = new SearchSkill();</span>
+/**
+ * Search Skill Actor for SearchSkill class
+ */
+<span class="fc" id="L13">public class SearchSkillActor extends AbstractActor {</span>
+<span class="fc" id="L14">    private SearchSkill ss = new SearchSkill();</span>
 
+    /**
+     * @return this method returns a Props object
+     */
     public static Props getProps() {
-<span class="fc" id="L14">        return Props.create(SearchSkillActor.class);</span>
+<span class="fc" id="L20">        return Props.create(SearchSkillActor.class);</span>
     }
 
     @Override
     public Receive createReceive() {
-<span class="fc" id="L19">        return receiveBuilder()</span>
-<span class="fc" id="L20">                .match(String.class, (a) -&gt; {</span>
-<span class="fc" id="L21">                    LinkedHashMap&lt;String, Resultlist&gt; skillResult = ss.getSkillResult(a);</span>
-<span class="fc" id="L22">                    sender().tell(skillResult, self());</span>
-<span class="fc" id="L23">                })</span>
-<span class="fc" id="L24">                .build();</span>
+<span class="fc" id="L25">        return receiveBuilder()</span>
+<span class="fc" id="L26">                .match(String.class, (a) -&gt; {</span>
+<span class="fc" id="L27">                    LinkedHashMap&lt;String, Resultlist&gt; skillResult = ss.getSkillResult(a);</span>
+<span class="fc" id="L28">                    sender().tell(skillResult, self());</span>
+<span class="fc" id="L29">                })</span>
+<span class="fc" id="L30">                .build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

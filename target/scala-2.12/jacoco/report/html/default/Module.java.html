@@ -7,13 +7,16 @@ import play.libs.akka.AkkaGuiceSupport;
 
     @Override
     protected final void configure() {
-<span class="fc" id="L10">        bindActor(UserParentActor.class, &quot;userParentActor&quot;);</span>
-<span class="fc" id="L11">        bindActorFactory(UserActor.class, UserActor.Factory.class);</span>
-<span class="fc" id="L12">        bindActor(SearchProfileActor.class,&quot;profileActor&quot;);</span>
-<span class="fc" id="L13">        bindActor(SearchPhraseActor.class,&quot;searchPhraseActor&quot;);</span>
-<span class="fc" id="L14">        bindActor(SearchSkillActor.class,&quot;skillActor&quot;);</span>
-<span class="fc" id="L15">        bindActor(WordStatsActor.class, &quot;statsActor&quot;);</span>
-<span class="fc" id="L16">    }</span>
+//        bindActor(UserParentActor.class, &quot;userParentActor&quot;);
+//        bindActorFactory(UserActor.class, UserActor.Factory.class);
+//        bindActor(SearchResultActor.class,&quot;resultActor&quot;);
+<span class="fc" id="L13">        bindActor(SearchProfileActor.class,&quot;profileActor&quot;);</span>
+<span class="fc" id="L14">        bindActor(SearchPhraseActor.class,&quot;searchPhraseActor&quot;);</span>
+<span class="fc" id="L15">        bindActor(SearchSkillActor.class,&quot;skillActor&quot;);</span>
+<span class="fc" id="L16">        bindActor(WordStatsActor.class, &quot;statsActor&quot;);</span>
+<span class="fc" id="L17">        bindActor(SearchFleschIndexActor.class, &quot;fleschActor&quot;);</span>
+<span class="fc" id="L18">        bindActor(WebSocketActor.class,&quot;webScoketActor&quot;);</span>
+<span class="fc" id="L19">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

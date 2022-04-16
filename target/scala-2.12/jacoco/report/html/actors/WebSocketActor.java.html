@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebSocketActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">WebSocketActor.java</span></div><h1>WebSocketActor.java</h1><pre class="source lang-java linenums">package actors;
+
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.Cancellable;
+import akka.actor.Props;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Inject;
+import play.libs.Json;
+
+import java.time.Duration;
+
+public class WebSocketActor extends AbstractActor {
+
+    public static Props props(ActorRef out) {
+<span class="nc" id="L16">        return Props.create(WebSocketActor.class, out);</span>
+    }
+
+    private final ActorRef out;
+
+<span class="fc" id="L21">    private Cancellable scheduled = null;</span>
+
+    @Inject
+<span class="fc" id="L24">    public WebSocketActor(ActorRef out) {</span>
+<span class="fc" id="L25">        this.out = out;</span>
+<span class="fc" id="L26">    }</span>
+
+    @Override
+    public Receive createReceive() {
+<span class="fc" id="L30">        return receiveBuilder()</span>
+<span class="fc" id="L31">                .match(String.class, message -&gt; {</span>
+                    try {
+<span class="fc" id="L33">                        JsonNode data = Json.parse(message);</span>
+<span class="nc" id="L34">                        String type = data.get(&quot;type&quot;).asText();</span>
+<span class="nc" id="L35">                        System.out.println(&quot;Type : &quot;+type);</span>
+<span class="nc" id="L36">                        String keywords = data.get(&quot;data&quot;).asText();</span>
+<span class="nc" id="L37">                        System.out.println(&quot;keywords : &quot;+keywords);</span>
+<span class="nc" id="L38">                        ActorRef actor = null;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                        if (type.equals(&quot;searchPhrase&quot;)) {</span>
+<span class="nc" id="L40">                            actor = getContext().actorOf((SearchResultActor.getProps()));</span>
+                        }
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                        if (scheduled != null) {</span>
+<span class="nc" id="L44">                            scheduled.cancel();</span>
+                        }
+                        // tell the message to searchActor
+<span class="nc" id="L47">                        scheduled = getContext().getSystem().getScheduler().scheduleAtFixedRate(</span>
+                                Duration.ZERO,
+<span class="nc" id="L49">                                Duration.ofSeconds(10),</span>
+                                actor, keywords,
+<span class="nc" id="L51">                                getContext().getDispatcher(),</span>
+<span class="nc" id="L52">                                self());</span>
+
+<span class="fc" id="L54">                    } catch (Exception e) {</span>
+<span class="fc" id="L55">                        e.printStackTrace();</span>
+<span class="fc" id="L56">                        System.out.println(&quot;Error: Websocket Actor parsing error(&quot; + message + &quot;) &quot; + e);</span>
+<span class="nc" id="L57">                    }</span>
+<span class="fc" id="L58">                })</span>
+<span class="fc" id="L59">                .match(Object.class, searchResult -&gt; {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                    if (!out.isTerminated()) {</span>
+<span class="nc" id="L61">                        out.tell(searchResult.toString(), self());</span>
+                    }
+<span class="nc" id="L63">                })</span>
+<span class="fc" id="L64">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
